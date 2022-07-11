@@ -12,7 +12,7 @@ releasedates_tmp = readtable([ dirname 'releasedates_ESIBCI.xlsx'] );
 releases_yymm = table2array(releasedates_tmp(:, 1:2));
 releases_date = table2cell(releasedates_tmp(:, 3));
 index_release = find((releases_yymm(:,1) == year(vintage) & releases_yymm(:,2) == month(vintage)) == 1) ;  
-
+%index_release = sum(datetime(vintage) >= datetime(releases_date));
 
 % loop over different categories (industry, retail, services, etc. )
 filenames = {'industry','retail','building','services','consumer'} ;
@@ -33,14 +33,10 @@ for f = 1 : length(filenames)
         end        
     end
 
-    %     data = importdata([filenames{f} '_total_nsa_nace2.xlsx']) ;
-%     txt = data.textdata.([sheetnames{f} 'MONTHLY']) ; 
-%     num = data.data.([sheetnames{f} 'MONTHLY']) ; 
-
-    
     % get dates
     firstdatestr = txt{2,1} ; 
     dates = year(firstdatestr,'dd.mm.yyyy') + month(firstdatestr,'dd.mm.yyyy')/12 + [0:(size(num,1) - 1)]'/12; 
+    dates_str = txt(2:end, 1);
     
     % get column indices of variables
     diffNcols = size(txt,2) - size(num,2) ;
@@ -48,17 +44,21 @@ for f = 1 : length(filenames)
     [~,index_cols,~] = intersect( txt(1,:),data_ESIBCI.seriesnames(index_monthly),'stable') ;
 
     % find end of available observations according to vintage     
-    index_row = find( abs(dates - (year(vintage) + month(vintage)/12)) <1e-05 ) ; 
-
-    if isempty(index_row) 
-        index_row = size(num,1) ; 
-    elseif datenum(releases_date{index_release,1}) > datenum(vintage) % vintage date is before this month's publication of the ESI
-        if datenum(releases_date{index_release-1,1}) > datenum(vintage) % check that previous vintage has been released => delayed publication of December values!!!!!
-           index_row = index_row - 1 ;  
-        else
-            index_row = index_row ; 
-        end
+    %index_row = find( abs(dates - (year(vintage) + month(vintage)/12)) <1e-05 ) ; 
+	index_row = sum(datetime(dates_str) <= datetime(vintage));
+    
+    if datenum(releases_date{index_release,1}) < datenum(vintage) % vintage date includes this month's release!
+        index_row = index_row + 1; 
     end
+%     if isempty(index_row) 
+%         index_row = size(num,1) ; 
+%     elseif datenum(releases_date{index_release,1}) > datenum(vintage) % vintage date is before this month's publication of the ESI
+%         if datenum(releases_date{index_release-1,1}) > datenum(vintage) % check that previous vintage has been released => delayed publication of December values!!!!!
+%            index_row = index_row ;  
+%         else
+%             index_row = index_row + 1; 
+%         end
+%     end
     if f == 1
     disp(['vintage is : ' vintage])
     disp(['Corresponding release of the ESI: ' releases_date{index_release}])
