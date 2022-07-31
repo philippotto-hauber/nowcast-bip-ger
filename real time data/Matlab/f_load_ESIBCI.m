@@ -7,12 +7,10 @@ dirname = [dir_rawdata '/ESI BCI/'] ;
 data_ESIBCI = f_loadoptions_ESIBCI ;
 
 % load release dates and 
-%releasedates = importdata( [ dirname 'releasedates_ESIBCI.xlsx'] ) ;
-releasedates_tmp = readtable([ dirname 'releasedates_ESIBCI.xlsx'] );
-releases_yymm = table2array(releasedates_tmp(:, 1:2));
-releases_date = table2cell(releasedates_tmp(:, 3));
-index_release = find((releases_yymm(:,1) == year(vintage) & releases_yymm(:,2) == month(vintage)) == 1) ;  
-%index_release = sum(datetime(vintage) >= datetime(releases_date));
+releasedates = readtable([ dirname 'releasedates_ESIBCI.xlsx'] );
+
+% specify date format for dates in table
+dateformat = 'dd.mm.yyyy';
 
 % loop over different categories (industry, retail, services, etc. )
 filenames = {'industry','retail','building','services','consumer'} ;
@@ -44,27 +42,7 @@ for f = 1 : length(filenames)
     [~,index_cols,~] = intersect( txt(1,:),data_ESIBCI.seriesnames(index_monthly),'stable') ;
 
     % find end of available observations according to vintage     
-    %index_row = find( abs(dates - (year(vintage) + month(vintage)/12)) <1e-05 ) ; 
-	index_row = sum(datetime(dates_str) <= datetime(vintage));
-    
-    if datenum(releases_date{index_release,1}) < datenum(vintage) % vintage date includes this month's release!
-        index_row = index_row + 1; 
-    end
-%     if isempty(index_row) 
-%         index_row = size(num,1) ; 
-%     elseif datenum(releases_date{index_release,1}) > datenum(vintage) % vintage date is before this month's publication of the ESI
-%         if datenum(releases_date{index_release-1,1}) > datenum(vintage) % check that previous vintage has been released => delayed publication of December values!!!!!
-%            index_row = index_row ;  
-%         else
-%             index_row = index_row + 1; 
-%         end
-%     end
-    if f == 1
-    disp(['vintage is : ' vintage])
-    disp(['Corresponding release of the ESI: ' releases_date{index_release}])
-    disp(['Data go until month ' month(datetime(txt{index_row+(size(txt,1)-size(num,1)), 1}),'name')])
-    disp('--------------')
-    end
+    index_row = get_vintage_row_index(dates_str, releasedates, vintage, dateformat);
 
     % get data
     data_ESIBCI.rawdata = [data_ESIBCI.rawdata num(1:index_row,index_cols - diffNcols)] ; 
@@ -83,13 +61,13 @@ for f = 1 : length(filenames)
         [~,index_cols,~] = intersect( txt(1,:),data_ESIBCI.seriesnames(index_quarterly),'stable') ;
 
         % find end of available observations according to vintage 
-        diffNrows = size(txt,1) - size(num,1) ;
-        index_row = find(strcmp(txt(:,1),[num2str(year(vintage)) '-Q' num2str(ceil(month(vintage)/3))])==1) - diffNrows; 
-        
-        if isempty(index_row) 
-            index_row = size(num,1) ; 
-        elseif month(vintage)==1 && datenum(releases_date{index_release,1}) < datenum(vintage) % vintage date is before this month's publication of the ESI
-            index_row = index_row - 1 ; 
+        index_row = get_row_index_esiQ(txt(2:end, 1), releasedates, vintage);
+        diffNrows = size(txt, 1) - size(num, 1);
+        if diffNrows > 1
+            % for quarterly services there are many missings at the
+            % beginning of the dataset which leads to many more rows in the
+            % dates vector than in the num matrix storing the data!
+            index_row = index_row - (diffNrows-1); 
         end
 
         % get data
