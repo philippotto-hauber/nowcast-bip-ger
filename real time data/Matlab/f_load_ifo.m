@@ -5,7 +5,7 @@ dirname = [dir_rawdata '/ifo/'] ;
 
 %% ifo options
 data_ifo.names = {'ifo_lage', 'ifo_erwartung'};
-data_ifo.groups = {'surveys'};
+data_ifo.groups = {'surveys', 'surveys'};
 data_ifo.trafo = [2, 2];
 data_ifo.type = {'m', 'm'} ; 
 data_ifo.flag_usestartvals =[1, 1] ; 

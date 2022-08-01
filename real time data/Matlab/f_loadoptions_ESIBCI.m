@@ -1,7 +1,9 @@
 function data = f_loadoptions_ESIBCI
 
  
-temp = {% -------INDUSTRY-------------- %
+% group field is overwritten in f_load_ESIBCI with 'surveys'!
+
+        temp = {% -------INDUSTRY-------------- %
         'Confidence Indicator' , 'ESI: industry' , 2 , 'm' , 1 , 0 , 'INDU.DE.TOT.COF.BS.M'  ;                           
         'Production trend observed in recent months' , 'ESI: industry' , 2 ,'m' , 1 , 0 , 'INDU.DE.TOT.1.BS.M' ;                  
         'Assessment of order-book levels' , 'ESI: industry', 2 , 'm' , 1 , 0 , 'INDU.DE.TOT.2.BS.M' ;                            
