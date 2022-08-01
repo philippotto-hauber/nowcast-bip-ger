@@ -2,7 +2,7 @@ function out = construct_realtime_vintages(dir_root)
     dir_rawdata = [dir_root, '/raw data'];
     dir_vintages = [dir_root, '/vintages'];
     vintages = importdata('../../dates_vintages.txt');
-    vintages = {'25-Jun-2022'};
+    %vintages = {'25-Jun-2022'};
 
     for v = 1 : length(vintages)
         dataset.data_ifo = f_load_ifo(vintages{v}, dir_rawdata) ;
@@ -17,7 +17,7 @@ function out = construct_realtime_vintages(dir_root)
         %toc
         %dataset.data_financial = f_load_financial(vintages{v}, dir_rawdata) ;
         %toc
-        dataset.vintagedate = vintages{v} ; 
+        %dataset.vintagedate = vintages{v} ; 
         % save dataset to mat
         save([ dir_vintages, '/dataset_', num2str(year(vintages{v})), '_' num2str(month(vintages{v})), '_', num2str(day(vintages{v})), '.mat'],'dataset');
 
