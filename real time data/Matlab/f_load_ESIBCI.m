@@ -43,7 +43,7 @@ for f = 1 : length(filenames)
     [~,index_cols,~] = intersect( txt(1,:),data_ESIBCI.seriesnames(index_monthly),'stable') ;
 
     % find end of available observations according to vintage     
-    index_row = get_row_index_esi(dates_str, releasedates, vintage, 'm', dateformat);
+    index_row = get_row_index_vintage(dates_str, releasedates, vintage, 'm', dateformat);
 
     % get data
     data_ESIBCI.rawdata = [data_ESIBCI.rawdata num(1:index_row,index_cols - diffNcols)] ; 
@@ -62,7 +62,7 @@ for f = 1 : length(filenames)
         [~,index_cols,~] = intersect( txt(1,:),data_ESIBCI.seriesnames(index_quarterly),'stable') ;
 
         % find end of available observations according to vintage 
-        index_row = get_row_index_esi(txt(2:end, 1), releasedates, vintage, 'q', []);
+        index_row = get_row_index_vintage(txt(2:end, 1), releasedates, vintage, 'q', []);
         diffNrows = size(txt, 1) - size(num, 1);
         if diffNrows > 1
             % for quarterly services there are many missings at the
