@@ -1,4 +1,4 @@
-function index_row = get_row_index_esi(dates, releasedates, vintage, freq, dateformat)
+function index_row = get_row_index_vintage(dates, releasedates, vintage, freq, dateformat)
 
 is_released = false;
 t = size(dates, 1) + 1; % start with latest observations (+ 1, then reduce in loop)
@@ -7,6 +7,9 @@ while ~is_released
     if strcmp(freq, 'm')
         ind_ym_release = find(releasedates.('year') == year(dates{t}, dateformat) & ...
                                 releasedates.('month') == month(dates{t}, dateformat));
+        if isempty(ind_ym_release)
+            error('Could not find date. Check that the ifo release dates files is up to date!!!')
+        end
     elseif strcmp(freq, 'q')
         % assumes that quarterly values are published in the first month of
         % the quarter!
