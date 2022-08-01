@@ -2,10 +2,10 @@ function out = construct_realtime_vintages(dir_root)
     dir_rawdata = [dir_root, '/raw data'];
     dir_vintages = [dir_root, '/vintages'];
     vintages = importdata('../../dates_vintages.txt');
-    vintages = {'30-Mar-2022'};
+    vintages = {'25-Jun-2022'};
 
     for v = 1 : length(vintages)
-        %dataset.data_ifo = f_load_ifo(vintages{v}) ;
+        dataset.data_ifo = f_load_ifo(vintages{v}, dir_rawdata) ;
         %toc
         dataset.data_ESIBCI = f_load_ESIBCI(vintages{v}, dir_rawdata) ;
         %toc
