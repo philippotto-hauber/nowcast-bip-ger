@@ -40,7 +40,8 @@ for f = 1 : length(filenames)
     
     % get column indices of variables
     diffNcols = size(txt,2) - size(num,2) ;
-    index_monthly = strcmp(data_ESIBCI.groups,['ESI: ' filenames{f}]) & strcmp(data_ESIBCI.type,'m') ;
+    %index_monthly = strcmp(data_ESIBCI.groups,['ESI: ' filenames{f}]) & strcmp(data_ESIBCI.type,'m') ;
+    index_monthly = strcmp(data_ESIBCI.type,'m');
     [~,index_cols,~] = intersect( txt(1,:),data_ESIBCI.seriesnames(index_monthly),'stable') ;
 
     % find end of available observations according to vintage     
@@ -59,7 +60,8 @@ for f = 1 : length(filenames)
 
         % get column indices of variables
         diffNcols = size(txt,2) - size(num,2) ;
-        index_quarterly = strcmp(data_ESIBCI.groups,['ESI: ' filenames{f}]) & not(strcmp(data_ESIBCI.type,'m')) ;
+        %index_quarterly = strcmp(data_ESIBCI.groups,['ESI: ' filenames{f}]) & not(strcmp(data_ESIBCI.type,'m')) ;
+        index_quarterly = not(strcmp(data_ESIBCI.type,'m'));
         [~,index_cols,~] = intersect( txt(1,:),data_ESIBCI.seriesnames(index_quarterly),'stable') ;
 
         % find end of available observations according to vintage 
