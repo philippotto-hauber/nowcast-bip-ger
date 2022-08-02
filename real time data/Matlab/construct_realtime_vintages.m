@@ -14,7 +14,7 @@ function out = construct_realtime_vintages(dir_realtimedata)
         % toc
         dataset.data_BuBaRTD = f_load_lkw_maut_index(dataset.data_BuBaRTD, vintages{v}, dir_rawdata);
         %toc
-        dataset.data_financial = f_load_financial(vintages{v}, dir_rawdata) ;
+        %dataset.data_financial = f_load_financial(vintages{v}, dir_rawdata) ;
         %toc
         dataset.vintagedate = vintages{v} ; 
         % save dataset to mat
