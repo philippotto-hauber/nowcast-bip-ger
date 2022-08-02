@@ -252,17 +252,12 @@ function out = compute_nowcasts(dir_root)
                         save([dir_nowcast '\non gdp forecasts\dates.mat'], 'dates_converted'); 
                     end
                     
-                    % check that names and groups have not changed!
-                    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                    %%% XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  %
-                    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                    
                     % ----------------------------- %
                     % - index of new obs ---------- %
                     
-                    % 
-                    newobs = ~isnan(data_new) & isnan(data_old) ;
-                    
+                    % restrict comparision to past two years as for some variables, e.g. hospitality, earlier values may sometimes become available                 
+                    newobs = ~isnan(data_new(:, end-24:end)) & isnan(data_old(:, end-24:end));
+                   
                     % check that we have no more than one new obs!
                     if any(sum(newobs,2) > 1)
                         disp('The following series have more than one new observations published at once. Remove from data set!')
