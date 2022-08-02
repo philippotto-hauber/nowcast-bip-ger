@@ -55,14 +55,14 @@ function out = compute_nowcasts(dir_root)
     
     % model specifications
     Nrs = [1 2 3 4 5 8 10]; % # of factors
-    Nrs = [2]; % # of factors
+    Nrs = [1:2]; % # of factors
     Nps = [2] ; % # of lags in factor VAR
     Njs = [0 1] ; % # of lags in idiosyncratic component
     Njs = [0] ; % # of lags in idiosyncratic component
     
     % switches
     switch_estimatemodels = 1; % 1 = yes!
-    switch_savetables = 1; % 1 = yes!
+    switch_savetables = 0; % 1 = yes!
     switch_savegraphs = 1 ; % 1 = yes!
     switch_savedocus = 1 ; % 1 = yes!
     
@@ -191,7 +191,7 @@ function out = compute_nowcasts(dir_root)
                     % ------------------------------------------ %
                     % - load new data -------------------------- % 
                     
-                    [dataM_new, dataQ_new, ~, ~, ~, names_temp, groups_temp, ~, results.vintages{v}] = f_constructdataset(samplestart,vintages{ v },list_removevars,options.means,options.stds) ;
+                    [dataM_new, dataQ_new, ~, ~, ~, names_temp, groups_temp, ~, results.vintages{v}] = f_constructdataset(dir_data, samplestart,vintages{ v },list_removevars,options.means,options.stds) ;
                     data_new = [[dataM_new;dataQ_new] NaN(size(dataM_new,1) + size(dataQ_new,1) , length(options.dates) - size(dataM_new,2))] ;
                     
                     % ----------------------------------- %
