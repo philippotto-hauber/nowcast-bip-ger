@@ -13,7 +13,7 @@ Rem Rscript --vanilla compile_rtd_lkw_maut_index.R "%DIR_REALTIMEDATA%/raw data"
 
 ECHO Constructing real-time vintages...
 cd ..\Matlab
-Rem matlab -noFigureWindows -batch "construct_realtime_vintages('%DIR_REALTIMEDATA%').m"
+matlab -noFigureWindows -batch "construct_realtime_vintages('%DIR_REALTIMEDATA%').m"
 
 ECHO Estimating models...
 cd ..\..\model\
