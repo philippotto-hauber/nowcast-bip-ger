@@ -55,16 +55,16 @@ function out = compute_nowcasts(dir_root)
     
     % model specifications
     Nrs = [1 2 3 4 5 8 10]; % # of factors
-    Nrs = [1:2]; % # of factors
+    Nrs = [1:5]; % # of factors
     Nps = [2] ; % # of lags in factor VAR
     Njs = [0 1] ; % # of lags in idiosyncratic component
     Njs = [0] ; % # of lags in idiosyncratic component
     
     % switches
-    switch_estimatemodels = 0; % 1 = yes!
-    switch_savetables = 0; % 1 = yes!
-    switch_savegraphs = 0 ; % 1 = yes!
-    switch_savedocus = 0 ; % 1 = yes!
+    switch_estimatemodels = 1; % 1 = yes!
+    switch_savetables = 1; % 1 = yes!
+    switch_savegraphs = 1 ; % 1 = yes!
+    switch_savedocus = 1 ; % 1 = yes!
     
     % list of vars to be removed from the data set 
     list_removevars = {'PPI: landwirtschaftliche Produkte', 
@@ -253,13 +253,11 @@ function out = compute_nowcasts(dir_root)
                     end
                     
                     % ----------------------------- %
-                    % - index of new obs ---------- %
-                    
-                    % restrict comparision to past two years as for some variables, e.g. hospitality, earlier values may sometimes become available                 
-                    newobs = ~isnan(data_new(:, end-24:end)) & isnan(data_old(:, end-24:end));
-                   
+                    % - index of new obs ---------- %                    
+                                   
+                    newobs = ~isnan(data_new) & isnan(data_old);
                     % check that we have no more than one new obs!
-                    if any(sum(newobs,2) > 1)
+                    if any(sum(newobs,2) > 1 & sum(newobs, 2) < 12) % restrict comparision to past year as for some variables, e.g. hospitality, earlier values may sometimes become available  
                         disp('The following series have more than one new observations published at once. Remove from data set!')
                         groups_temp{sum(newobs,2)>1};
                         names_temp{sum(newobs,2)>1}
