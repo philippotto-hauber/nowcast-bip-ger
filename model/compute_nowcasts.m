@@ -61,10 +61,10 @@ function out = compute_nowcasts(dir_root)
     Njs = [0] ; % # of lags in idiosyncratic component
     
     % switches
-    switch_estimatemodels = 1; % 1 = yes!
+    switch_estimatemodels = 0; % 1 = yes!
     switch_savetables = 0; % 1 = yes!
-    switch_savegraphs = 1 ; % 1 = yes!
-    switch_savedocus = 1 ; % 1 = yes!
+    switch_savegraphs = 0 ; % 1 = yes!
+    switch_savedocus = 0 ; % 1 = yes!
     
     % list of vars to be removed from the data set 
     list_removevars = {'PPI: landwirtschaftliche Produkte', 
@@ -373,7 +373,7 @@ function out = compute_nowcasts(dir_root)
                 % - export tables to xls ------------------ %
     
                 if switch_savetables == 1    
-                    varnames = {'Prognose','ESI_building','ESI_consumer','ESI_industry','ESI_retail','ESI_services','financial','ifo_Baugewerbe','ifo_Dienstleistungen','ifo_Einzelhandel','ifo_Grosshandel','ifo_VerarbGewerbe','labormarket','nationalaccounts','orders','prices','production','turnover','Revision'} ;
+                    varnames = {'Prognose', options.groupnames{:}, 'Revision'};
                     % nowcast
                     savename =  ['nowcasts_' str_forecast '_Nr' num2str(options.Nr) '_Np' num2str(options.Np) '_Nj' num2str(options.Nj)] ;
                     f_table(results.nowcast.new( 1 , : , modcounter ), ...
@@ -539,7 +539,7 @@ function out = compute_nowcasts(dir_root)
     % - export tables to xls ---------------------------------------- %
     
     if switch_savetables == 1    
-        varnames = {'Prognose','ESI_building','ESI_consumer','ESI_industry','ESI_retail','ESI_services','financial','ifo_Baugewerbe','ifo_Dienstleistungen','ifo_Einzelhandel','ifo_Grosshandel','ifo_VerarbGewerbe','labormarket','nationalaccounts','orders','prices','production','turnover','Revision'} ;
+        varnames = {'Prognose', options.groupnames{:}, 'Revision'};
         % nowcast
         savename = ['nowcasts_' str_nowcast '_equalweightpool'] ;
         f_table(mean(results.nowcast.new,3), ...
