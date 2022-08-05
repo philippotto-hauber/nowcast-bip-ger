@@ -5,7 +5,7 @@ dirname = [dir_rawdata '/ESI BCI/'] ;
 
 % load options like names, groups, trafos and so on 
 data_ESIBCI = f_loadoptions_ESIBCI ;
-data_ESIBCI.groups(:) = {'surveys'}; 
+data_ESIBCI.groups(:) = {'ESI'}; 
 
 % load release dates and 
 releasedates_alt = readtable([ dirname 'releasedates_ESIBCI.xlsx'] );
