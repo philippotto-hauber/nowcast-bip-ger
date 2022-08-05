@@ -45,7 +45,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast)
     
     % check vintage dates are increasing
     for v = 2:length(vintages)
-        if datenum(vintages{v}) <= datenum(vintages{v})
+		if datenum(vintages{v}) <= datenum(vintages{v-1})
             disp('Vintage dates are not increasing. Abort execution') 
             return
         end
@@ -386,7 +386,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast)
                 if switch_savetables == 1    
                     varnames = {'Prognose', options.groupnames{:}, 'Revision'};
                     % nowcast
-                    savename =  ['nowcasts_' str_forecast '_Nr' num2str(options.Nr) '_Np' num2str(options.Np) '_Nj' num2str(options.Nj)] ;
+                    savename =  ['nowcasts_' str_nowcast '_Nr' num2str(options.Nr) '_Np' num2str(options.Np) '_Nj' num2str(options.Nj)] ;
                     f_table(results.nowcast.new( 1 , : , modcounter ), ...
                         [0 results.nowcast.revised_data(1,2:end,modcounter) - results.nowcast.new(1,1:end-1,modcounter)] , ...
                         results.nowcast.impact_by_group( : , : , modcounter ), ...
