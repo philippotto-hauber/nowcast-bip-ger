@@ -1,8 +1,12 @@
 @echo off
+ECHO Set year and quarter of nowcast (also produces forecast for the next quarter)!
+set /p YEAR="Year: "
+set /p QUARTER="Quarter: "
+
 
 set DIR_ROOT=C:/Users/Philipp/Desktop
 set DIR_REALTIMEDATA=%DIR_ROOT%/Echtzeitdatensatz
-ECHO %DIR_REALTIMEDATA%
+
 ECHO Downloading data...
 cd "real time data\R\"
 Rem Rscript --vanilla download_bbk_rtd.R "%DIR_REALTIMEDATA%/raw data"
@@ -17,9 +21,9 @@ matlab -noFigureWindows -batch "construct_realtime_vintages('%DIR_REALTIMEDATA%'
 
 ECHO Estimating models...
 cd ..\..\model\
-matlab -noFigureWindows -batch "compute_nowcasts('%DIR_ROOT%').m"
+matlab -noFigureWindows -batch "compute_nowcasts('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
 
 
 
-cd ..\..
+cd ..
 cmd /k

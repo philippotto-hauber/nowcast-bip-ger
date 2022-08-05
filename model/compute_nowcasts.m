@@ -1,4 +1,4 @@
-function out = compute_nowcasts(dir_root)
+function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast)
 
     % ----------------------------------------------------------------------- %
     % - This code computes the news decomposition for nowcasts of GDP 
@@ -6,7 +6,7 @@ function out = compute_nowcasts(dir_root)
     % ----------------------------------------------------------------------- %
     
     dir_data = [dir_root '\Echtzeitdatensatz'];
-    dir_nowcast = [dir_root '\Nowcasts\2022Q2'] ;
+    dir_nowcast = [dir_root '\Nowcasts\' year_nowcast 'Q' quarter_nowcast] ;
     if exist(dir_nowcast, 'dir') ~= 7;mkdir(dir_nowcast);end 
     
     % ----------------------------------------------------------------------- %
@@ -47,15 +47,20 @@ function out = compute_nowcasts(dir_root)
     samplestart = 1996 + 1/12 ; 
     
     % dates corresponding to now- and forecast
-    date_nowcast = 2022 + 6/12 ; % 2021Q3
-    date_forecast = 2022 + 9/12 ; % 2021Q4 
+    date_nowcast = str2double(year_nowcast) + str2double(quarter_nowcast)*3/12 ; 
+    if str2double(quarter_nowcast)*3 == 12
+        date_forecast = str2double(year_nowcast)+1 + 3/12 ; 
+    else
+        date_forecast = str2double(year_nowcast) + (str2double(quarter_nowcast)*3+3)/12 ; 
+    end
     
+
     % number of vintages => size(datasets.mat)
     Nvintages = length( vintages ) ;
     
     % model specifications
     Nrs = [1 2 3 4 5 8 10]; % # of factors
-    Nrs = [1:5]; % # of factors
+    Nrs = [1:2]; % # of factors
     Nps = [2] ; % # of lags in factor VAR
     Njs = [0 1] ; % # of lags in idiosyncratic component
     Njs = [0] ; % # of lags in idiosyncratic component
@@ -383,7 +388,7 @@ function out = compute_nowcasts(dir_root)
                         dir_nowcast)
     
                     % forecast
-                    savename =  ['forecasts_' str_forecast '_Nr' num2str(options.Nr) '_Np' num2str(options.Np) '_Nj' num2str(options.Nj)] ;
+                    savename =  ['nowcasts_' str_forecast '_Nr' num2str(options.Nr) '_Np' num2str(options.Np) '_Nj' num2str(options.Nj)] ;
                     f_table(results.forecast.new( 1 , : , modcounter ), ...
                         [0 results.forecast.revised_data(1,2:end,modcounter) - results.forecast.new(1,1:end-1,modcounter)],...
                         mean(results.forecast.impact_by_group,3), ...
