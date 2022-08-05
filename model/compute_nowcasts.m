@@ -43,6 +43,14 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast)
         return
     end
     
+    % check vintage dates are increasing
+    for v = 2:length(vintages)
+        if datenum(vintages{v}) <= datenum(vintages{v})
+            disp('Vintage dates are not increasing. Abort execution') 
+            return
+        end
+    end
+
     % sample starts in ...
     samplestart = 1996 + 1/12 ; 
     
