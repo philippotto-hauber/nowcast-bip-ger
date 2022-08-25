@@ -6,7 +6,7 @@
 args <- commandArgs(trailingOnly = TRUE)
 dir_main <- args[length(args)]
 
-#dir_main <- "C:/Users/Philipp/Desktop/Echtzeitdatensatz/raw data"
+dir_main <- "C:/Users/Philipp/Desktop/Echtzeitdatensatz/raw data"
 
 #library(lubridate)
 #library(dplyr)
@@ -31,8 +31,8 @@ for (i in seq(1, nrow(vintages)))
   
   dat <- rbind(dat, data.frame(date = lubridate::make_date(year = substr(tmp[,1], 1, 4), 
                                                  month = substr(tmp[, 1], 6, 7)), 
-                               value = tmp[, 2],
-                               vintage = vintages[i, 1])
+                               vintage = vintages[i, 1],
+                               value = tmp[, 2])
                )
 }
 
@@ -43,6 +43,10 @@ df <- rbind(df, dat)
 
 #----- CONVERT TO WIDE FORMAT
 df_wide <- tidyr::pivot_wider(df, names_from = "vintage", values_from = "value")
+
+df_wide <- dplyr::arrange(df_wide, date)
+
+df_wide <- dplyr::filter(df_wide, date >= "2015-01-01")
 
 # convert date to format YYYY-MM
 df_wide$date <- ifelse(lubridate::month(df_wide$date)>=10,
