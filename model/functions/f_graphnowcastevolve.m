@@ -25,36 +25,42 @@ box off
 % second subplot => news decomposition
 subplot(2,1,2)
 
-% aggregate survey groups into ESI and ifo 
-index_group = strcmp(groupnames,'ESI: industry') | strcmp(groupnames,'ESI: consumer') | strcmp(groupnames,'ESI: services') | strcmp(groupnames,'ESI: building') | strcmp(groupnames,'ESI: consumer') | strcmp(groupnames,'ESI: retail') ;  
-temp(1,:) = sum(groupcontribs(index_group,:),1) ; 
-tempnames{1} = 'ESI' ; 
-index_group = strcmp(groupnames,'ifo: Dienstleistungen') | strcmp(groupnames,'ifo: Einzelhandel') | strcmp(groupnames,'ifo: Groﬂhandel') | strcmp(groupnames,'ifo: Verarb. Gewerbe') ;   
-temp(2,:) = sum(groupcontribs(index_group,:),1) ; 
-tempnames{2} = 'ifo' ; 
+% aggregate survey groups into ESI and ifo
+ind_temp = 1;
+index_group = strcmp(groupnames,'ESI') | strcmp(groupnames,'ifo');
+temp(ind_temp,:) = sum(groupcontribs(index_group,:),1) ; 
+tempnames{ind_temp} = 'surveys';
+ind_temp = ind_temp + 1;
 index_group = strcmp(groupnames,'production') ; 
-temp(3,:) = sum(groupcontribs(index_group,:),1) ; 
-tempnames{3} = 'production' ; 
+temp(ind_temp,:) = sum(groupcontribs(index_group,:),1) ; 
+tempnames{ind_temp} = 'production' ; 
+ind_temp = ind_temp + 1;
 index_group = strcmp(groupnames,'orders') ; 
-temp(4,:) = sum(groupcontribs(index_group,:),1) ; 
-tempnames{4} = 'orders' ; 
+temp(ind_temp,:) = sum(groupcontribs(index_group,:),1) ; 
+tempnames{ind_temp} = 'orders';
+ind_temp = ind_temp + 1;
 index_group = strcmp(groupnames,'turnover') ; 
-temp(5,:) = sum(groupcontribs(index_group,:),1) ; 
-tempnames{5} = 'turnover' ; 
+temp(ind_temp,:) = sum(groupcontribs(index_group,:),1) ; 
+tempnames{ind_temp} = 'turnover' ;
+ind_temp = ind_temp + 1;
 index_group = strcmp(groupnames,'financial') ; 
-temp(6,:) = sum(groupcontribs(index_group,:),1) ; 
-tempnames{6} = 'financial' ; 
+temp(ind_temp,:) = sum(groupcontribs(index_group,:),1) ; 
+tempnames{ind_temp} = 'financial' ; 
+ind_temp = ind_temp + 1;
 index_group = strcmp(groupnames,'labor market') ; 
-temp(7,:) = sum(groupcontribs(index_group,:),1) ; 
-tempnames{7} = 'labor market' ; 
+temp(ind_temp,:) = sum(groupcontribs(index_group,:),1) ; 
+tempnames{ind_temp} = 'labor market' ; 
+ind_temp = ind_temp + 1;
 index_group = strcmp(groupnames,'prices') ; 
-temp(8,:) = sum(groupcontribs(index_group,:),1) ; 
-tempnames{8} = 'prices' ; 
+temp(ind_temp,:) = sum(groupcontribs(index_group,:),1) ; 
+tempnames{ind_temp} = 'prices';
+ind_temp = ind_temp + 1;
 index_group = strcmp(groupnames,'national accounts') ; 
-temp(9,:) = sum(groupcontribs(index_group,:),1) ; 
-tempnames{9} = 'national accounts' ; 
-temp(10,:) = nowcastrevision(1,:) ;
-tempnames{10} = 'data revisions' ;          
+temp(ind_temp,:) = sum(groupcontribs(index_group,:),1) ; 
+tempnames{ind_temp} = 'national accounts' ; 
+ind_temp = ind_temp + 1;
+temp(ind_temp,:) = nowcastrevision(1,:) ;
+tempnames{ind_temp} = 'data revisions' ;          
 
 %b=bar(temp','stacked') ;
 
@@ -76,14 +82,16 @@ b(2,:) = bar(temp_neg','stacked') ;
 c = [0 0.4470 0.7410; % default blue
      0.85 0.3250 0.0980; % default dark orange
      0.9290 0.6940 0.1250; % default light orange 
-     1 0 0; % red
+     %1 0 0; % red
      0.6350 0.0780 0.1840; % dark red
      0.3010 0.7450 0.9330; % light blue
      0.75 0 0.75; % violet
      0 0.5 0 ; % dark green
      0.466 0.674 0.188; % light green
      0 0 0] ; % black
- 
+if size(c, 1) ~= length(tempnames)
+   error('Number of groups and specified colors do not match. Abort!')
+end
 for n = 1 : size(c,1)
     b(1,n).FaceColor = c(n,:) ; 
     b(2,n).FaceColor = c(n,:) ; 
