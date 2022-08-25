@@ -79,8 +79,8 @@ b(2,:) = bar(temp_neg','stacked') ;
 
 
 
-c = [0 0.4470 0.7410; % default blue
-     0.85 0.3250 0.0980; % default dark orange
+c = [0.85 0.3250 0.0980; % default dark orange
+     0 0.4470 0.7410; % default blue
      0.9290 0.6940 0.1250; % default light orange 
      %1 0 0; % red
      0.6350 0.0780 0.1840; % dark red
