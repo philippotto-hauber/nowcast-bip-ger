@@ -68,7 +68,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast)
     
     % model specifications
     Nrs = [1 2 3 4 5 8 10]; % # of factors
-    Nrs = [1:2]; % # of factors
+    % Nrs = [1:2]; % # of factors
     Nps = [2] ; % # of lags in factor VAR
     Njs = [0 1] ; % # of lags in idiosyncratic component
     Njs = [0] ; % # of lags in idiosyncratic component
@@ -90,6 +90,8 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast)
                         'VPI: Dienstleistungen (ex Mieten)',
                         'VPI: Mieten',
                         'VPI: Mieten (ex Nebenkosten)',
+                        'PPI: industrielle Produkte',
+                        'PPI: industrielle Produkte (ex Energie)',
                         'BLG: Verarbeitendes Gewerbe und Bergbau',
                         'Exportpreise',
                         'Importpreise',
