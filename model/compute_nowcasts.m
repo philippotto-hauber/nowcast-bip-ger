@@ -74,7 +74,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast)
     %Njs = [0] ; % # of lags in idiosyncratic component
     
     % switches
-    switch_estimatemodels = 0; % 1 = yes!
+    switch_estimatemodels = 1; % 1 = yes!
     switch_savetables = 1; % 1 = yes!
     switch_savegraphs = 1 ; % 1 = yes!
     switch_savedocus = 1 ; % 1 = yes!
