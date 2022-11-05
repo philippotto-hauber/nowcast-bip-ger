@@ -3,7 +3,7 @@ dir_main <- args[length(args)]
 
 # create store_dir if it does not already exist
 storedir <- paste0(dir_main, "/BuBa RTD/")
-if (!dir.exists(storedir)) dir.create(storedir)
+if (!dir.exists(storedir)) dir.create(storedir, recursive = TRUE)
 
 # load function
 source("get_var_codes_bbk_rtd.R")

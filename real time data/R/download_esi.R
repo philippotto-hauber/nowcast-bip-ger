@@ -4,7 +4,7 @@ dir_main = "C:/Users/Philipp/Desktop/Echtzeitdatensatz/raw data"
 
 # create store_dir if it does not already exist
 dir_dest <- paste0(dir_main, "/ESI BCI/")
-if (!dir.exists(dir_dest)) dir.create(dir_dest)
+if (!dir.exists(dir_dest)) dir.create(dir_dest, recursive = TRUE)
 
 # download latest zip package
 counter_max <- 10

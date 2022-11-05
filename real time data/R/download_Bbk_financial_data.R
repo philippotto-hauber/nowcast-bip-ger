@@ -3,7 +3,7 @@ dir_main <- args[length(args)]
 
 # create store_dir if it does not already exist
 store_dir <- paste0(dir_main, "/Finanzmarktdaten/")
-if (!dir.exists(store_dir)) dir.create(store_dir)
+if (!dir.exists(store_dir)) dir.create(store_dir, recursive = TRUE)
 
 # function that returns vector of series codes
 source("get_var_codes_bbk_financial.R")
