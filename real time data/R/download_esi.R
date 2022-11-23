@@ -28,7 +28,7 @@ while (looking_for_file)
 
       file_dest <- paste0(dir_dest, "tmp.zip")
       download.file(url_data, destfile = file_dest, quiet = FALSE)
-      unzip(file_dest, exdir = dir_dest, list = TRUE)
+      unzip(file_dest, exdir = dir_dest, list = FALSE)
     },
     error = function(cond)
     {
