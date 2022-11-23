@@ -67,11 +67,12 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast)
     Nvintages = length( vintages ) ;
     
     % model specifications
-    Nrs = [1 2 3 4 5 8 10]; % # of factors
-    %Nrs = [1:2]; % # of factors
-    Nps = [2] ; % # of lags in factor VAR
-    Njs = [0 1] ; % # of lags in idiosyncratic component
-    %Njs = [0] ; % # of lags in idiosyncratic component
+    Nrs = readmatrix('../model_specs_Nrs.csv'); % # number of factors
+    Nps = readmatrix('../model_specs_Nps.csv'); % # of lags in factor VAR
+    Njs = readmatrix('../model_specs_Njs.csv'); % # of lags in idiosysncratic component
+    disp(Nrs)
+    disp(Nps)
+    disp(Njs)
     
     % switches
     switch_estimatemodels = 1; % 1 = yes!
