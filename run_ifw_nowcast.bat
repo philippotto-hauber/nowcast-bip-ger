@@ -6,7 +6,7 @@ set /p QUARTER="Quarter: "
 set DIR_ROOT=C:/Users/Philipp/Desktop
 set DIR_REALTIMEDATA=%DIR_ROOT%/Echtzeitdatensatz
 
-set /A switch_download_data = 1
+set /A switch_download_data = 0
 cd "real time data\R\"
 IF %switch_download_data%==1 (
     ECHO Downloading data...
@@ -19,7 +19,7 @@ IF %switch_download_data%==1 (
     ECHO "Switch set to 0. Do not download data"
 )
 
-set /A switch_construct_vintages = 1
+set /A switch_construct_vintages = 0
 cd "..\Matlab"
 IF %switch_construct_vintages%==1 (
     ECHO Constructing real-time vintages...  
@@ -29,12 +29,18 @@ IF %switch_construct_vintages%==1 (
 )
 
 cd "..\..\model\"
-set /A switch_estimate_models = 1
+set /A switch_estimate_models = 0
 IF %switch_estimate_models%==1 (
     ECHO Estimating models...
     matlab -noFigureWindows -batch "compute_nowcasts('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
 ) ELSE (
     ECHO "Switch set to 0. Do not estimate models"
 )
+
+set /A switch_additional_plots = 1
+IF %switch_additional_plots% == 1 (
+    ECHO "Plotting monthly GDP and non-GDP forecasts"
+    matlab -noFigureWindows -batch "plot_monthlyGDP('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
+) 
 cd ..
 cmd /k
