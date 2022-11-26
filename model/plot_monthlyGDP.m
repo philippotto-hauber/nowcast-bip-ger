@@ -1,4 +1,4 @@
-function out = plot_monthly_gdp(dir_root, year_nowcast, quarter_nowcast)    
+function out = plot_monthlyGDP(dir_root, year_nowcast, quarter_nowcast)    
     dir_monthly_gdp = [dir_root '\Nowcasts\' year_nowcast 'Q' quarter_nowcast, '\monthlyGDP'] ;
     
     % model specifications
