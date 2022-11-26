@@ -41,6 +41,7 @@ set /A switch_additional_plots = 1
 IF %switch_additional_plots% == 1 (
     ECHO "Plotting monthly GDP and non-GDP forecasts"
     matlab -noFigureWindows -batch "plot_monthlyGDP('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
+    matlab -noFigureWindows -batch "plot_nonGDPforecasts('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
 ) 
 cd ..
 cmd /k
