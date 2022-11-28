@@ -12,8 +12,8 @@ function out = plot_nonGDPforecasts(dir_root, year_nowcast, quarter_nowcast)
     vintages = importdata('../dates_vintages.txt');
     vintage = vintages{end};  
     
-    vars = {'ip', 'to_hosp', 'ord', 'lkwm'};
-    str_titles = {'Industrieproduktion, m/m', 'Umsatz Gastgewerbe, m/m', 'Auftragseingänge, m/m', 'LKW-Fahrleistungsindex, m/m'};
+    vars = {'ip', 'ifoLage', 'ord', 'ifoErw'};
+    str_titles = {'Industrieproduktion, m/m', 'Ifo - Lage (1. Diff.)', 'Auftragseingänge, m/m', 'Ifo - Erwartungen (1. Diff.)'};
     Nvars = length(vars);
     load([dir_nongdp_forecasts, 'dates.mat'])
     date_start = dates_converted{end-11};
@@ -40,7 +40,7 @@ function out = plot_nonGDPforecasts(dir_root, year_nowcast, quarter_nowcast)
         plot_forecasts(squeeze(ys(1, :, i)), squeeze(xis(:, :, i)), dates_converted, date_start, str_titles{i})
     end
     
-    print([dir_nongdp_forecasts 'forecasts', strjoin(vars, '_')],'-dpdf','-fillpage')
+    print([dir_nongdp_forecasts 'forecasts_', strjoin(vars, '_')],'-dpdf','-fillpage')
 
     disp('Done plotting non GDP forecasts')
     out = [];

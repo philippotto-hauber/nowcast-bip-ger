@@ -99,9 +99,9 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast)
                         'Handel mit KFZ'} ;
     
     % monthly variables for which we store the forecasts based on the latest available vintages
-    names_export = {'Produzierendes Gewerbe', 'hospitality', 'Industrie', 'lkw_maut'};
-    groups_export = {'production', 'turnover', 'orders', 'production'};
-    mnemonic_export = {'ip', 'to_hosp', 'ord', 'lkwm'};
+    names_export = {'Produzierendes Gewerbe', 'hospitality', 'Industrie', 'lkw_maut', 'ifo_lage', 'ifo_erwartung'};
+    groups_export = {'production', 'turnover', 'orders', 'production', 'ifo', 'ifo'};
+    mnemonic_export = {'ip', 'to_hosp', 'ord', 'lkwm', 'ifoLage', 'ifoErw'};
     
     if length(names_export) ~= length(groups_export) || length(names_export) ~= length(mnemonic_export)
         error('names, groups and mnemonics vector must be of the same length!')
