@@ -1,5 +1,5 @@
 @echo off
-ECHO Set year and quarter of nowcast (also produces forecast for the next quarter)!
+ECHO "Set year and quarter of nowcast (also produces forecast for the next quarter)!"
 set /p YEAR="Year: "
 set /p QUARTER="Quarter: "
 
@@ -29,7 +29,7 @@ IF %switch_construct_vintages%==1 (
 )
 
 cd "..\..\model\"
-set /A switch_estimate_models = 0
+set /A switch_estimate_models = 1
 IF %switch_estimate_models%==1 (
     ECHO Estimating models...
     matlab -noFigureWindows -batch "compute_nowcasts('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
@@ -42,6 +42,8 @@ IF %switch_additional_plots% == 1 (
     ECHO "Plotting monthly GDP and non-GDP forecasts"
     matlab -noFigureWindows -batch "plot_monthlyGDP('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
     matlab -noFigureWindows -batch "plot_nonGDPforecasts('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
-) 
+) ELSE (
+    ECHO "Switch set to 0. Do not produce additional plots"
+)
 cd ..
 cmd /k
