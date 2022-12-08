@@ -6,7 +6,7 @@ SET /p QUARTER="Quarter: "
 SET DIR_ROOT=C:/Users/Philipp/Desktop
 SET DIR_REALTIMEDATA=%DIR_ROOT%/Echtzeitdatensatz
 
-SET /A switch_download_data = 0
+SET /A switch_download_data = 1
 CD "real time data\R\"
 IF %switch_download_data%==1 (
     ECHO Downloading data...
@@ -19,7 +19,7 @@ IF %switch_download_data%==1 (
     ECHO "Switch set to 0. Do not download data"
 )
 
-SET /A switch_construct_vintages = 0
+SET /A switch_construct_vintages = 1
 CD "..\Matlab"
 IF %switch_construct_vintages%==1 (
     ECHO Constructing real-time vintages...  
