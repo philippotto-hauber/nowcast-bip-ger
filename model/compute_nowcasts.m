@@ -72,7 +72,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast)
     Njs = readmatrix('../model_specs_Njs.csv'); % # of lags in idiosysncratic component
     
     % switches
-    switch_estimatemodels = 1; % 1 = yes!
+    switch_estimatemodels = 0; % 1 = yes!
     switch_savetables = 1; % 1 = yes!
     switch_savegraphs = 1 ; % 1 = yes!
     switch_savedocus = 1 ; % 1 = yes!
@@ -99,7 +99,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast)
                         'Handel mit KFZ'} ;
     
     % monthly variables for which we store the forecasts based on the latest available vintages
-    names_export = {'Produzierendes Gewerbe', 'hospitality', 'Industrie', 'lkw_maut', 'ifo_lage', 'ifo_erwartung'};
+    names_export = {'Industrie', 'hospitality', 'Industrie', 'lkw_maut', 'ifo_lage', 'ifo_erwartung'};
     groups_export = {'production', 'turnover', 'orders', 'production', 'ifo', 'ifo'};
     mnemonic_export = {'ip', 'to_hosp', 'ord', 'lkwm', 'ifoLage', 'ifoErw'};
     
