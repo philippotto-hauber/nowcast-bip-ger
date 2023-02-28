@@ -18,7 +18,7 @@ for (i in seq(1, nrow(vintages)))
     tmp[, 1] <- substr(tmp[, 1], 1, 7)
   
   dat <- rbind(dat, data.frame(dates = tmp[, 1], 
-                               values = tmp[, 3],
+                               values = tmp[, 2],
                                vintage = vintages[i, 1])
                )
 }
