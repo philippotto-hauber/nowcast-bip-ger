@@ -79,6 +79,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast)
     
     % list of vars to be removed from the data set 
     list_removevars = {'PPI: landwirtschaftliche Produkte', 
+                        'VPI: insgesamt',
                         'VPI: insgesamt (ex Energie)',
                         'VPI: insgesamt (ex Energie und Nahrungsmittel)',
                         'VPI: Nahrungsmittel',
