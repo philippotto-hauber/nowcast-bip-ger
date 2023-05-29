@@ -29,7 +29,7 @@ IF %switch_construct_vintages%==1 (
 )
 
 CD "..\..\model\"
-SET /A switch_estimate_models = 1
+SET /A switch_estimate_models = 0
 IF %switch_estimate_models%==1 (
     ECHO Estimating models...
     matlab -noFigureWindows -batch "compute_nowcasts('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
