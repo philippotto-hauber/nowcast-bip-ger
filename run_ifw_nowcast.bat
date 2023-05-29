@@ -10,11 +10,11 @@ SET /A switch_download_data = 1
 CD "real time data\R\"
 IF %switch_download_data%==1 (
     ECHO Downloading data...
-    Rscript --vanilla download_bbk_rtd.R "%DIR_REALTIMEDATA%/raw data"
-    Rscript --vanilla download_bbk_financial_data.R "%DIR_REALTIMEDATA%/raw data"
+    Rem Rscript --vanilla download_bbk_rtd.R "%DIR_REALTIMEDATA%/raw data"
+    Rem Rscript --vanilla download_bbk_financial_data.R "%DIR_REALTIMEDATA%/raw data"
     Rscript --vanilla download_esi.R "%DIR_REALTIMEDATA%/raw data"
-    Rscript --vanilla compile_rtd_gastgewerbe.R "%DIR_REALTIMEDATA%/raw data"
-    Rscript --vanilla compile_rtd_lkw_maut_index.R "%DIR_REALTIMEDATA%/raw data"
+    Rem Rscript --vanilla compile_rtd_gastgewerbe.R "%DIR_REALTIMEDATA%/raw data"
+    Rem Rscript --vanilla compile_rtd_lkw_maut_index.R "%DIR_REALTIMEDATA%/raw data"
 ) ELSE (
     ECHO "Switch set to 0. Do not download data"
 )
