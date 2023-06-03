@@ -45,6 +45,14 @@ Downloading the vintages for the turnover in the hospitality sector is very simi
 
 5. update the file `release_dates.csv` by entering the date of the release and the latest data point in the format e.g. 2023M3 for March 2023 
 
+#### ESI surveys
+
+The download of the ESI surveys is automated. However, the release dates need to be updated manually!
+
+1. go to the list of [ESI press releases](https://economy-finance.ec.europa.eu/economic-forecast-and-surveys/business-and-consumer-surveys/download-business-and-consumer-survey-data/press-releases_en)
+
+2. update the file `*\Echtzeitdatensatz\raw data\ESI BCI\releasedates_ESIBCI_csv.csv` by entering the date of the release and the latest data point in the format e.g. 2023M4 for April 2023 
+
 - set `DIR_ROOT` in `run_ifw_nowcast.bat` to the directory where the folders `Echtzeitdatensatz` and `Nowcasts` are located
 
 - specify the dates for which nowcasts are produced. Typically this will be the end of the second to last quarter of the one being nowcast, i.e. 30 March 2022 when nowcasting 2022Q3 but fewer dates are also possible. Note that in any case, the models are being estimated with data only up until December 2019!  
