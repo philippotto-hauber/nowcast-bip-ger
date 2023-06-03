@@ -31,10 +31,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     
     % vintages
     vintages = importdata('../dates_vintages.txt');
-    
-    
-    vintage_estim ='30-Dec-2019';
-    
+    vintage_estim = vintages{1};
         
     % check all vintages are available        
     flag_missing = checkvintages(vintages, dir_data) ;
@@ -72,7 +69,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     Njs = readmatrix('../model_specs_Njs.csv'); % # of lags in idiosysncratic component
     
     % switches
-    switch_estimatemodels = str2num(switch_estimatemodels) % convert string input to numeric
+    switch_estimatemodels = str2double(switch_estimatemodels); % convert string input to numeric
     switch_savetables = 1; % 1 = yes!
     switch_savegraphs = 1 ; % 1 = yes!
     switch_savedocus = 1 ; % 1 = yes!
