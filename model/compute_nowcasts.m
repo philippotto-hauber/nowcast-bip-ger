@@ -1,4 +1,4 @@
-function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast)
+function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_estimatemodels)
 
     % ----------------------------------------------------------------------- %
     % - This code computes the news decomposition for nowcasts of GDP 
@@ -72,7 +72,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast)
     Njs = readmatrix('../model_specs_Njs.csv'); % # of lags in idiosysncratic component
     
     % switches
-    switch_estimatemodels = 1; % 1 = yes!
+    switch_estimatemodels = str2num(switch_estimatemodels) % convert string input to numeric
     switch_savetables = 1; % 1 = yes!
     switch_savegraphs = 1 ; % 1 = yes!
     switch_savedocus = 1 ; % 1 = yes!
