@@ -8,7 +8,7 @@ while ~is_released
         ind_ym_release = find(releasedates.('year') == year(dates{t}, dateformat) & ...
                                 releasedates.('month') == month(dates{t}, dateformat));
         if isempty(ind_ym_release)
-            error('Could not find date. Check that the ifo release dates files is up to date!!!')
+            error('Could not find date. Check that the ifo/ESI release dates files is up to date!!!')
         end
     elseif strcmp(freq, 'q')
         % assumes that quarterly values are published in the first month of
