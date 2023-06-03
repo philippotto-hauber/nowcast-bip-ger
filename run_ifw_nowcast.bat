@@ -29,12 +29,13 @@ IF %switch_construct_vintages%==1 (
 )
 
 CD "..\..\model\"
-SET /A switch_estimate_models = 0
-IF %switch_estimate_models%==1 (
-    ECHO Estimating models...
-    matlab -noFigureWindows -batch "compute_nowcasts('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
+SET /A switch_compute_nowcasts = 1
+SET /A switch_estimate_models = 1
+IF %switch_compute_nowcasts%==1 (
+    ECHO Computing nowcasts...
+    matlab -noFigureWindows -batch "compute_nowcasts('%DIR_ROOT%', '%YEAR%', '%QUARTER%', '%switch_compute_nowcasts%').m"
 ) ELSE (
-    ECHO "Switch set to 0. Do not estimate models"
+    ECHO "Switch set to 0. Do not compute nowcasts"
 )
 
 SET /A switch_additional_plots = 1
