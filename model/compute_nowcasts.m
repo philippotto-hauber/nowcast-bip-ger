@@ -75,31 +75,13 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     switch_savedocus = 1 ; % 1 = yes!
     
     % list of vars to be removed from the data set 
-    list_removevars = {'PPI: landwirtschaftliche Produkte', 
-                        'VPI: insgesamt',
-                        'VPI: insgesamt (ex Energie)',
-                        'VPI: insgesamt (ex Energie und Nahrungsmittel)',
-                        'VPI: Nahrungsmittel',
-                        'VPI: andere Gebrauchs- und Verbrauchsg�ter',
-                        'VPI: Energie',
-                        'VPI: Dienstleistungen',
-                        'VPI: Dienstleistungen (ex Mieten)',
-                        'VPI: Mieten',
-                        'VPI: Mieten (ex Nebenkosten)',
-                        'PPI: industrielle Produkte',
-                        'PPI: industrielle Produkte (ex Energie)',
-                        'BLG: Verarbeitendes Gewerbe und Bergbau',
-                        'Exportpreise',
-                        'Importpreise',
-                        'Expectations of the employment over the next 3 months',
-                        'Expectations of the prices over the next 3 months',
-                        'Einzelhandel',
-                        'Handel mit KFZ'} ;
+    list_removevars = determine_vars_remove(dir_data, vintages, samplestart, samplestart:1/12:date_forecast);
+    writecell(list_removevars, [dir_nowcast, '\list_removed_vars.txt'])
     
     % monthly variables for which we store the forecasts based on the latest available vintages
-    names_export = {'Industrie', 'hospitality', 'Industrie', 'lkw_maut', 'ifo_lage', 'ifo_erwartung'};
-    groups_export = {'production', 'turnover', 'orders', 'production', 'ifo', 'ifo'};
-    mnemonic_export = {'ip', 'to_hosp', 'ord', 'lkwm', 'ifoLage', 'ifoErw'};
+    names_export = {'Industrie', 'Industrie', 'lkw_maut', 'ifo_lage', 'ifo_erwartung'};
+    groups_export = {'production', 'orders', 'production', 'ifo', 'ifo'};
+    mnemonic_export = {'ip', 'ord', 'lkwm', 'ifoLage', 'ifoErw'};
     
     if length(names_export) ~= length(groups_export) || length(names_export) ~= length(mnemonic_export)
         error('names, groups and mnemonics vector must be of the same length!')
