@@ -107,8 +107,8 @@ if options.Nq_flow>0
     data_q_flow_bal = data_q_flow(:, balstart:balend);
     X = [NaN(size(factors, 1), 2) (factors(:, 1:end-2) + factors(:, 2:end-1) + factors(:, 3:end)) /3];
     for i=1:size(data_q_flow,1)        
-        Yestim = data_q_flow_bal(i, ~isnan(data_q_flow_bal(i, :)))';
-        Xestim = X(:, ~isnan(data_q_flow_bal(i, :)))';
+        Yestim = data_q_flow_bal(i, ~isnan(data_q_flow_bal(i, :)) & ~any(isnan(X), 1))';
+        Xestim = X(:, ~isnan(data_q_flow_bal(i, :))& ~any(isnan(X), 1))';
         lambdaQ_flow(i,:) = ((Xestim'*Xestim)\Xestim'*Yestim)';
         idios = Yestim - Xestim*lambdaQ_flow(i,:)';
         if options.Nj > 0
