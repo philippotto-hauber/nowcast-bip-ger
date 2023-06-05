@@ -76,7 +76,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     
     % list of vars to be removed from the data set 
     list_removevars = determine_vars_remove(dir_data, vintages, samplestart, samplestart:1/12:date_forecast);
-    writecell(list_removevars, [dir_nowcast, '\list_removed_vars.txt'])
+    writecell(list_removevars.namegroup, [dir_nowcast, '\list_removed_vars.txt'])
     
     % monthly variables for which we store the forecasts based on the latest available vintages
     names_export = {'Industrie', 'Industrie', 'lkw_maut', 'ifo_lage', 'ifo_erwartung'};
