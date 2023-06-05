@@ -90,17 +90,16 @@ flag_usestartvals = [flag_usestartvalsM flag_usestartvalsQ] ;
 
 % ------------------------------------------ % 
 % - remove specified vars ------------------ %
-
-for n = 1 : length(names)
-    index_remove(n) =  any(strcmp(list_removevars,names{n})) ;
-    index_keep(n) =  ~any(strcmp(list_removevars,names{n})) ;
+if ~isempty(list_removevars)
+    for n = 1 : length(names)
+        index_remove(n) =  any(strcmp(list_removevars.names,names{n})) & any(strcmp(list_removevars.groups,groups{n})) ;
+        index_keep(n) =  ~any(strcmp(list_removevars.names,names{n})) & ~any(strcmp(list_removevars.groups,groups{n}))  ;
+    end
+    dataM = dataM(index_keep(1:size(dataM,1)),:) ; 
+    flag_usestartvals = flag_usestartvals(index_keep) ; 
+    names = names(index_keep) ; 
+    groups = groups(index_keep) ; 
 end
-
-dataM = dataM(index_keep(1:size(dataM,1)),:) ; 
-flag_usestartvals = flag_usestartvals(index_keep) ; 
-names = names(index_keep) ; 
-groups = groups(index_keep) ; 
-
 % -------------------------------- % 
 % - standardize ------------------ % 
 
