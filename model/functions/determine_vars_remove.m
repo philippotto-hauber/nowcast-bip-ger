@@ -13,14 +13,15 @@ for v = 2:length(vintages)
         newobs = ~isnan(data_new) & isnan(data_old);
         n_newobs = sum(newobs, 2);
         if any(n_newobs>1)
-            list_removevars.names = [list_removevars.names,names_new(n_newobs>1)];
-            list_removevars.groups = [list_removevars.groups,groups_new(n_newobs>1)];
+            list_removevars.names = [list_removevars.names, names_new(n_newobs>1)];
+            list_removevars.groups = [list_removevars.groups, groups_new(n_newobs>1)];
         end
     else
         error('Not the same variables in two adjacent vintages! Abort and manually check vintage construction!')
     end
-    list_removevars.namegroup = strcat(list_removevars.names(:), '_', list_removevars.groups(:));
-    if ~all(strcmp(unique(list_removevars.namegroup, 'stable'), list_removevars.namegroup))
-        error('duplicates in series to be removed. check manually')
-    end
 end
+list_removevars.namegroup = strcat(list_removevars.names(:), '_', list_removevars.groups(:));
+[~, ind_unique, ~] = unique(list_removevars.namegroup);
+list_removevars.names = list_removevars.names(ind_unique);
+list_removevars.groups = list_removevars.groups(ind_unique);
+list_removevars.namegroup = list_removevars.namegroup(ind_unique);
