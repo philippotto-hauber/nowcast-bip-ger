@@ -13,12 +13,16 @@ for (i in seq(1, nrow(vintages)))
 {
   tmp <- read.csv2(paste0(dirname, "/releases/", filename, vintages[i, 1], ".csv"))
   
-  # "dates" in format YYYY-MM
-  if (nchar(tmp[1, 1]) > 7)
-    tmp[, 1] <- substr(tmp[, 1], 1, 7)
+  col_date = grep("Monat", names(tmp))
+  col_val_orig = grep("Original", names(tmp))
+  col_val_sa = grep("saisonbereinigt", names(tmp))
   
-  dat <- rbind(dat, data.frame(dates = tmp[, 1], 
-                               values = tmp[, 2],
+  # "dates" in format YYYY-MM
+  if (nchar(tmp[1, col_date]) > 7)
+    tmp[, col_date] <- substr(tmp[, col_date], 1, 7)
+  
+  dat <- rbind(dat, data.frame(dates = tmp[, col_date], 
+                               values = tmp[, col_val_sa],
                                vintage = vintages[i, 1])
                )
 }
