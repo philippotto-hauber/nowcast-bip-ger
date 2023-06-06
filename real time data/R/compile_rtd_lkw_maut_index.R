@@ -5,8 +5,7 @@
 
 args <- commandArgs(trailingOnly = TRUE)
 dir_main <- args[length(args)]
-
-dir_main <- "C:/Users/Philipp/Desktop/Echtzeitdatensatz/raw data"
+#dir_main <- "C:/Users/Philipp/Desktop/Echtzeitdatensatz/raw data"
 
 #library(lubridate)
 #library(dplyr)
@@ -25,15 +24,18 @@ for (i in seq(1, nrow(vintages)))
 {
   tmp <- read.csv2(paste0(dirname, "/releases/", filename, vintages[i, 1], ".csv"))
   
+  col_date <- grep("Monat", names(tmp))
+  col_val <- 2
+
   # "dates" in format YYYY-MM
-  if (nchar(tmp[1, 1]) > 7)
-    tmp[, 1] <- substr(tmp[, 1], 1, 7)
+  if (nchar(tmp[1, col_date]) > 7)
+    tmp[, col_date] <- substr(tmp[, col_date], 1, 7)
   
-  dat <- rbind(dat, data.frame(date = lubridate::make_date(year = substr(tmp[,1], 1, 4), 
-                                                 month = substr(tmp[, 1], 6, 7)), 
+  dat <- rbind(dat, data.frame(date = lubridate::make_date(year = substr(tmp[, col_date], 1, 4), 
+                                                           month = substr(tmp[, col_date], 6, 7)), 
                                vintage = vintages[i, 1],
-                               value = tmp[, 2])
-               )
+                               value = tmp[, col_val])
+               )               
 }
 
 #----- MERGE WITH EARLIER VINTAGES
