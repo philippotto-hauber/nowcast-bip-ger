@@ -1,4 +1,4 @@
-# ifw-nowcast
+# nowcast-bip-ger
 
 Codes for nowcasting model of German GDP
 
