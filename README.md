@@ -4,7 +4,7 @@ Codes for nowcasting model of German GDP
 
 ## Running the model
 
-Steps **before*** running the model
+Steps **before** running the model
 
 ### Manual data download
 
