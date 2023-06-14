@@ -1,15 +1,24 @@
 # nowcast-bip-ger
 
+## Overview
+
 Codes for nowcasting model of German GDP
 
-## Running the model
+- methodology
 
-Steps **before** running the model
+- news decomposition to track changes in the nowcast as new data are released
+
+- based on real-time vintages that are compiled as part of the estimation process
+
+## Set-up
+
+### Folder strcture
+
+The real-time vintages and nowcasts are **not** stored in the repo but locally! To run , this repo assumes a specific structure of how the real time data are organized 
+
+[Link to Dropbox](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0)
 
 ### Manual data download
-
-
-manually download latest ifo, LKW-Maut-Index, Gastgewerbeumsatz  vintages and update the respective release dates files (details to follow)
 
 #### ifo-index
 
@@ -55,22 +64,61 @@ The download of the ESI surveys is automated. However, the release dates need to
 
 2. update the file `*\Echtzeitdatensatz\raw data\ESI BCI\releasedates_ESIBCI_csv.csv` by entering the date of the release and the latest data point in the format e.g. 2023M4 for April 2023 
 
-- set `DIR_ROOT` in `run_ifw_nowcast.bat` to the directory where the folders `Echtzeitdatensatz` and `Nowcasts` are located
+### Configure the batch script
+Set `DIR_ROOT` in `run-nowcast.bat` to the directory where the folders `Echtzeitdatensatz` and `Nowcasts` are located
 
-- specify the dates for which nowcasts are produced. Typically this will be the end of the second to last quarter of the one being nowcast, i.e. 30 March 2022 when nowcasting 2022Q3 but fewer dates are also possible. Note that in any case, the models are being estimated with data only up until December 2019!  
+### Choose vintages
 
-- set the models specifications in the script `compute_nowcasts.m` (starting in line 69). These include the number of factors `Nrs`, the number of lags in the factor VAR `Nps` and the number of lags in the idiosyncratic components `Njs`. 
+Specify the dates for which nowcasts are produced. Typically this will be the end of the second to last quarter of the one being nowcast, i.e. 30 March 2022 when nowcasting 2022Q3 but fewer dates are also possible. Note that by default, the models are estimated with the **first** vintage in the list. To undo this, manually overwrite the corresponding line in `compute_nowcasts.m`!
+
+### Set model specifications
+The model specifications include the number of factors `Nrs`, the number of lags in the factor VAR `Nps` and the number of lags in the idiosyncratic components `Njs`. These can be set in the respective files `model_specs_xxx.csv` in this repo
+
+## Running the batch script
 
 Once these steps have been completed, you only need to execute the batch script and enter the year and quarter for which you want a nowcast (automatically produces forecasts for the next quarter). This will create a subfolder in `DIR_ROOT\Nowcasts`. Note that no checks are performed whether the provided list of vintages corresponds to the manual user input. 
 
+The batch script `run_nowcast_bip_ger.bat` executes all the necessary steps to generate the nowcast output. 
+
+Specifically it,
+- downloads the required data or compiles the vintages of the manually downloaded data
+- transforms the raw data into vintages that are processed by Matlab
+- estimates the model and runs the news decompositions
+- generates additional results like plots of non-GDP forecasts or monthly GDP estimates
+
+## Output
+
+### Graphs
+
+- evolution of the nowcast and news decomposition for individual models and an equally-weighted pool
+- fan charts visualizing the distribution of forecasts across models for the now- and forecast
+
+### Tables
+
+- Excel sheets with the news decomposition and nowcast evolution visualized in the graphs
+
+### News decomposition in text file
+
+- folder `docu`
+- details of the news decomposition for individual series, i.e. predicted vs. realized value as well as the model implied weight and impact on the nowcast of the release
+
+### Monthly gdp
+
+- `Monats_BIP_mm.pdf`: plot of implied mont-on-month changes in GDP. Not that these are **not** restandardized!
+
+- `Monats_BIP_qq.pdf`: plot of 3-month-over-3-month changes in GDP
+
+### non-GDP forecasts
+
+- `forecasts_ip_ifoLage_ord_ifoErw.pdf`: plot of the forecasts for industrial production, ifo (current situation and expectations) as well as orders
+
+Note that the list of variables for which these forecasts are produced is hard-coded into `compute_nowcasts.m`
 
 ## Comments 
 
-The current list of vintage dates corresponds to nowcasts for the third quarter of 2022. Running the batch script with those values should reproduce the results that are already in the `Nowcasts/2022Q3` folder!
+- The code can take quite a while to run (~1h) when the number of vintages is large and the factor models have to be estimated. Once the vintages have already been created, the corresponding lines in the batch script can be commented out. Similarly, if estimates of the factor models' parameters already exist, setting the flag `estimate_models` to 0 in `compute_nowcasts.m` can save a bit of time. 
 
-The code can take quite a while to run (~1h) when the number of vintages is large and the factor models have to be estimated. Once the vintages have already been created, the corresponding lines in the batch script can be commented out. Similarly, if estimates of the factor models' parameters already exist, setting the flag `estimate_models` to 0 in `compute_nowcasts.m` can save a bit of time. 
-
-Matlab currently produces the following error when running in headless mode:
+- Matlab currently produces the following error when running in headless mode:
 
 ``
 Dot indexing is not supported for variables of this type.
@@ -79,6 +127,6 @@ ERROR: MATLAB error Exit Status: 0x00000001
 ``
 As far as I can tell, this can be safely ignored in the sense that the code nevertheless produces the correct results! 
 
-## Next steps
+- `list_remove_vars.txt` 
 
-- details on output that is generated
+
