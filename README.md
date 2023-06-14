@@ -16,7 +16,9 @@ For a description of a very similar model, see [here](https://www.newyorkfed.org
 
 ### Folder strcture
 
-The real-time vintages and nowcasts are **not** stored in the repo but locally! To run without further modifications, this repo assumes a specific structure of how the data are stored locally: [Link to Dropbox](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0). These folders also include files containing the release dates for the survey indicators such as ESI and ifo as well as the turnover in the hospitality sector and truck toll mileage (the latter three also need to be updated manually
+The real-time vintages and nowcasts are **not** stored in the repo but locally! To run without further modifications, this repo assumes the followingc structure of how files are stored locally: [copy and paste from here](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0). 
+
+These folders also include files containing the release dates for the survey indicators such as ESI and ifo as well as the turnover in the hospitality sector and truck toll mileage. The latter three also need to be updated manually (see below).
 
 ### Data
 
@@ -122,14 +124,13 @@ Note that the list of variables for which these forecasts are produced is hard-c
 
 - The code can take quite a while to run (~1h) when the number of vintages is large and the factor models have to be estimated. Once the vintages have already been created, the corresponding lines in the batch script can be commented out. Similarly, if estimates of the factor models' parameters already exist, setting the flag `estimate_models` to 0 in `compute_nowcasts.m` can save a bit of time. 
 
-- Matlab currently produces the following error when running in headless mode:
+- Matlab currently produces the following error when running in headless mode (As far as I can tell, this can be safely ignored in the sense that the code nevertheless produces the correct results!):
 
 ``
 Dot indexing is not supported for variables of this type.
 
 ERROR: MATLAB error Exit Status: 0x00000001
 ``
-As far as I can tell, this can be safely ignored in the sense that the code nevertheless produces the correct results! 
 
 - To produce sensible results, the news decomposition assumes that for any time series no more than one observation is released at once. This is usually the case except when data errors lead to two or more new observations. The model then doesn't generate an error but the news decomposition produces awkward results. To avoid this, prior to actually estimating the model and generating the nowcasts and news decomposition, the code checks if this pattern is observed for any of the series and then removes them. The variables in question are stored in `list_remove_vars.txt` in the results folder of the quarter that you are nowcasting. 
 
