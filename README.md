@@ -2,21 +2,20 @@
 
 ## Overview
 
-Codes for nowcasting model of German GDP
+This repo 
 
-- methodology
+- downloads publicly available time series and constructs real-time vintages
+- estimates factor models to produce nowcasts of German GDP
+- decomposes forecast revisions as new data are released
 
-- news decomposition to track changes in the nowcast as new data are released
+For a description of a very similar model, see [here](https://www.newyorkfed.org/research/staff_reports/sr830) and references therein. The main methodological difference is that I estimate several different specifications of factor models and combine their nowcasts (and news decompositions).  
 
-- based on real-time vintages that are compiled as part of the estimation process
 
 ## Set-up
 
 ### Folder strcture
 
-The real-time vintages and nowcasts are **not** stored in the repo but locally! To run , this repo assumes a specific structure of how the real time data are organized 
-
-[Link to Dropbox](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0)
+The real-time vintages and nowcasts are **not** stored in the repo but locally! To run without further modifications, this repo assumes a specific structure of how the data are stored locally: [Link to Dropbox](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0)
 
 ### Manual data download
 
@@ -85,6 +84,8 @@ Specifically it,
 - transforms the raw data into vintages that are processed by Matlab
 - estimates the model and runs the news decompositions
 - generates additional results like plots of non-GDP forecasts or monthly GDP estimates
+
+These blocks can be "turned on and off" with switches in the script. 
 
 ## Output
 
