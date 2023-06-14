@@ -14,11 +14,11 @@ For a description of a very similar model, see [here](https://www.newyorkfed.org
 
 ## Set-up
 
-### Folder strcture
+### Folder structure
 
-The real-time vintages and nowcasts are **not** stored in the repo but locally! To run without further modifications, this repo assumes the followingc structure of how files are stored locally: [copy and paste from here](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0). 
+The real-time vintages and nowcasts are **not** stored in the repo but locally! To run without further modifications, this repo assumes the following structure of how files are stored locally: [copy and paste from here](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0). 
 
-These folders also include files containing the release dates for the survey indicators such as ESI and ifo as well as the turnover in the hospitality sector and truck toll mileage. The latter three also need to be updated manually (see below).
+These folders also include files containing the release dates for the survey indicators such as ESI and ifo as well as the turnover in the hospitality sector and truck toll mileage. These need to be updated manually (along with some of the data, see below).
 
 ### Data
 
