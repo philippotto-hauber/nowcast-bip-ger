@@ -5,19 +5,22 @@
 This repo 
 
 - downloads publicly available time series and constructs real-time vintages
-- estimates factor models to produce nowcasts of German GDP
+- estimates factor models based on these vintages to produce nowcasts of German GDP
 - decomposes forecast revisions as new data are released
 
-For a description of a very similar model, see [here](https://www.newyorkfed.org/research/staff_reports/sr830) and references therein. The main methodological difference is that I estimate several different specifications of factor models and combine their nowcasts (and news decompositions).  
+Once everything has been set up, the scripts performing all the above steps can be easily run by executing the following batch script `run-nowcast.bat`.
 
+For a description of a very similar model, see [here](https://www.newyorkfed.org/research/staff_reports/sr830) and references therein. The main methodological difference is that I estimate several different specifications of factor models and combine their nowcasts (and news decompositions).  
 
 ## Set-up
 
 ### Folder strcture
 
-The real-time vintages and nowcasts are **not** stored in the repo but locally! To run without further modifications, this repo assumes a specific structure of how the data are stored locally: [Link to Dropbox](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0)
+The real-time vintages and nowcasts are **not** stored in the repo but locally! To run without further modifications, this repo assumes a specific structure of how the data are stored locally: [Link to Dropbox](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0). These folders also include files containing the release dates for the survey indicators such as ESI and ifo as well as the turnover in the hospitality sector and truck toll mileage (the latter three also need to be updated manually
 
-### Manual data download
+### Data
+
+Most of the time series can be downloaded automatically. However, for a few series a couple of manual steps are necessary. These are described in the following sections. 
 
 #### ifo-index
 
