@@ -128,6 +128,8 @@ ERROR: MATLAB error Exit Status: 0x00000001
 ``
 As far as I can tell, this can be safely ignored in the sense that the code nevertheless produces the correct results! 
 
-- `list_remove_vars.txt` 
+- To produce sensible results, the news decomposition assumes that for any time series no more than one observation is released at once. This is usually the case except when data errors lead to two or more new observations. The model then doesn't generate an error but the news decomposition produces awkward results. To avoid this, prior to actually estimating the model and generating the nowcasts and news decomposition, the code checks if this pattern is observed for any of the series and then removes them. The variables in question are stored in `list_remove_vars.txt` in the results folder of the quarter that you are nowcasting. 
+
+
 
 
