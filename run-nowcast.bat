@@ -19,7 +19,7 @@ IF %switch_download_data%==1 (
     ECHO "Switch set to 0. Do not download data"
 )
 
-SET /A switch_construct_vintages = 0
+SET /A switch_construct_vintages = 1
 CD "..\Matlab"
 IF %switch_construct_vintages%==1 (
     ECHO Constructing real-time vintages...  
@@ -29,8 +29,8 @@ IF %switch_construct_vintages%==1 (
 )
 
 CD "..\..\model\"
-SET /A switch_compute_nowcasts = 0
-SET /A switch_estimate_models = 0
+SET /A switch_compute_nowcasts = 1
+SET /A switch_estimate_models = 1
 IF %switch_compute_nowcasts%==1 (
     ECHO Computing nowcasts...
     matlab -noFigureWindows -batch "compute_nowcasts('%DIR_ROOT%', '%YEAR%', '%QUARTER%', '%switch_estimate_models%').m"
@@ -38,7 +38,7 @@ IF %switch_compute_nowcasts%==1 (
     ECHO "Switch set to 0. Do not compute nowcasts"
 )
 
-SET /A switch_additional_plots = 0
+SET /A switch_additional_plots = 1
 IF %switch_additional_plots% == 1 (
     ECHO "Plotting monthly GDP and non-GDP forecasts"
     matlab -noFigureWindows -batch "plot_monthlyGDP('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
