@@ -4,7 +4,7 @@ dir_main <- args[length(args)]
 
 dirname <- paste0(dir_main, "/umsatz_gastgewerbe/")
 
-vintages <- read.csv(file = paste0(dirname, "release_dates.csv"))
+vintages <- read.csv(file = paste0(dirname, "release_dates_to_hosp.csv"))
 
 filename <- "umsatz-gastgewerbe-"
 

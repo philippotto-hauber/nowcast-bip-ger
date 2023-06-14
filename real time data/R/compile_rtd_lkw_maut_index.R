@@ -13,7 +13,7 @@ dir_main <- args[length(args)]
 
 dirname <- paste0(dir_main, "/lkw_maut_index/")
 
-vintages <- read.csv(file = paste0(dirname, "release_dates.csv"))
+vintages <- read.csv(file = paste0(dirname, "release_dates_lkw_maut.csv"))
 
 filename <- "lkw_maut_index_"
 
