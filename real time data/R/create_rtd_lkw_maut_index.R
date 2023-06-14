@@ -10,7 +10,7 @@ library(tidyr)
 
 dirname <- "C:/Users/Philipp/Documents/Echtzeitdatensatz/raw data/lkw_maut_index/"
 
-vintages <- read.csv(file = paste0(dirname, "release_dates.csv"))
+vintages <- read.csv(file = paste0(dirname, "release_dates_lw_maut.csv"))
 
 filename <- "lkw_maut_index_"
 
