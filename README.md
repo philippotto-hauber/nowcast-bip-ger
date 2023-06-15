@@ -80,7 +80,7 @@ Set `DIR_ROOT` in `run-nowcast.bat` to the directory where the folders `Echtzeit
 Specify the dates for which nowcasts are produced. Typically this will be the end of the second to last quarter of the one being nowcast, i.e. 30 March 2022 when nowcasting 2022Q3 but fewer dates are also possible. Note that by default, the models are estimated with the **first** vintage in the list. To undo this, manually overwrite the corresponding line in `compute_nowcasts.m`!
 
 ### Set model specifications
-The model specifications include the number of factors `Nrs`, the number of lags in the factor VAR `Nps` and the number of lags in the idiosyncratic components `Njs`. These can be set in the respective files `model_specs_xxx.csv` in this repo
+The model specifications include the number of factors `Nrs`, the number of lags in the factor VAR `Nps` and the number of lags in the idiosyncratic components `Njs`. These can be set in the respective files `model_specs_xxx.csv` in this repo. The values currently set are sensible defaults. 
 
 ## Running the batch script
 
