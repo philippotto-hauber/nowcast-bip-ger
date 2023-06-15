@@ -6,12 +6,15 @@ This repo estimates mixed-frequency factor models to produce now- and forecasts[
 
 The models are estimated with real-time vintages that are compiled in this repo. These vintages exactly replicate the information set available to forecasters at a specific point in time and include a large cross-section of publicly available macroeconomic data covering the real economy (industrial production, turnover, orders), prices, financial and labor markets as well survey-based sentiment indicators. 
 
-Besides the now- and forecast the scripts also decompose revisions in the now- and forecast over time as new data are released following the approach in [Banbura and Modugno (2010)](https://www.ecb.europa.eu/pub/pdf/scpwps/ecbwp1189.pdf) 
+Besides the now- and forecast the scripts also decompose revisions in the now- and forecast over time as new data are released following the approach in [Banbura and Modugno (2010)](https://www.ecb.europa.eu/pub/pdf/scpwps/ecbwp1189.pdf).
 
-![](screenshots_output/plot_nowcast.PNG)
+Once everything has been set up (see below for details), the scripts performing all the above steps can be run by executing the following batch script `run-nowcast.bat`.
 
+### Sample output
 
-Once everything has been set up, the scripts performing all the above steps can be run by executing the following batch script `run-nowcast.bat`.
+Nowcast evolution (top) and news decomposition (bottom)
+
+<img src="screenshots_output/plot_nowcast.PNG" width="800">
 
 ## Set-up
 
@@ -100,24 +103,24 @@ These blocks can be "turned on and off" with switches in the script.
 - evolution of the nowcast and news decomposition for individual models and an equally-weighted pool
 - fan charts visualizing the distribution of forecasts across models for the now- and forecast
 
-![](screenshots_output/plot_nowcast.PNG)
+<img src="screenshots_output/plot_nowcast.PNG" width="300">
 
 ### Tables
 
 - Excel sheets with the news decomposition and nowcast evolution visualized in the graphs
 
-![](screenshots_output/table_nowcast.PNG)
+<img src="screenshots_output/table_nowcast.PNG" width="300">
 
 ### News decomposition in text file
 
 - folder `docu`
 - details of the news decomposition for individual series, i.e. predicted vs. realized value as well as the model implied weight and impact on the nowcast of the release
 
-![](screenshots_output/txt_newsdecomp.PNG)
+<img src="screenshots_output/txt_newsdecomp.PNG" width="300">
 
 ### Monthly gdp
 
-![](screenshots_output/plot_monthlyGDP.PNG)
+<img src="screenshots_output/plot_monthlyGDP.PNG" width="300">
 
 - `Monats_BIP_mm.pdf`: plot of implied mont-on-month changes in GDP. Not that these are **not** restandardized!
 
@@ -129,13 +132,13 @@ These blocks can be "turned on and off" with switches in the script.
 
 Note that the list of variables for which these forecasts are produced is hard-coded into `compute_nowcasts.m`
 
-![](screenshots_output/plot_nonGDPforecast.PNG)
+<img src="screenshots_output/plot_nonGDPforecast.PNG" width="300">
 
 ## Comments 
 
-- The code can take quite a while to run (~1h) when the number of vintages is large and the factor models have to be estimated. Once the vintages have already been created, the corresponding lines in the batch script can be commented out. Similarly, if estimates of the factor models' parameters already exist, setting the flag `estimate_models` to 0 in `compute_nowcasts.m` can save a bit of time. 
+- The code can take quite a while to run (~1h) when the number of vintages is large and the factor models have to be estimated. Once the vintages have already been created, the corresponding lines in the batch script can be "switched off". Similarly, if estimates of the factor models' parameters already exist, setting the switch `estimate_models` to 0 in can save a bit of time. 
 
-- Matlab currently produces the following error when running in headless mode (As far as I can tell, this can be safely ignored in the sense that the code nevertheless produces the correct results!):
+- Matlab currently produces the following error when running in headless mode (as far as I can tell, this can be safely ignored in the sense that the code nevertheless produces the correct results!):
 
 ``
 Dot indexing is not supported for variables of this type.
