@@ -2,21 +2,22 @@
 
 ## Overview
 
-This repo 
+This repo estimates mixed-frequency factor models to produce now- and forecasts[^1] of the growth in German gross domestic product (GDP). This class of models is commonly used in the literature (see [here](https://www.newyorkfed.org/research/staff_reports/sr830), [here](https://ideas.repec.org/a/eee/moneco/v55y2008i4p665-676.html), and [here](https://www.sciencedirect.com/science/article/abs/pii/S0169207008000393) for example). The main methodological difference is that I estimate several different specifications of factor models and combine their nowcasts by equally weighting the models' nowcasts (partly motivated by the results in [this paper](https://www.bundesbank.de/resource/blob/703462/5e9829f75a56c8087e83051012fb4d5d/mL/2009-02-17-dkp-03-data.pdf)).
 
-- downloads publicly available time series and constructs real-time vintages
-- estimates factor models based on these vintages to produce nowcasts of German GDP
-- decomposes forecast revisions as new data are released
+The models are estimated with real-time vintages that are compiled in this repo. These vintages exactly replicate the information set available to forecasters at a specific point in time and include a large cross-section of publicly available macroeconomic data covering the real economy (industrial production, turnover, orders), prices, financial and labor markets as well survey-based sentiment indicators. 
 
-Once everything has been set up, the scripts performing all the above steps can be easily run by executing the following batch script `run-nowcast.bat`.
+Besides the now- and forecast the scripts also decompose revisions in the now- and forecast over time as new data are released following the approach in [Banbura and Modugno (2010)](https://www.ecb.europa.eu/pub/pdf/scpwps/ecbwp1189.pdf) 
 
-For a description of a very similar model, see [here](https://www.newyorkfed.org/research/staff_reports/sr830) and references therein. The main methodological difference is that I estimate several different specifications of factor models and combine their nowcasts (and news decompositions).  
+![](screenshots_output/plot_nowcast.PNG)
+
+
+Once everything has been set up, the scripts performing all the above steps can be run by executing the following batch script `run-nowcast.bat`.
 
 ## Set-up
 
 ### Folder structure
 
-The real-time vintages and nowcasts are **not** stored in the repo but locally! To run without further modifications, this repo assumes the following structure of how files are stored locally: [copy and paste from here](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0). 
+The real-time vintages and nowcasts are **not** stored in the repo but locally! To run the scripts without further modifications, this repo assumes the following structure of how files are stored locally: [copy and paste from here in to your root directory of choice!](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0). 
 
 These folders also include files containing the release dates for the survey indicators such as ESI and ifo as well as the turnover in the hospitality sector and truck toll mileage. These need to be updated manually (along with some of the data, see below).
 
@@ -99,16 +100,24 @@ These blocks can be "turned on and off" with switches in the script.
 - evolution of the nowcast and news decomposition for individual models and an equally-weighted pool
 - fan charts visualizing the distribution of forecasts across models for the now- and forecast
 
+![](screenshots_output/plot_nowcast.PNG)
+
 ### Tables
 
 - Excel sheets with the news decomposition and nowcast evolution visualized in the graphs
+
+![](screenshots_output/table_nowcast.PNG)
 
 ### News decomposition in text file
 
 - folder `docu`
 - details of the news decomposition for individual series, i.e. predicted vs. realized value as well as the model implied weight and impact on the nowcast of the release
 
+![](screenshots_output/txt_newsdecomp.PNG)
+
 ### Monthly gdp
+
+![](screenshots_output/plot_monthlyGDP.PNG)
 
 - `Monats_BIP_mm.pdf`: plot of implied mont-on-month changes in GDP. Not that these are **not** restandardized!
 
@@ -119,6 +128,8 @@ These blocks can be "turned on and off" with switches in the script.
 - `forecasts_ip_ifoLage_ord_ifoErw.pdf`: plot of the forecasts for industrial production, ifo (current situation and expectations) as well as orders
 
 Note that the list of variables for which these forecasts are produced is hard-coded into `compute_nowcasts.m`
+
+![](screenshots_output/plot_nonGDPforecast.PNG)
 
 ## Comments 
 
@@ -135,5 +146,5 @@ ERROR: MATLAB error Exit Status: 0x00000001
 - To produce sensible results, the news decomposition assumes that for any time series no more than one observation is released at once. This is usually the case except when data errors lead to two or more new observations. The model then doesn't generate an error but the news decomposition produces awkward results. To avoid this, prior to actually estimating the model and generating the nowcasts and news decomposition, the code checks if this pattern is observed for any of the series and then removes them. The variables in question are stored in `list_remove_vars.txt` in the results folder of the quarter that you are nowcasting. 
 
 
-
+[^1]: The terms nowcast and forecast are largely used interchangeably in this description.
 
