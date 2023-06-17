@@ -20,7 +20,7 @@ Nowcast evolution (top) and news decomposition (bottom)
 
 ### Folder structure
 
-The real-time vintages and nowcasts are **not** stored in the repo but locally! To run the scripts without further modifications, this repo assumes the following structure of how files are stored locally: [copy and paste from here in to your root directory of choice!](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0). 
+The real-time vintages and nowcasts are **not** stored in the repo but locally! To run the scripts without further modifications, this repo assumes the following structure of how files are stored locally: [copy and paste from here in to your root directory of choice](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0)!
 
 These folders also include files containing the release dates for the survey indicators such as ESI and ifo as well as the turnover in the hospitality sector and truck toll mileage. These need to be updated manually (along with some of the data, see below).
 
