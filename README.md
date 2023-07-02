@@ -86,10 +86,10 @@ The model specifications include the number of factors `Nrs`, the number of lags
 
 Once these steps have been completed, you only need to execute the batch script and enter the year and quarter for which you want a nowcast (automatically produces forecasts for the next quarter). This will create a subfolder in `DIR_ROOT\Nowcasts`. Note that no checks are performed whether the provided list of vintages corresponds to the manual user input. 
 
-The batch script `run_nowcast_bip_ger.bat` executes all the necessary steps to generate the nowcast output. 
+The batch script `run_nowcast.bat` executes all the necessary steps to generate the nowcast output. 
 
 Specifically it,
-- downloads the required data or compiles the vintages of the manually downloaded data
+- downloads the required data and compiles the vintages of the manually downloaded data
 - transforms the raw data into vintages that are processed by Matlab
 - estimates the model and runs the news decompositions
 - generates additional results like plots of non-GDP forecasts or monthly GDP estimates
