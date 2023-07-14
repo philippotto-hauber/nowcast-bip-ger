@@ -161,7 +161,6 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                 
                 s0 = zeros(size(T,1),1) ; 
                 P0 = 10 * eye(size(T,1)) ; 
-    %             [~,~,~,~,stT,~,~,~] = f_KalmanSmootherv2(data,T,Z,H,R,Q,s0,P0) ;
                 ks_output_old = f_KalmanSmootherDK(data,T,Z,H,R,Q,s0,P0) ;
                 
                 results.nowcast.new(1,1,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_old.stT(:,options.index_nowcast) ) + options.meangdp ; 
@@ -190,33 +189,6 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                     % ----------------------------------- %
                     % - nowcast with new data ----------- %
                     ks_output_new = f_KalmanSmootherDK(data_new,T,Z,H,R,Q,s0,P0) ;
-                    
-    
-    %                 % plot and save fit and forecasts for ifo and ip
-    %                 ind_ifo = find(strcmp(options.names, 'ifo - VG: Lage'));
-    %                 ind_ip = find(strcmp(options.names, 'Produzierendes Gewerbe') & strcmp(options.groups, 'production'));
-    %                 dat_ifo = options.stds(ind_ifo)* (Z(ind_ifo,:) * ks_output_new.stT) + options.means(ind_ifo);
-    %                 dat_ip = options.stds(ind_ip)* (Z(ind_ip,:) * ks_output_new.stT) + options.means(ind_ip);
-    %                 ind_cu = find(strcmp(options.names, 'ifo - VG:  Kapazit�tsauslastung'));
-    %                 dat_cu = options.stds(ind_cu)* (Z(ind_cu,:) * ks_output_new.stT) + options.means(ind_cu);
-    %                 fig = figure;
-    %                 fig.PaperOrientation = 'landscape';
-    %                 savename = ['ifo_ip_fit_' vintages{v} '_Nr' num2str(options.Nr) '_Np' num2str(options.Np) '_Nj' num2str(options.Nj)] ;
-    %                 subplot(2,2,1)
-    %                 plot(dat_ip, 'b:'); hold on; plot(options.stds(2)*data_new(2,:) + options.means(2), 'b-');title(options.names{2});
-    %                 subplot(2,2,2)
-    %                 plot(dat_ifo, 'b:'); hold on; plot(options.stds(ind_ifo)*data_new(ind_ifo,:) + options.means(ind_ifo), 'b-');title(options.names{ind_ifo});
-    %                 subplot(2,2,3)
-    %                 plot(dat_cu, 'b:'); hold on; plot(options.stds(ind_cu)*data_new(ind_cu,:) + options.means(ind_cu), 'bo');title(options.names{ind_cu});
-    %                 subplot(2,2,4)
-    %                 plot(Z(options.index_gdp,:) * ks_output_new.stT, 'b-'); title('monthly GDP, standardized');
-    %                 mtit([vintages{v} '; Nr = ' num2str(options.Nr) ', Np = ' num2str(options.Np) ', Nj = ' num2str(options.Nj)], 'yoff',.0000)
-    %                 if switch_savegraphs == 1
-    %                 print([dirname '\graphs\' savename],'-dpdf','-fillpage') 
-    %                 end                
-    %                 close
-                    
-                    
                     results.nowcast.new(1,v,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_new.stT(:,options.index_nowcast == 1) ) + options.meangdp ;
                     results.forecast.new(1,v,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_new.stT(:,options.index_forecast == 1) ) + options.meangdp ;
                     
@@ -285,8 +257,6 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                     % compute nowcast due to data revisions
                     results.nowcast.revised_data(1,v,modcounter) = results.nowcast.new(1,v,modcounter) - sum(results.nowcast.impact_by_group( : , v , modcounter ) ) ; 
                     results.forecast.revised_data(1,v,modcounter) = results.forecast.new(1,v,modcounter) - sum(results.forecast.impact_by_group( : , v , modcounter ) ) ;
-                    
-       
                     
                     % ------------------------------------------------ %
                     % - "update" data Kalman smoother output --------- %
