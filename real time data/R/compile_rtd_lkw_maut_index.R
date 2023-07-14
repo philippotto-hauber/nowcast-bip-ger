@@ -5,11 +5,9 @@
 
 args <- commandArgs(trailingOnly = TRUE)
 dir_main <- args[length(args)]
-#dir_main <- "C:/Users/Philipp/Desktop/Echtzeitdatensatz/raw data"
 
-#library(lubridate)
-#library(dplyr)
-#library(tidyr)
+# keeps this comment for future debugging sessions
+#dir_main <- "C:/Users/Philipp/Desktop/Echtzeitdatensatz/raw data"
 
 dirname <- paste0(dir_main, "/lkw_maut_index/")
 

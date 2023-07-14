@@ -1,5 +1,7 @@
 args <- commandArgs(trailingOnly = TRUE)
 dir_main <- args[length(args)]
+
+# keeps this comment for future debugging sessions
 #dir_main <- "C:/Users/Philipp/Desktop/Echtzeitdatensatz/raw data"
 
 dirname <- paste0(dir_main, "/umsatz_gastgewerbe/")
