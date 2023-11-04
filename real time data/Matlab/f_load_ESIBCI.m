@@ -8,7 +8,6 @@ data_ESIBCI = f_loadoptions_ESIBCI ;
 data_ESIBCI.groups(:) = {'ESI'}; 
 
 % load release dates and 
-releasedates_alt = readtable([ dirname 'releasedates_ESIBCI.xlsx'] );
 releasedates = readtable([ dirname 'releasedates_ESIBCI_csv.csv'], Delimiter=';' );
 
 % specify date format for dates in table
