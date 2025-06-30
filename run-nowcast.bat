@@ -3,7 +3,7 @@ ECHO "Set year and quarter of nowcast (also produces forecast for the next quart
 SET /p YEAR="Year: "
 SET /p QUARTER="Quarter: "
 
-SET DIR_ROOT=C:/Users/Philipp/Dropbox
+SET DIR_ROOT=C:/Users/Hauber-P/Documents
 SET DIR_REALTIMEDATA=%DIR_ROOT%/Echtzeitdatensatz
 
 SET /A switch_download_data = 1
