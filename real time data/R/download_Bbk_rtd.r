@@ -2,7 +2,7 @@ args <- commandArgs(trailingOnly = TRUE)
 dir_main <- args[length(args)]
 
 # create store_dir if it does not already exist
-storedir <- paste0(dir_main, "/BuBa RTD/")
+storedir <- paste0(dir_main, "/raw data/BuBa RTD/")
 if (!dir.exists(storedir)) dir.create(storedir, recursive = TRUE)
 
 # load function
@@ -39,7 +39,7 @@ for ( j in 1 : length(categories) ){
 		# export to csv
 		exportseries2csv(x, dirname, var_codes[i])
 	}
-	print(paste0("Done downloading ", categories[j], " series!"))
+	print(paste0("Done downloading ", categories[j], " series and writing to ", dirname, "!"))
 }
 
 
