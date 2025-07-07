@@ -13,7 +13,7 @@ function data = f_loadoptions_ESIBCI
         'Selling price expectations for the months ahead' , 'ESI: industry' , 2 , 'm' , 1 , 1 , 'INDU.DE.TOT.6.BS.M' ;             
         'Employment expectations for the months ahead' , 'ESI: industry' , 2 , 'm' , 1 , 0 , 'INDU.DE.TOT.7.BS.M' ;
         %'Export expectations for the months ahead' ,   'ESI: industry' , 2 , 'q:A' , 0 , 0 , 'INDU.DE.TOT.12.BS.Q' ;                      
-        %'Current level of capacity utilization'  'ESI: industry' , 1 , 'q:A' , 0 , 0 , 'INDU.DE.TOT.13.QPS.Q' ; 
+        'Current level of capacity utilization'  'ESI: industry' , 1 , 'q:A' , 0 , 0 , 'INDU.DE.TOT.13.QPS.Q' ; 
         % -------RETAIL-------------- %
         'Confidence Indicator' , 'ESI: retail' , 2 , 'm' , 1 , 0 , 'RETA.DE.TOT.COF.BS.M' ;                             
         'Business activity (sales) development over the past 3 months' , 'ESI: retail' , 2 , 'm' , 1 , 0 , 'RETA.DE.TOT.1.BS.M' ;
@@ -36,7 +36,7 @@ function data = f_loadoptions_ESIBCI
         %'Evolution of the employment over the past 3 months' , 'ESI: services' , 2 , 'm' , 0 , 0 , 'SERV.DE.TOT.4.BS.M' ; 
         'Expectations of the employment over the next 3 months' , 'ESI: services' , 2 , 'm' , 0 , 1 , 'SERV.DE.TOT.5.BS.M' ; 
         'Expectations of the prices over the next 3 months' , 'ESI: services' , 2 , 'm' , 0 , 1 , 'SERV.DE.TOT.6.BS.M'
-        %'Current level of capacity utilization' , 'ESI: services' , 1 , 'q:A' , 0 , 0 , 'SERV.DE.TOT.8.QPS.Q' ;     
+        'Current level of capacity utilization' , 'ESI: services' , 1 , 'q:A' , 0 , 0 , 'SERV.DE.TOT.8.QPS.Q' ;     
         % -------CONSUMER-------------- %
         'Confidence Indicator' , 'ESI: consumer' , 2 , 'm' , 1 , 0 , 'CONS.DE.TOT.COF.BS.M' ;                            
         'Financial situation over last 12 months' , 'ESI: consumer' , 2 , 'm' , 1 , 0 , 'CONS.DE.TOT.1.BS.M' ; 
