@@ -3,7 +3,7 @@ ECHO "Set year and quarter of nowcast (also produces forecast for the next quart
 SET /p YEAR="Year: "
 SET /p QUARTER="Quarter: "
 
-SET DIR_ROOT=C:/Users/Hauber-P/Documents
+SET DIR_ROOT=G:/Geteilte Ablagen/02_Konjunktur/04_Prognose/9_Prognosemodelle/03_DFM
 SET DIR_REALTIMEDATA=%DIR_ROOT%/Echtzeitdatensatz
 
 SET /A switch_download_data = 1
@@ -30,7 +30,7 @@ IF %switch_construct_vintages%==1 (
 
 CD "..\..\model\"
 SET /A switch_compute_nowcasts = 1
-SET /A switch_estimate_models = 1
+SET /A switch_estimate_models = 0
 IF %switch_compute_nowcasts%==1 (
     ECHO Computing nowcasts...
     matlab -noFigureWindows -batch "compute_nowcasts('%DIR_ROOT%', '%YEAR%', '%QUARTER%', '%switch_estimate_models%').m"
