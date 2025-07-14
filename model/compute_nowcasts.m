@@ -1,5 +1,9 @@
 function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_estimatemodels)
-
+    
+    % dir_root = 'G:/Geteilte Ablagen/02_Konjunktur/04_Prognose/9_Prognosemodelle/03_DFM';
+    % year_nowcast = '2025';
+    % quarter_nowcast = '2';
+    % switch_estimatemodels = '0';
     % ----------------------------------------------------------------------- %
     % - This code computes the news decomposition for nowcasts of GDP 
     % - growth 
@@ -79,9 +83,9 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     writecell(list_removevars.namegroup, [dir_nowcast, '\list_removed_vars.txt'])
     
     % monthly variables for which we store the forecasts based on the latest available vintages
-    names_export = {'Industrie', 'Industrie', 'lkw_maut', 'ifo_lage', 'ifo_erwartung'};
-    groups_export = {'production', 'orders', 'production', 'ifo', 'ifo'};
-    mnemonic_export = {'ip', 'ord', 'lkwm', 'ifoLage', 'ifoErw'};
+    names_export = {'Industrie', 'Industrie', 'lkw_maut', 'ifo_lage', 'ifo_erwartung', 'private consumption', 'exports'};
+    groups_export = {'production', 'orders', 'production', 'ifo', 'ifo', 'national accounts', 'national accounts'};
+    mnemonic_export = {'ip', 'ord', 'lkwm', 'ifoLage', 'ifoErw', 'privVerbrauch', 'Exporte'};
     
     if length(names_export) ~= length(groups_export) || length(names_export) ~= length(mnemonic_export)
         error('names, groups and mnemonics vector must be of the same length!')
