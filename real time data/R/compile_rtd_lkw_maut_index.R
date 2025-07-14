@@ -6,32 +6,41 @@
 args <- commandArgs(trailingOnly = TRUE)
 dir_main <- args[length(args)]
 
-# keeps this comment for future debugging sessions
-#dir_main <- "C:/Users/Philipp/Desktop/Echtzeitdatensatz/raw data"
+# keep this comment for future debugging sessions
+# dir_main <- "G:/Geteilte Ablagen/02_Konjunktur/04_Prognose/9_Prognosemodelle/03_DFM/Echtzeitdatensatz/raw data"
 
 dirname <- paste0(dir_main, "/lkw_maut_index/")
 
 vintages <- read.csv(file = paste0(dirname, "release_dates_lkw_maut.csv"))
-
+vintages <- list.files(path = paste0(dirname, "releases/"), pattern = "lkw_maut_index_", full.names = TRUE)
 filename <- "lkw_maut_index_"
+
+extract_date_from_filename <- function(f){
+  len_f <- nchar(f)
+  d <- as.Date(substr(f, len_f - 13, len_f - 4))
+  stopifnot(class(d) == "Date")
+  return(d)
+}
 
 #----- READ IN CSV VINTAGES
 
 dat <- data.frame()
-for (i in seq(1, nrow(vintages)))
+for (v in vintages)
 {
-  tmp <- read.csv2(paste0(dirname, "/releases/", filename, vintages[i, 1], ".csv"))
+  tmp <- read.csv2(v)
   
   col_date <- grep("Monat", names(tmp))
+  
+  # hard-code because column name changes over time! 
   col_val <- 2
-
+  
   # "dates" in format YYYY-MM
   if (nchar(tmp[1, col_date]) > 7)
     tmp[, col_date] <- substr(tmp[, col_date], 1, 7)
   
   dat <- rbind(dat, data.frame(date = lubridate::make_date(year = substr(tmp[, col_date], 1, 4), 
                                                            month = substr(tmp[, col_date], 6, 7)), 
-                               vintage = vintages[i, 1],
+                               vintage = extract_date_from_filename(v),
                                value = tmp[, col_val])
                )               
 }
