@@ -4,7 +4,10 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     % - This code computes the news decomposition for nowcasts of GDP 
     % - growth 
     % ----------------------------------------------------------------------- %
-    
+    % dir_root = 'G:/Geteilte Ablagen/02_Konjunktur/04_Prognose/9_Prognosemodelle/03_DFM';
+    % year_nowcast = '2025';
+    % quarter_nowcast = '2';
+    % switch_estimatemodels = '1';
     dir_data = [dir_root '\Echtzeitdatensatz'];
     dir_nowcast = [dir_root '\Nowcasts\' year_nowcast 'Q' quarter_nowcast] ;
     if exist(dir_nowcast, 'dir') ~= 7;mkdir(dir_nowcast);end 
@@ -521,6 +524,6 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
             options.groupnames, ...
             dir_nowcast)
     end
-    disp('Done estimating models!')
+    disp('Done generating nowcasts!')
     out = [];
 end
