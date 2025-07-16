@@ -1,6 +1,9 @@
 args <- commandArgs(trailingOnly = TRUE)
 dir_main <- args[length(args)]
 
+# keep this comment for future debugging sessions
+# dir_main <- "C:/Users/Hauber-P/Documents/GitHub/nowcast-bip-ger/Echtzeitdatensatz/raw data"
+
 # create store_dir if it does not already exist
 store_dir <- paste0(dir_main, "/Finanzmarktdaten/")
 if (!dir.exists(store_dir)) dir.create(store_dir, recursive = TRUE)
@@ -37,7 +40,7 @@ for (series_code in get_var_codes_bbk_financial())
 {
   series_code_category <- substr(series_code, 1, 5) 
   series_code_series <- substr(series_code, 7, nchar(series_code)) 
-  dat <- read.csv(paste0(url_base, series_code_category, "/", series_code_series, url_params), skip = 8, stringsAsFactors = FALSE)
+  dat <- read.csv(paste0(url_base, series_code_category, "/", series_code_series, url_params), skip = 9, stringsAsFactors = FALSE)
   dat <- dat[, c(1, 2)] # get rid of flags column!
   names(dat) <- c("dates", "values")
   dat[, 1] <- as.Date(paste0(dat[, 1], "-01"), format = "%Y-%m-%d")
