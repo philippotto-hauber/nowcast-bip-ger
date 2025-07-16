@@ -3,11 +3,11 @@ ECHO "Set year and quarter of nowcast (also produces forecast for the next quart
 SET /p YEAR="Year: "
 SET /p QUARTER="Quarter: "
 
-SET DIR_ROOT=G:/Geteilte Ablagen/02_Konjunktur/04_Prognose/9_Prognosemodelle/03_DFM
+SET DIR_ROOT=%CD%
 SET DIR_REALTIMEDATA=%DIR_ROOT%/Echtzeitdatensatz
 
-SET /A switch_download_data = 1
-CD "real time data\R\"
+SET /A switch_download_data = 0
+CD "src\real time data\R\"
 IF %switch_download_data%==1 (
     ECHO Downloading data...
     Rscript --vanilla download_bbk_rtd.R "%DIR_REALTIMEDATA%/raw data"
@@ -19,7 +19,7 @@ IF %switch_download_data%==1 (
     ECHO "Switch set to 0. Do not download data"
 )
 
-SET /A switch_construct_vintages = 1
+SET /A switch_construct_vintages = 0
 CD "..\Matlab"
 IF %switch_construct_vintages%==1 (
     ECHO Constructing real-time vintages...  
@@ -29,7 +29,7 @@ IF %switch_construct_vintages%==1 (
 )
 
 CD "..\..\model\"
-SET /A switch_compute_nowcasts = 1
+SET /A switch_compute_nowcasts = 0
 SET /A switch_estimate_models = 0
 IF %switch_compute_nowcasts%==1 (
     ECHO Computing nowcasts...
