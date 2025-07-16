@@ -1,7 +1,7 @@
 function out = construct_realtime_vintages(dir_realtimedata)
     dir_rawdata = [dir_realtimedata, '/raw data'];
     dir_vintages = [dir_realtimedata, '/vintages'];
-    vintages = importdata('../../dates_vintages.txt');
+    vintages = importdata('../../../dates_vintages.txt');
     for v = 1 : length(vintages)
         dataset.data_ifo = f_load_ifo(vintages{v}, dir_rawdata) ;
         %toc

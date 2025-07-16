@@ -33,7 +33,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     % ----------------------------------------------------------------------- %
     
     % vintages
-    vintages = importdata('../dates_vintages.txt');
+    vintages = importdata('../../dates_vintages.txt');
     vintage_estim = vintages{1};
         
     % check all vintages are available        
@@ -67,9 +67,9 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     Nvintages = length( vintages ) ;
     
     % model specifications
-    Nrs = readmatrix('../model_specs_Nrs.csv'); % # number of factors
-    Nps = readmatrix('../model_specs_Nps.csv'); % # of lags in factor VAR
-    Njs = readmatrix('../model_specs_Njs.csv'); % # of lags in idiosysncratic component
+    Nrs = readmatrix('../../model_specs_Nrs.csv'); % # number of factors
+    Nps = readmatrix('../../model_specs_Nps.csv'); % # of lags in factor VAR
+    Njs = readmatrix('../../model_specs_Njs.csv'); % # of lags in idiosysncratic component
     
     % switches
     switch_estimatemodels = str2double(switch_estimatemodels); % convert string input to numeric
