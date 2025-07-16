@@ -7,11 +7,10 @@ args <- commandArgs(trailingOnly = TRUE)
 dir_main <- args[length(args)]
 
 # keep this comment for future debugging sessions
-# dir_main <- "G:/Geteilte Ablagen/02_Konjunktur/04_Prognose/9_Prognosemodelle/03_DFM/Echtzeitdatensatz/raw data"
+# dir_main <- "C:/Users/Hauber-P/Documents/GitHub/nowcast-bip-ger/Echtzeitdatensatz/raw data"
 
 dirname <- paste0(dir_main, "/lkw_maut_index/")
 
-vintages <- read.csv(file = paste0(dirname, "release_dates_lkw_maut.csv"))
 vintages <- list.files(path = paste0(dirname, "releases/"), pattern = "lkw_maut_index_", full.names = TRUE)
 filename <- "lkw_maut_index_"
 
@@ -70,7 +69,7 @@ write.csv(df_wide,
           quote = T,
           na = "")
 
-print("Done compiling real-time truck toll mileage data!")
+print(paste0("Done compiling real-time truck toll mileage data and storing vintages to ", dirname, "!"))
 
 
 
