@@ -2,14 +2,14 @@ function out = plot_nonGDPforecasts(dir_root, year_nowcast, quarter_nowcast)
     dir_nongdp_forecasts = [dir_root '\Nowcasts\' year_nowcast 'Q' quarter_nowcast, '\non gdp forecasts\'] ;
     
     % models
-    Nrs = readmatrix('../model_specs_Nrs.csv'); % # number of factors
-    Nps = readmatrix('../model_specs_Nps.csv'); % # of lags in factor VAR
-    Njs = readmatrix('../model_specs_Njs.csv'); % # of lags in idiosysncratic component
+    Nrs = readmatrix('../../model_specs_Nrs.csv'); % # number of factors
+    Nps = readmatrix('../../model_specs_Nps.csv'); % # of lags in factor VAR
+    Njs = readmatrix('../../model_specs_Njs.csv'); % # of lags in idiosysncratic component
     
     Nmodels = length(Nrs) * length(Nps) * length(Njs);
     
     % vintage
-    vintages = importdata('../dates_vintages.txt');
+    vintages = importdata('../../dates_vintages.txt');
     vintage = vintages{end};  
     
     vars = {'ip', 'ifoLage', 'ord', 'ifoErw'};

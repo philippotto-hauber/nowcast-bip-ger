@@ -2,9 +2,9 @@ function out = plot_monthlyGDP(dir_root, year_nowcast, quarter_nowcast)
     dir_monthly_gdp = [dir_root '\Nowcasts\' year_nowcast 'Q' quarter_nowcast, '\monthlyGDP'] ;
     
     % model specifications
-    Nrs = readmatrix('../model_specs_Nrs.csv'); % # number of factors
-    Nps = readmatrix('../model_specs_Nps.csv'); % # of lags in factor VAR
-    Njs = readmatrix('../model_specs_Njs.csv'); % # of lags in idiosysncratic component
+    Nrs = readmatrix('../../model_specs_Nrs.csv'); % # number of factors
+    Nps = readmatrix('../../model_specs_Nps.csv'); % # of lags in factor VAR
+    Njs = readmatrix('../../model_specs_Njs.csv'); % # of lags in idiosysncratic component
     
     % specs
     specs = {};
@@ -17,7 +17,7 @@ function out = plot_monthlyGDP(dir_root, year_nowcast, quarter_nowcast)
     end
     
     % vintages
-    vintages = importdata('../dates_vintages.txt');
+    vintages = importdata('../../dates_vintages.txt');
     vintage = vintages{end};  
     
     % get data
