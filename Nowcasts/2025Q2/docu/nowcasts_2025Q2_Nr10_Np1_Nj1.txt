@@ -1,0 +1,41 @@
+################################################################# 
+################################################################# 
+####### MODEL SPECIFICATION ##################################### 
+####### Nr = 10 ##################################################
+####### Np = 1 ##################################################
+####### Nj = 1 ##################################################
+################################################################# 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-04-15, the nowcast for 2025Q2 was 0.23 percent. 
+#- 
+#- Previous nowcast was -0.21 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    lkw_maut (production) 
+#     forecast:  0.7 actual:  2.6 weight: 0.1337 impact: 0.26 
+#- 
+#-    VPI: insgesamt (ex Energie) (prices) 
+#     forecast:  0.0 actual:  0.3 weight: 0.2696 impact: 0.06 
+#- 
+#-    VPI: insgesamt (prices) 
+#     forecast: -0.0 actual:  0.2 weight: 0.2717 impact: 0.05 
+#- 
+#-    Zinsstrukturkurve: 10 Jahre RLZ (financial) 
+#     forecast: -0.0 actual:  0.3 weight: -0.1292 impact: -0.05 
+#- 
+#-    VPI: Nahrungsmittel (prices) 
+#     forecast: -0.1 actual:  0.7 weight: 0.0466 impact: 0.04 
+#- 
+#-    VPI: andere Gebrauchs- und Verbrauchsg�ter (prices) 
+#     forecast:  0.0 actual:  0.3 weight: 0.1395 impact: 0.03 
+#- 
+#-    Umlaufrendite: insgesamt (financial) 
+#     forecast: -0.0 actual:  0.3 weight: -0.0944 impact: -0.03 
+#- 
+#-    VPI: insgesamt (ex Energie und Nahrungsmittel) (prices) 
+#     forecast:  0.0 actual:  0.2 weight: 0.2030 impact: 0.03 
+#- 
+################################################################# 

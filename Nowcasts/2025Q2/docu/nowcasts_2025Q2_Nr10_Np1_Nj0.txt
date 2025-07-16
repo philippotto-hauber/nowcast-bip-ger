@@ -1,0 +1,41 @@
+################################################################# 
+################################################################# 
+####### MODEL SPECIFICATION ##################################### 
+####### Nr = 10 ##################################################
+####### Np = 1 ##################################################
+####### Nj = 0 ##################################################
+################################################################# 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-04-15, the nowcast for 2025Q2 was 0.46 percent. 
+#- 
+#- Previous nowcast was 0.01 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    lkw_maut (production) 
+#     forecast:  0.8 actual:  2.6 weight: 0.1129 impact: 0.21 
+#- 
+#-    Investitionsg�ter (turnover) 
+#     forecast: -0.6 actual:  2.4 weight: 0.0194 impact: 0.06 
+#- 
+#-    Industrie (turnover) 
+#     forecast: -1.1 actual:  0.7 weight: 0.0270 impact: 0.05 
+#- 
+#-    VPI: insgesamt (ex Energie) (prices) 
+#     forecast:  0.0 actual:  0.3 weight: 0.2027 impact: 0.04 
+#- 
+#-    VPI: Nahrungsmittel (prices) 
+#     forecast: -0.1 actual:  0.7 weight: 0.0439 impact: 0.03 
+#- 
+#-    VPI: andere Gebrauchs- und Verbrauchsg�ter (prices) 
+#     forecast:  0.0 actual:  0.3 weight: 0.1285 impact: 0.03 
+#- 
+#-    VPI: Energie (prices) 
+#     forecast:  0.0 actual: -1.5 weight: 0.0184 impact: -0.03 
+#- 
+#-    VPI: insgesamt (prices) 
+#     forecast:  0.0 actual:  0.2 weight: 0.2243 impact: 0.03 
+#- 
+################################################################# 
