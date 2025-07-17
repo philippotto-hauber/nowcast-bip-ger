@@ -1,0 +1,182 @@
+################################################################# 
+################################################################# 
+####### MODEL SPECIFICATION ##################################### 
+####### Nr = 4 ##################################################
+####### Np = 1 ##################################################
+####### Nj = 0 ##################################################
+################################################################# 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-04-15, the nowcast for 2025Q2 was 0.53 percent. 
+#- 
+#- Previous nowcast was 0.27 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    lkw_maut (production) 
+#     forecast:  0.5 actual:  2.6 weight: 0.1175 impact: 0.25 
+#- 
+#-    VPI: Energie (prices) 
+#     forecast:  0.3 actual: -1.5 weight: 0.0140 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-04-30, the nowcast for 2025Q2 was 0.40 percent. 
+#- 
+#- Previous nowcast was 0.53 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    ifo_erwartung (ifo) 
+#     forecast:  0.2 actual: -1.2 weight: 0.1198 impact: -0.17 
+#- 
+#-    ifo_lage (ifo) 
+#     forecast:  0.3 actual:  0.7 weight: 0.2158 impact: 0.09 
+#- 
+#-    VPI: Dienstleistungen (prices) 
+#     forecast:  0.2 actual:  0.4 weight: 0.1989 impact: 0.05 
+#- 
+#-    VPI: Energie (prices) 
+#     forecast:  0.4 actual: -0.6 weight: 0.0446 impact: -0.04 
+#- 
+#-    Importpreise (prices) 
+#     forecast:  0.2 actual: -1.1 weight: 0.0200 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-05-15, the nowcast for 2025Q2 was 0.61 percent. 
+#- 
+#- Previous nowcast was 0.40 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Industrie (production) 
+#     forecast:  0.8 actual:  3.5 weight: 0.0400 impact: 0.11 
+#- 
+#-    Produzierendes Gewerbe ohne Bau (production) 
+#     forecast:  0.7 actual:  3.0 weight: 0.0365 impact: 0.09 
+#- 
+#-    Produzierendes Gewerbe (production) 
+#     forecast:  0.9 actual:  2.9 weight: 0.0246 impact: 0.05 
+#- 
+#-    Production expectations for the months ahead (ESI) 
+#     forecast:  0.1 actual: -2.2 weight: 0.0178 impact: -0.04 
+#- 
+#-    Business activity expectations over the next 3 months (ESI) 
+#     forecast: -0.1 actual: -5.1 weight: 0.0078 impact: -0.04 
+#- 
+#-    lkw_maut (production) 
+#     forecast: -0.0 actual: -0.2 weight: 0.1811 impact: -0.03 
+#- 
+#-    Zinsstrukturkurve: 10 Jahre RLZ (financial) 
+#     forecast: -0.0 actual: -0.2 weight: -0.1128 impact: 0.03 
+#- 
+#-    Orders expectations over the next 3 months (ESI) 
+#     forecast:  0.0 actual: -4.1 weight: 0.0061 impact: -0.03 
+#- 
+#-    Expectation of the demand over the next 3 months (ESI) 
+#     forecast: -0.1 actual:  1.9 weight: 0.0126 impact: 0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-05-30, the nowcast for 2025Q2 was 0.72 percent. 
+#- 
+#- Previous nowcast was 0.61 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Production expectations for the months ahead (ESI) 
+#     forecast: -0.5 actual:  4.3 weight: 0.0146 impact: 0.07 
+#- 
+#-    Importpreise (prices) 
+#     forecast:  0.5 actual: -1.9 weight: 0.0283 impact: -0.07 
+#- 
+#-    Business activity expectations over the next 3 months (ESI) 
+#     forecast: -1.0 actual:  9.4 weight: 0.0065 impact: 0.07 
+#- 
+#-    ifo_erwartung (ifo) 
+#     forecast: -0.4 actual:  3.0 weight: 0.0165 impact: 0.06 
+#- 
+#-    PPI: industrielle Produkte (prices) 
+#     forecast:  0.4 actual: -0.7 weight: 0.0421 impact: -0.05 
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  0.0 actual:  2.1 weight: 0.0226 impact: 0.05 
+#- 
+#-    Expectations of the employment over the next 3 months (ESI) 
+#     forecast: -0.1 actual:  3.2 weight: 0.0139 impact: 0.05 
+#- 
+#-    ifo_lage (ifo) 
+#     forecast:  0.1 actual:  1.2 weight: 0.0326 impact: 0.04 
+#- 
+#-    Employment expectations over the next 3 months (ESI) 
+#     forecast: -0.2 actual:  1.7 weight: 0.0168 impact: 0.03 
+#- 
+#-    Financial situation over last 12 months (ESI) 
+#     forecast: -0.1 actual:  2.3 weight: -0.0126 impact: -0.03 
+#- 
+#-    Orders expectations over the next 3 months (ESI) 
+#     forecast: -0.6 actual:  5.4 weight: 0.0050 impact: 0.03 
+#- 
+#-    VPI: Energie (prices) 
+#     forecast:  0.7 actual: -0.4 weight: 0.0232 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-06-15, the nowcast for 2025Q2 was 0.35 percent. 
+#- 
+#- Previous nowcast was 0.72 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    lkw_maut (production) 
+#     forecast:  0.6 actual: -0.6 weight: 0.1284 impact: -0.15 
+#- 
+#-    Produzierendes Gewerbe ohne Bau (production) 
+#     forecast: -1.2 actual: -1.9 weight: 0.0668 impact: -0.05 
+#- 
+#-    Industrie (production) 
+#     forecast: -1.3 actual: -1.9 weight: 0.0741 impact: -0.05 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-06-30, the nowcast for 2025Q2 was 0.31 percent. 
+#- 
+#- Previous nowcast was 0.35 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  0.5 actual: -3.0 weight: 0.0107 impact: -0.04 
+#- 
+#-    Financial situation over last 12 months (ESI) 
+#     forecast:  0.2 actual: -3.6 weight: -0.0068 impact: 0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-07-15, the nowcast for 2025Q2 was 0.31 percent. 
+#- 
+#- Previous nowcast was 0.31 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    lkw_maut (production) 
+#     forecast:  0.8 actual: -0.8 weight: 0.0697 impact: -0.11 
+#- 
+#-    Produzierendes Gewerbe ohne Bau (production) 
+#     forecast:  0.2 actual:  2.2 weight: 0.0447 impact: 0.09 
+#- 
+#-    Industrie (production) 
+#     forecast:  0.1 actual:  1.4 weight: 0.0495 impact: 0.06 
+#- 
+#-    Produzierendes Gewerbe (production) 
+#     forecast: -0.1 actual:  1.2 weight: 0.0304 impact: 0.04 
+#- 
+################################################################# 

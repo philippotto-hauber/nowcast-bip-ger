@@ -20,9 +20,7 @@ Nowcast evolution (top) and news decomposition (bottom)
 
 ### Folder structure
 
-The real-time vintages and nowcasts are **not** stored in the repo but locally! To run the scripts without further modifications, this repo assumes the following structure of how files are stored locally: [copy and paste from here in to your root directory of choice](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0)!
-
-These folders also include files containing the release dates for the survey indicators such as ESI and ifo as well as the turnover in the hospitality sector and truck toll mileage. These need to be updated manually (along with some of the data, see below).
+The folder `Echtzeitdatensatz` in this repo contains the raw data which is largely downloaed automatically as well as the real-time vintages that are needed to estimate the models and compute the nowcasts. The output is stored in the directory `Nowcasts`.
 
 ### Data
 
@@ -32,7 +30,7 @@ Most of the time series can be downloaded automatically. However, for a few seri
 
 1. download latest release from the [ifo's website](https://www.ifo.de/umfrage/ifo-geschaeftsklima-deutschland). The file currently has the name format `gsk-d-YYYYMM.xlsx` where YYYY and MM are the year and month of the release
 
-2. rename the file to `ifo_current.xlsx`and place in `*\Echtzeitdatensatz\raw data\ifo` 
+2. rename the file to `ifo_current.xlsx`and place in `Echtzeitdatensatz\raw data\ifo` 
 
 3. update the release dates of the index in the file `release_dates_ifo.csv`
 
@@ -46,9 +44,7 @@ All vintages that have been released since the last time the model was run have 
 
 3. rename the file as `lkw_index_YYYY-MM-DD.csv` where YYYY, MM and DD are the year, month and day of the release
 
-4. move the file to `*\Echtzeitdatensatz\raw data\lkw_maut_index\releases` 
-
-5. update the file `release_dates.csv` by entering the date of the release and the latest data point in the format e.g. 2023M4 for April 2023 
+4. move the file to `Echtzeitdatensatz\raw data\lkw_maut_index\releases` 
 
 #### Gastgewerbeumsatz
 
@@ -60,7 +56,7 @@ Downloading the vintages for the turnover in the hospitality sector is very simi
 
 3. rename the file as `umsatz-gastgewerbe-YYYY-MM-DD.csv` where YYYY, MM and DD are the year, month and day of the release
 
-4. move the file to `*\Echtzeitdatensatz\raw data\umsatz_gastgewerbe\releases` 
+4. move the file to `Echtzeitdatensatz\raw data\umsatz_gastgewerbe\releases` 
 
 5. update the file `release_dates.csv` by entering the date of the release and the latest data point in the format e.g. 2023M3 for March 2023 
 
@@ -73,7 +69,6 @@ The download of the ESI surveys is automated. However, the release dates need to
 2. update the file `*\Echtzeitdatensatz\raw data\ESI BCI\releasedates_ESIBCI_csv.csv` by entering the date of the release and the latest data point in the format e.g. 2023M4 for April 2023 
 
 ### Configure the batch script
-Set `DIR_ROOT` in `run-nowcast.bat` to the directory where the folders `Echtzeitdatensatz` and `Nowcasts` are located
 
 ### Choose vintages
 

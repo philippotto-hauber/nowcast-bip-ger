@@ -3,11 +3,11 @@ ECHO "Set year and quarter of nowcast (also produces forecast for the next quart
 SET /p YEAR="Year: "
 SET /p QUARTER="Quarter: "
 
-SET DIR_ROOT=G:/Geteilte Ablagen/02_Konjunktur/04_Prognose/9_Prognosemodelle/03_DFM
+SET DIR_ROOT=%CD%
 SET DIR_REALTIMEDATA=%DIR_ROOT%/Echtzeitdatensatz
 
-SET /A switch_download_data = 1
-CD "real time data\R\"
+SET /A switch_download_data = 0
+CD "src\real time data\R\"
 IF %switch_download_data%==1 (
     ECHO Downloading data...
     Rscript --vanilla download_bbk_rtd.R "%DIR_REALTIMEDATA%/raw data"

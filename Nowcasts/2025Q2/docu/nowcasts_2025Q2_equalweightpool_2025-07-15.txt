@@ -1,0 +1,182 @@
+################################################################# 
+################################################################# 
+####### MODEL SPECIFICATION ##################################### 
+####### equal-weight pool ####################################### 
+################################################################# 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-07-15, the nowcast for 2025Q2 was 0.19 percent... 
+#- 
+#- ... a revision of -0.34 percentage points... 
+#- 
+#- ... compared to the previous nowcast, made on 2025-06-30. 
+#- 
+#- Impact by newly released variables (in descending absolute order): 
+#- 
+#-    lkw_maut (production) 
+#     forecast:  0.7,  actual: -0.8,  weight: 0.0570,  impact: -0.1073 
+#- 
+#-    Industrie (turnover) 
+#     forecast:  0.4,  actual: -2.5,  weight: 0.0269,  impact: -0.0722 
+#- 
+#-    Industrie (Inland) (turnover) 
+#     forecast: -0.0,  actual: -2.7,  weight: 0.0130,  impact: -0.0364 
+#- 
+#-    Investitionsg�ter (turnover) 
+#     forecast:  1.1,  actual: -2.6,  weight: 0.0106,  impact: -0.0331 
+#- 
+#-    Produzierendes Gewerbe ohne Bau (production) 
+#     forecast:  0.9,  actual:  2.2,  weight: 0.0224,  impact: 0.0297 
+#- 
+#-    Industrie (Ausland) (turnover) 
+#     forecast:  0.8,  actual: -2.3,  weight: 0.0065,  impact: -0.0211 
+#- 
+#-    Investitionsg�ter (production) 
+#     forecast:  1.4,  actual:  4.1,  weight: 0.0074,  impact: 0.0196 
+#- 
+#-    Konsumg�ter (turnover) 
+#     forecast: -1.3,  actual: -3.5,  weight: 0.0123,  impact: -0.0166 
+#- 
+#-    Investitionsg�ter (Ausland) (turnover) 
+#     forecast:  0.9,  actual: -3.3,  weight: 0.0036,  impact: -0.0146 
+#- 
+#-    Industrie (production) 
+#     forecast:  0.8,  actual:  1.4,  weight: 0.0222,  impact: 0.0146 
+#- 
+#-    Produzierendes Gewerbe (production) 
+#     forecast:  0.6,  actual:  1.2,  weight: 0.0197,  impact: 0.0123 
+#- 
+#-    Vorleistungsg�ter (turnover) 
+#     forecast:  0.2,  actual: -1.8,  weight: 0.0053,  impact: -0.0116 
+#- 
+#-    Industrie (Inland) (orders) 
+#     forecast:  0.3,  actual: -8.1,  weight: 0.0013,  impact: -0.0109 
+#- 
+#-    Vorleistungsg�ter (Inland) (turnover) 
+#     forecast:  0.1,  actual: -2.3,  weight: 0.0043,  impact: -0.0108 
+#- 
+#-    Investitionsg�ter (Inland) (turnover) 
+#     forecast:  1.5,  actual: -1.4,  weight: 0.0035,  impact: -0.0107 
+#- 
+#-    Verbrauchsg�ter (turnover) 
+#     forecast: -1.5,  actual: -3.8,  weight: 0.0062,  impact: -0.0087 
+#- 
+#-    Vorleistungsg�ter (production) 
+#     forecast:  0.4,  actual: -2.1,  weight: 0.0027,  impact: -0.0076 
+#- 
+#-    Investitionsg�ter (Inland) (orders) 
+#     forecast: -0.9,  actual: -13.6,  weight: 0.0006,  impact: -0.0070 
+#- 
+#-    Industrie (orders) 
+#     forecast:  0.8,  actual: -1.4,  weight: 0.0050,  impact: -0.0057 
+#- 
+#-    Vorleistungsg�ter (orders) 
+#     forecast:  1.2,  actual: -3.5,  weight: 0.0011,  impact: -0.0053 
+#- 
+#-    Baugewerbe (production) 
+#     forecast: -1.0,  actual: -4.0,  weight: 0.0022,  impact: -0.0050 
+#- 
+#-    Konsumg�ter (Inland) (turnover) 
+#     forecast: -2.5,  actual: -4.8,  weight: 0.0046,  impact: -0.0047 
+#- 
+#-    Vorleistungsg�ter (Inland) (orders) 
+#     forecast:  2.0,  actual: -3.3,  weight: 0.0009,  impact: -0.0047 
+#- 
+#-    Zinsstrukturkurve: 10 Jahre RLZ (financial) 
+#     forecast: -0.1,  actual:  0.1,  weight: -0.0323,  impact: -0.0042 
+#- 
+#-    Gebrauchsg�ter (production) 
+#     forecast:  0.9,  actual: -2.0,  weight: 0.0014,  impact: -0.0040 
+#- 
+#-    Ausbaugewerbe (production) 
+#     forecast: -0.9,  actual: -4.7,  weight: 0.0013,  impact: -0.0038 
+#- 
+#-    Vorleistungsg�ter (Ausland) (turnover) 
+#     forecast:  0.5,  actual: -1.1,  weight: 0.0019,  impact: -0.0038 
+#- 
+#-    Konsumg�ter (Inland) (orders) 
+#     forecast: -0.8,  actual:  2.8,  weight: 0.0010,  impact: 0.0036 
+#- 
+#-    Energie (production) 
+#     forecast:  1.0,  actual: 10.2,  weight: 0.0003,  impact: 0.0033 
+#- 
+#-    Erwerbst�tigenstunden: Verarbeitendes Gewerbe und Bergbau (labor market) 
+#     forecast:  0.5,  actual: -0.2,  weight: 0.0043,  impact: -0.0033 
+#- 
+#-    Gebrauchsg�ter (turnover) 
+#     forecast:  0.2,  actual: -1.5,  weight: 0.0020,  impact: -0.0031 
+#- 
+#-    NEER (EWK 42) (financial) 
+#     forecast:  0.2,  actual:  1.2,  weight: -0.0028,  impact: -0.0027 
+#- 
+#-    Konsumg�ter (Ausland) (turnover) 
+#     forecast:  0.6,  actual: -1.2,  weight: 0.0010,  impact: -0.0025 
+#- 
+#-    Vorleistungsg�ter (Ausland) (orders) 
+#     forecast:  0.5,  actual: -3.7,  weight: 0.0004,  impact: -0.0023 
+#- 
+#-    Investitionsg�ter (Ausland) (orders) 
+#     forecast:  1.4,  actual:  5.6,  weight: 0.0006,  impact: 0.0022 
+#- 
+#-    Konsumg�ter (orders) 
+#     forecast:  0.3,  actual:  3.0,  weight: 0.0009,  impact: 0.0019 
+#- 
+#-    Verbrauchsg�ter (production) 
+#     forecast: -0.2,  actual:  1.1,  weight: 0.0014,  impact: 0.0015 
+#- 
+#-    BLG: Verarbeitendes Gewerbe und Bergbau (labor market) 
+#     forecast:  0.2,  actual: -0.5,  weight: 0.0023,  impact: -0.0013 
+#- 
+#-    Bauhauptgewerbe (production) 
+#     forecast: -1.4,  actual: -2.4,  weight: 0.0058,  impact: 0.0012 
+#- 
+#-    Investitionsg�ter (orders) 
+#     forecast:  0.7,  actual: -0.9,  weight: 0.0017,  impact: -0.0011 
+#- 
+#-    Konsumg�ter (production) 
+#     forecast: -0.0,  actual:  0.5,  weight: 0.0023,  impact: 0.0008 
+#- 
+#-    Industrie (Ausland) (orders) 
+#     forecast:  1.1,  actual:  2.8,  weight: 0.0007,  impact: 0.0007 
+#- 
+#-    Zinsstrukturkurve: 0.5 Jahre RLZ (financial) 
+#     forecast: -0.0,  actual: -0.0,  weight: 0.0155,  impact: 0.0006 
+#- 
+#-    VPI: Mieten (prices) 
+#     forecast:  0.1,  actual:  0.2,  weight: 0.0099,  impact: 0.0005 
+#- 
+#-    VPI: Mieten (ex Nebenkosten) (prices) 
+#     forecast:  0.1,  actual:  0.3,  weight: 0.0029,  impact: 0.0004 
+#- 
+#-    Zinsstrukturkurve: 1 Jahre RLZ (financial) 
+#     forecast: -0.0,  actual:  0.0,  weight: 0.0047,  impact: 0.0003 
+#- 
+#-    Hochbau (production) 
+#     forecast: -1.5,  actual: -2.5,  weight: 0.0017,  impact: -0.0003 
+#- 
+#-    Erwerbst�tige: Verarbeitendes Gewerbe und Bergbau (labor market) 
+#     forecast: -0.1,  actual: -0.2,  weight: 0.0027,  impact: -0.0002 
+#- 
+#-    Konsumg�ter (Ausland) (orders) 
+#     forecast:  1.3,  actual:  3.1,  weight: 0.0003,  impact: 0.0002 
+#- 
+#-    Erwerbst�tige: Gesamtwirtschaft (labor market) 
+#     forecast:  0.0,  actual:  0.0,  weight: 0.0084,  impact: -0.0001 
+#- 
+#-    Tiefbau (production) 
+#     forecast: -1.4,  actual: -2.3,  weight: 0.0007,  impact: 0.0001 
+#- 
+#-    Umlaufrendite: insgesamt (financial) 
+#     forecast: -0.0,  actual: -0.0,  weight: -0.0012,  impact: -0.0001 
+#- 
+#-    PPI: landwirtschaftliche Produkte (prices) 
+#     forecast: -0.2,  actual:  0.2,  weight: 0.0003,  impact: 0.0001 
+#- 
+#-    VPI: Dienstleistungen (ex Mieten) (prices) 
+#     forecast:  0.2,  actual:  0.2,  weight: -0.0035,  impact: 0.0001 
+#- 
+#-    Sozialversichungspflichtig Besch�ftigte (labor market) 
+#     forecast:  0.0,  actual:  0.0,  weight: 0.0098,  impact: -0.0000 
+#- 
+################################################################# 
