@@ -20,8 +20,6 @@ Nowcast evolution (top) and news decomposition (bottom)
 
 ### Folder structure
 
-The real-time vintages and nowcasts are **not** stored in the repo but locally! To run the scripts without further modifications, this repo assumes the following structure of how files are stored locally: [copy and paste from here in to your root directory of choice](https://www.dropbox.com/sh/7g186cz8m336pcc/AAC7rUDsL1sePIOjI5eBwblIa?dl=0)!
-
 The folder `Echtzeitdatensatz` in this repo contains the raw data which is largely downloaed automatically as well as the real-time vintages that are needed to estimate the models and compute the nowcasts. The output is stored in the directory `Nowcasts`.
 
 ### Data
