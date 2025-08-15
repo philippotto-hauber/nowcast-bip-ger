@@ -1,0 +1,145 @@
+################################################################# 
+################################################################# 
+####### MODEL SPECIFICATION ##################################### 
+####### Nr = 1 ##################################################
+####### Np = 3 ##################################################
+####### Nj = 1 ##################################################
+################################################################# 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-04-15, the nowcast for 2025Q3 was 0.28 percent. 
+#- 
+#- Previous nowcast was 0.29 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-04-30, the nowcast for 2025Q3 was 0.30 percent. 
+#- 
+#- Previous nowcast was 0.28 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-05-15, the nowcast for 2025Q3 was 0.27 percent. 
+#- 
+#- Previous nowcast was 0.30 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-05-30, the nowcast for 2025Q3 was 0.46 percent. 
+#- 
+#- Previous nowcast was 0.27 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-06-15, the nowcast for 2025Q3 was 0.49 percent. 
+#- 
+#- Previous nowcast was 0.46 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-06-30, the nowcast for 2025Q3 was 0.18 percent. 
+#- 
+#- Previous nowcast was 0.49 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  0.7 actual: -3.0 weight: 0.0213 impact: -0.08 
+#- 
+#-    Assessment of order-book levels (ESI) 
+#     forecast:  0.6 actual: -6.3 weight: 0.0076 impact: -0.05 
+#- 
+#-    Employment expectations for the months ahead (ESI) 
+#     forecast:  0.4 actual: -4.4 weight: 0.0109 impact: -0.05 
+#- 
+#-    Assessment of export order-book levels (ESI) 
+#     forecast:  0.6 actual: -4.7 weight: 0.0084 impact: -0.04 
+#- 
+#-    ifo_lage (ifo) 
+#     forecast:  0.4 actual: -0.8 weight: 0.0280 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-07-15, the nowcast for 2025Q3 was 0.06 percent. 
+#- 
+#- Previous nowcast was 0.18 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    lkw_maut (production) 
+#     forecast:  0.2 actual: -0.8 weight: 0.0352 impact: -0.04 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-07-30, the nowcast for 2025Q3 was 0.31 percent. 
+#- 
+#- Previous nowcast was 0.06 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast: -0.6 actual:  2.5 weight: 0.0274 impact: 0.09 
+#- 
+#-    Production expectations for the months ahead (ESI) 
+#     forecast: -0.1 actual:  5.8 weight: 0.0138 impact: 0.08 
+#- 
+#-    ifo_lage (ifo) 
+#     forecast: -0.1 actual:  1.2 weight: 0.0370 impact: 0.05 
+#- 
+#-    Assessment of order-book levels (ESI) 
+#     forecast: -1.7 actual:  3.1 weight: 0.0095 impact: 0.05 
+#- 
+#-    Employment expectations for the months ahead (ESI) 
+#     forecast: -0.5 actual:  2.5 weight: 0.0146 impact: 0.04 
+#- 
+#-    Employment expectations over the next 3 months (ESI) 
+#     forecast: -0.1 actual: -2.0 weight: 0.0192 impact: -0.04 
+#- 
+#-    General economic situation over next 12 months (ESI) 
+#     forecast:  0.1 actual: -4.2 weight: 0.0080 impact: -0.03 
+#- 
+#-    Assessment of export order-book levels (ESI) 
+#     forecast: -1.2 actual:  1.9 weight: 0.0106 impact: 0.03 
+#- 
+#-    Business activity expectations over the next 3 months (ESI) 
+#     forecast: -0.3 actual: -3.2 weight: 0.0092 impact: -0.03 
+#- 
+#-    Selling price expectations for the months ahead (ESI) 
+#     forecast: -0.7 actual:  2.8 weight: 0.0074 impact: 0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-08-15, the nowcast for 2025Q3 was 0.38 percent. 
+#- 
+#- Previous nowcast was 0.31 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    lkw_maut (production) 
+#     forecast:  0.6 actual:  2.3 weight: 0.0486 impact: 0.09 
+#- 
+################################################################# 
