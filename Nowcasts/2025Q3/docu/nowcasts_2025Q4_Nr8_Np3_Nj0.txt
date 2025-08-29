@@ -65,15 +65,15 @@
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 #-    Assessment of order-book levels (ESI) 
-#     forecast: -1.0 actual: -6.3 weight: 0.0095 impact: -0.05 
+#     forecast: -1.0 actual: -6.2 weight: 0.0095 impact: -0.05 
 #- 
 #-    Assessment of export order-book levels (ESI) 
-#     forecast: -0.9 actual: -4.7 weight: 0.0088 impact: -0.03 
+#     forecast: -0.9 actual: -4.6 weight: 0.0088 impact: -0.03 
 #- 
 ################################################################# 
 #---------------------------------------------------------------# 
 #- 
-#- On 2025-07-15, the nowcast for 2025Q4 was 0.19 percent. 
+#- On 2025-07-15, the nowcast for 2025Q4 was 0.20 percent. 
 #- 
 #- Previous nowcast was 0.17 percent. 
 #- 
@@ -87,12 +87,12 @@
 #- 
 #- On 2025-07-30, the nowcast for 2025Q4 was 0.40 percent. 
 #- 
-#- Previous nowcast was 0.19 percent. 
+#- Previous nowcast was 0.20 percent. 
 #- 
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 #-    Assessment of order-book levels (ESI) 
-#     forecast: -0.6 actual:  3.1 weight: 0.0175 impact: 0.06 
+#     forecast: -0.6 actual:  3.2 weight: 0.0175 impact: 0.07 
 #- 
 #-    Assessment of export order-book levels (ESI) 
 #     forecast: -0.5 actual:  1.9 weight: 0.0173 impact: 0.04 
@@ -101,7 +101,7 @@
 #     forecast: -1.2 actual:  3.5 weight: 0.0075 impact: 0.04 
 #- 
 #-    Selling price expectations for the months ahead (ESI) 
-#     forecast: -0.9 actual:  2.8 weight: 0.0086 impact: 0.03 
+#     forecast: -0.9 actual:  2.7 weight: 0.0086 impact: 0.03 
 #- 
 #-    Confidence Indicator (ESI) 
 #     forecast: -0.7 actual:  2.5 weight: 0.0091 impact: 0.03 
@@ -117,5 +117,23 @@
 #- 
 #-    lkw_maut (production) 
 #     forecast:  0.1 actual:  2.3 weight: -0.0756 impact: -0.17 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-08-30, the nowcast for 2025Q4 was 0.16 percent. 
+#- 
+#- Previous nowcast was 0.38 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  1.6 actual: -1.3 weight: 0.0240 impact: -0.07 
+#- 
+#-    Production expectations for the months ahead (ESI) 
+#     forecast:  2.8 actual: -6.1 weight: 0.0039 impact: -0.03 
+#- 
+#-    Selling price expectations for the months ahead (ESI) 
+#     forecast:  0.8 actual: -1.7 weight: 0.0114 impact: -0.03 
 #- 
 ################################################################# 

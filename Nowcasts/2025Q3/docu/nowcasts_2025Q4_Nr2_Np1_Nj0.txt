@@ -96,3 +96,21 @@
 #- 
 # ...none! 
 ################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-08-30, the nowcast for 2025Q4 was 0.33 percent. 
+#- 
+#- Previous nowcast was 0.31 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Production expectations for the months ahead (ESI) 
+#     forecast: -0.3 actual: -6.1 weight: 0.0062 impact: -0.04 
+#- 
+#-    Employment expectations over the next 3 months (ESI) 
+#     forecast: -0.1 actual:  4.4 weight: 0.0078 impact: 0.04 
+#- 
+#-    Orders expectations over the next 3 months (ESI) 
+#     forecast: -0.4 actual:  6.0 weight: 0.0041 impact: 0.03 
+#- 
+################################################################# 

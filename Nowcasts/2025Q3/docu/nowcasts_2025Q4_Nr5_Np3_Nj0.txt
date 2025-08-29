@@ -14,7 +14,9 @@
 #- 
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
-# ...none! 
+#-    lkw_maut (production) 
+#     forecast:  0.4 actual:  2.6 weight: -0.0113 impact: -0.03 
+#- 
 ################################################################# 
 #---------------------------------------------------------------# 
 #- 
@@ -65,13 +67,13 @@
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 #-    Assessment of order-book levels (ESI) 
-#     forecast: -0.2 actual: -6.3 weight: 0.0082 impact: -0.05 
+#     forecast: -0.2 actual: -6.2 weight: 0.0082 impact: -0.05 
 #- 
 #-    Assessment of export order-book levels (ESI) 
-#     forecast: -0.2 actual: -4.7 weight: 0.0077 impact: -0.04 
+#     forecast: -0.2 actual: -4.6 weight: 0.0077 impact: -0.03 
 #- 
 #-    Confidence Indicator (ESI) 
-#     forecast:  0.2 actual: -3.0 weight: 0.0080 impact: -0.03 
+#     forecast:  0.2 actual: -3.1 weight: 0.0080 impact: -0.03 
 #- 
 ################################################################# 
 #---------------------------------------------------------------# 
@@ -95,7 +97,7 @@
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 #-    Assessment of order-book levels (ESI) 
-#     forecast: -1.4 actual:  3.1 weight: 0.0189 impact: 0.08 
+#     forecast: -1.4 actual:  3.2 weight: 0.0189 impact: 0.09 
 #- 
 #-    Confidence Indicator (ESI) 
 #     forecast: -0.7 actual:  2.5 weight: 0.0198 impact: 0.06 
@@ -123,5 +125,20 @@
 #- 
 #-    Industrie (production) 
 #     forecast: -0.6 actual: -2.8 weight: -0.0139 impact: 0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-08-30, the nowcast for 2025Q4 was 0.29 percent. 
+#- 
+#- Previous nowcast was 0.39 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  1.3 actual: -1.3 weight: 0.0326 impact: -0.08 
+#- 
+#-    Production trend observed in recent months (ESI) 
+#     forecast:  2.7 actual: 12.6 weight: 0.0026 impact: 0.03 
 #- 
 ################################################################# 

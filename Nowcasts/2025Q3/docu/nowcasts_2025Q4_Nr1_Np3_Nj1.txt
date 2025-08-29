@@ -78,7 +78,7 @@
 ################################################################# 
 #---------------------------------------------------------------# 
 #- 
-#- On 2025-07-30, the nowcast for 2025Q4 was 0.28 percent. 
+#- On 2025-07-30, the nowcast for 2025Q4 was 0.27 percent. 
 #- 
 #- Previous nowcast was 0.30 percent. 
 #- 
@@ -90,7 +90,17 @@
 #- 
 #- On 2025-08-15, the nowcast for 2025Q4 was 0.27 percent. 
 #- 
-#- Previous nowcast was 0.28 percent. 
+#- Previous nowcast was 0.27 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-08-30, the nowcast for 2025Q4 was 0.22 percent. 
+#- 
+#- Previous nowcast was 0.27 percent. 
 #- 
 #- Variables with an absolute impact larger than 0.02 were...
 #- 

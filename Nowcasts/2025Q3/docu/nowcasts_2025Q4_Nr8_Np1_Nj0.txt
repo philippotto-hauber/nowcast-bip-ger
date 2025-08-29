@@ -65,10 +65,10 @@
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 #-    Assessment of order-book levels (ESI) 
-#     forecast:  0.5 actual: -6.3 weight: 0.0065 impact: -0.04 
+#     forecast:  0.5 actual: -6.2 weight: 0.0065 impact: -0.04 
 #- 
 #-    Assessment of export order-book levels (ESI) 
-#     forecast:  0.4 actual: -4.7 weight: 0.0059 impact: -0.03 
+#     forecast:  0.4 actual: -4.6 weight: 0.0059 impact: -0.03 
 #- 
 ################################################################# 
 #---------------------------------------------------------------# 
@@ -90,7 +90,7 @@
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 #-    Selling price expectations for the months ahead (ESI) 
-#     forecast: -1.3 actual:  2.8 weight: 0.0076 impact: 0.03 
+#     forecast: -1.3 actual:  2.7 weight: 0.0076 impact: 0.03 
 #- 
 #-    General economic situation over last 12 months (ESI) 
 #     forecast: -0.9 actual:  3.5 weight: 0.0061 impact: 0.03 
@@ -108,4 +108,34 @@
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 # ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-08-30, the nowcast for 2025Q4 was 0.22 percent. 
+#- 
+#- Previous nowcast was 0.46 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Production expectations for the months ahead (ESI) 
+#     forecast:  0.9 actual: -6.1 weight: 0.0082 impact: -0.06 
+#- 
+#-    Employment expectations over the next 3 months (ESI) 
+#     forecast:  0.5 actual:  4.4 weight: 0.0106 impact: 0.04 
+#- 
+#-    ifo_lage (ifo) 
+#     forecast:  0.5 actual: -1.0 weight: 0.0223 impact: -0.03 
+#- 
+#-    Unemployment expectations over next 12 months (ESI) 
+#     forecast: -1.3 actual:  0.1 weight: -0.0220 impact: -0.03 
+#- 
+#-    General economic situation over next 12 months (ESI) 
+#     forecast:  0.7 actual: -4.6 weight: 0.0053 impact: -0.03 
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  0.9 actual: -1.3 weight: 0.0123 impact: -0.03 
+#- 
+#-    Statement on financial situation of household (ESI) 
+#     forecast:  0.0 actual: -4.0 weight: 0.0066 impact: -0.03 
+#- 
 ################################################################# 

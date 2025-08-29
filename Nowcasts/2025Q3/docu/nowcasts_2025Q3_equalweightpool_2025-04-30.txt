@@ -18,10 +18,10 @@
 #     forecast:  0.1,  actual:  0.4,  weight: -0.0321,  impact: -0.0088 
 #- 
 #-    ifo_lage (ifo) 
-#     forecast:  0.2,  actual:  0.7,  weight: 0.0157,  impact: 0.0076 
+#     forecast:  0.2,  actual:  0.7,  weight: 0.0158,  impact: 0.0076 
 #- 
 #-    ifo_erwartung (ifo) 
-#     forecast:  0.4,  actual: -1.2,  weight: 0.0029,  impact: -0.0041 
+#     forecast:  0.4,  actual: -1.3,  weight: 0.0029,  impact: -0.0044 
 #- 
 #-    VPI: insgesamt (prices) 
 #     forecast:  0.2,  actual:  0.2,  weight: 0.0326,  impact: 0.0041 
@@ -35,11 +35,11 @@
 #-    Exportpreise (prices) 
 #     forecast:  0.1,  actual: -0.3,  weight: 0.0015,  impact: -0.0011 
 #- 
-#-    gross domestic product (national accounts) 
-#     forecast:  0.2,  actual:  0.2,  weight: 0.0168,  impact: -0.0006 
-#- 
 #-    VPI: Nahrungsmittel (prices) 
 #     forecast:  0.2,  actual:  0.0,  weight: 0.0052,  impact: -0.0006 
+#- 
+#-    gross domestic product (national accounts) 
+#     forecast:  0.2,  actual:  0.2,  weight: 0.0168,  impact: -0.0006 
 #- 
 #-    Erwerbst�tige: Gesamtwirtschaft (labor market) 
 #     forecast:  0.1,  actual:  0.0,  weight: -0.0079,  impact: 0.0005 
@@ -95,16 +95,16 @@
 #-    Bauhauptgewerbe, �ffentliche Auftraggeber und Stra�enbau (turnover) 
 #     forecast: -2.8,  actual: -6.2,  weight: 0.0000,  impact: -0.0000 
 #- 
-#-    Bauhauptgewerbe, �ffentliche Auftraggeber und Stra�enbau (orders) 
-#     forecast:  1.0,  actual:  1.3,  weight: -0.0000,  impact: 0.0000 
-#- 
 #-    PPI: industrielle Produkte (ex Energie) (prices) 
 #     forecast:  0.1,  actual:  0.2,  weight: 0.0055,  impact: 0.0000 
 #- 
-#-    BLG: Bauhauptgewerbe (labor market) 
-#     forecast: -0.6,  actual:  0.4,  weight: 0.0000,  impact: 0.0000 
+#-    Bauhauptgewerbe, �ffentliche Auftraggeber und Stra�enbau (orders) 
+#     forecast:  1.0,  actual:  1.3,  weight: -0.0000,  impact: 0.0000 
 #- 
 #-    Hochbau (orders) 
 #     forecast: -1.3,  actual:  1.0,  weight: 0.0000,  impact: 0.0000 
+#- 
+#-    BLG: Bauhauptgewerbe (labor market) 
+#     forecast: -0.6,  actual:  0.4,  weight: 0.0000,  impact: 0.0000 
 #- 
 ################################################################# 
