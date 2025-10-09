@@ -65,7 +65,7 @@
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 #-    Confidence Indicator (ESI) 
-#     forecast:  0.7 actual: -3.1 weight: -0.0079 impact: 0.03 
+#     forecast:  0.7 actual: -3.1 weight: -0.0080 impact: 0.03 
 #- 
 ################################################################# 
 #---------------------------------------------------------------# 
@@ -90,7 +90,7 @@
 ################################################################# 
 #---------------------------------------------------------------# 
 #- 
-#- On 2025-08-15, the nowcast for 2025Q4 was 0.27 percent. 
+#- On 2025-08-15, the nowcast for 2025Q4 was 0.28 percent. 
 #- 
 #- Previous nowcast was 0.23 percent. 
 #- 
@@ -102,22 +102,85 @@
 ################################################################# 
 #---------------------------------------------------------------# 
 #- 
-#- On 2025-08-30, the nowcast for 2025Q4 was 0.24 percent. 
+#- On 2025-08-30, the nowcast for 2025Q4 was 0.38 percent. 
 #- 
-#- Previous nowcast was 0.27 percent. 
+#- Previous nowcast was 0.28 percent. 
 #- 
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 #-    Employment expectations over the next 3 months (ESI) 
-#     forecast:  0.6 actual:  4.4 weight: 0.0150 impact: 0.06 
+#     forecast:  0.7 actual:  4.4 weight: 0.0125 impact: 0.05 
 #- 
-#-    General economic situation over next 12 months (ESI) 
-#     forecast:  1.7 actual: -4.6 weight: 0.0077 impact: -0.05 
-#- 
-#-    Production expectations for the months ahead (ESI) 
-#     forecast: -0.5 actual: -6.1 weight: 0.0079 impact: -0.04 
+#-    VPI: insgesamt (ex Energie) (prices) 
+#     forecast:  0.1 actual:  0.3 weight: 0.1937 impact: 0.04 
 #- 
 #-    Orders expectations over the next 3 months (ESI) 
-#     forecast:  0.7 actual:  6.0 weight: 0.0052 impact: 0.03 
+#     forecast:  0.7 actual:  6.0 weight: 0.0068 impact: 0.04 
+#- 
+#-    Production expectations for the months ahead (ESI) 
+#     forecast: -0.5 actual: -6.0 weight: 0.0062 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-09-15, the nowcast for 2025Q4 was 0.31 percent. 
+#- 
+#- Previous nowcast was 0.38 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    lkw_maut (production) 
+#     forecast: -0.6 actual: -2.3 weight: 0.0574 impact: -0.10 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-09-30, the nowcast for 2025Q4 was 0.05 percent. 
+#- 
+#- Previous nowcast was 0.31 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Expectations of the employment over the next 3 months (ESI) 
+#     forecast:  0.7 actual: -4.7 weight: 0.0227 impact: -0.12 
+#- 
+#-    Assessment of order-book levels (ESI) 
+#     forecast: -0.0 actual: -4.1 weight: -0.0215 impact: 0.09 
+#- 
+#-    Unemployment expectations over next 12 months (ESI) 
+#     forecast: -1.1 actual:  1.1 weight: -0.0330 impact: -0.07 
+#- 
+#-    Expectations of the prices over the next 3 months (ESI) 
+#     forecast: -0.1 actual: -5.3 weight: 0.0118 impact: -0.06 
+#- 
+#-    Production expectations for the months ahead (ESI) 
+#     forecast:  1.8 actual:  4.5 weight: 0.0201 impact: 0.05 
+#- 
+#-    Assessment of stocks of finished products (ESI) 
+#     forecast:  0.1 actual:  2.0 weight: 0.0268 impact: 0.05 
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  0.8 actual: -2.6 weight: 0.0144 impact: -0.05 
+#- 
+#-    Savings over next 12 months (ESI) 
+#     forecast:  0.6 actual: -2.2 weight: -0.0152 impact: 0.04 
+#- 
+#-    Expectation of the demand over the next 3 months (ESI) 
+#     forecast:  1.1 actual: -1.9 weight: 0.0136 impact: -0.04 
+#- 
+#-    PPI: industrielle Produkte (prices) 
+#     forecast:  0.3 actual: -0.5 weight: 0.0504 impact: -0.04 
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  0.1 actual: -2.3 weight: 0.0138 impact: -0.03 
+#- 
+#-    Price trends over last 12 months (ESI) 
+#     forecast:  0.4 actual:  2.9 weight: 0.0130 impact: 0.03 
+#- 
+#-    PPI: industrielle Produkte (ex Energie) (prices) 
+#     forecast:  0.2 actual: -0.2 weight: 0.0920 impact: -0.03 
+#- 
+#-    Production trend observed in recent months (ESI) 
+#     forecast: -3.3 actual: -11.5 weight: 0.0032 impact: -0.03 
 #- 
 ################################################################# 

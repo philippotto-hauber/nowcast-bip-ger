@@ -14,20 +14,20 @@
 #- 
 #- Impact by newly released variables (in descending absolute order): 
 #- 
+#-    ifo_lage (ifo) 
+#     forecast:  0.2,  actual:  0.8,  weight: 0.0158,  impact: 0.0093 
+#- 
 #-    VPI: Dienstleistungen (prices) 
 #     forecast:  0.1,  actual:  0.4,  weight: -0.0321,  impact: -0.0088 
 #- 
-#-    ifo_lage (ifo) 
-#     forecast:  0.2,  actual:  0.7,  weight: 0.0158,  impact: 0.0076 
-#- 
 #-    ifo_erwartung (ifo) 
-#     forecast:  0.4,  actual: -1.3,  weight: 0.0029,  impact: -0.0044 
+#     forecast:  0.4,  actual: -1.5,  weight: 0.0029,  impact: -0.0050 
 #- 
 #-    VPI: insgesamt (prices) 
-#     forecast:  0.2,  actual:  0.2,  weight: 0.0326,  impact: 0.0041 
+#     forecast:  0.1,  actual:  0.2,  weight: 0.0326,  impact: 0.0041 
 #- 
 #-    VPI: Energie (prices) 
-#     forecast:  0.4,  actual: -0.6,  weight: 0.0027,  impact: -0.0022 
+#     forecast:  0.4,  actual: -0.6,  weight: 0.0027,  impact: -0.0021 
 #- 
 #-    Bauhauptgewerbe (orders) 
 #     forecast: -2.3,  actual: -7.8,  weight: -0.0003,  impact: 0.0015 
@@ -39,7 +39,7 @@
 #     forecast:  0.2,  actual:  0.0,  weight: 0.0052,  impact: -0.0006 
 #- 
 #-    gross domestic product (national accounts) 
-#     forecast:  0.2,  actual:  0.2,  weight: 0.0168,  impact: -0.0006 
+#     forecast:  0.2,  actual:  0.2,  weight: 0.0168,  impact: -0.0005 
 #- 
 #-    Erwerbst�tige: Gesamtwirtschaft (labor market) 
 #     forecast:  0.1,  actual:  0.0,  weight: -0.0079,  impact: 0.0005 
@@ -69,7 +69,7 @@
 #     forecast:  0.1,  actual:  0.1,  weight: 0.0071,  impact: 0.0001 
 #- 
 #-    Sozialversichungspflichtig Besch�ftigte (labor market) 
-#     forecast:  0.0,  actual:  0.0,  weight: -0.0008,  impact: -0.0001 
+#     forecast: -0.0,  actual:  0.0,  weight: -0.0008,  impact: -0.0001 
 #- 
 #-    Bauhauptgewerbe, gewerbliche Auftraggeber (turnover) 
 #     forecast: -2.4,  actual:  2.1,  weight: -0.0000,  impact: -0.0001 
@@ -87,16 +87,16 @@
 #     forecast: -3.7,  actual: -12.4,  weight: -0.0000,  impact: 0.0001 
 #- 
 #-    PPI: industrielle Produkte (prices) 
-#     forecast:  0.1,  actual: -0.7,  weight: -0.0003,  impact: -0.0000 
+#     forecast:  0.1,  actual: -0.7,  weight: -0.0003,  impact: -0.0001 
 #- 
 #-    Einzelhandel (ohne KFZ) (turnover) 
 #     forecast:  0.1,  actual: -0.2,  weight: -0.0000,  impact: -0.0000 
 #- 
-#-    Bauhauptgewerbe, �ffentliche Auftraggeber und Stra�enbau (turnover) 
-#     forecast: -2.8,  actual: -6.2,  weight: 0.0000,  impact: -0.0000 
-#- 
 #-    PPI: industrielle Produkte (ex Energie) (prices) 
 #     forecast:  0.1,  actual:  0.2,  weight: 0.0055,  impact: 0.0000 
+#- 
+#-    Bauhauptgewerbe, �ffentliche Auftraggeber und Stra�enbau (turnover) 
+#     forecast: -2.8,  actual: -6.2,  weight: 0.0000,  impact: -0.0000 
 #- 
 #-    Bauhauptgewerbe, �ffentliche Auftraggeber und Stra�enbau (orders) 
 #     forecast:  1.0,  actual:  1.3,  weight: -0.0000,  impact: 0.0000 

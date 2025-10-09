@@ -106,3 +106,48 @@
 #- 
 # ...none! 
 ################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-09-15, the nowcast for 2025Q4 was 0.27 percent. 
+#- 
+#- Previous nowcast was 0.31 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    lkw_maut (production) 
+#     forecast:  0.2 actual: -2.3 weight: 0.0200 impact: -0.05 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-09-30, the nowcast for 2025Q4 was -0.05 percent. 
+#- 
+#- Previous nowcast was 0.27 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Expectations of the prices over the next 3 months (ESI) 
+#     forecast:  0.1 actual: -5.3 weight: 0.0102 impact: -0.06 
+#- 
+#-    Assessment of order-book levels (ESI) 
+#     forecast: -0.0 actual: -4.1 weight: 0.0129 impact: -0.05 
+#- 
+#-    Production expectations for the months ahead (ESI) 
+#     forecast: -0.5 actual:  4.5 weight: 0.0095 impact: 0.05 
+#- 
+#-    Expectations of the employment over the next 3 months (ESI) 
+#     forecast: -0.2 actual: -4.7 weight: 0.0098 impact: -0.04 
+#- 
+#-    Production trend observed in recent months (ESI) 
+#     forecast: -0.4 actual: -11.5 weight: 0.0031 impact: -0.03 
+#- 
+#-    Assessment of stocks of finished products (ESI) 
+#     forecast:  0.1 actual:  2.0 weight: -0.0153 impact: -0.03 
+#- 
+#-    Evolution of your current overall order books (ESI) 
+#     forecast:  0.0 actual: -4.7 weight: 0.0060 impact: -0.03 
+#- 
+#-    Employment expectations for the months ahead (ESI) 
+#     forecast: -0.1 actual: -2.1 weight: 0.0142 impact: -0.03 
+#- 
+################################################################# 
