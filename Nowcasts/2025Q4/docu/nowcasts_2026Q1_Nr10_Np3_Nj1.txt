@@ -1,0 +1,108 @@
+################################################################# 
+################################################################# 
+####### MODEL SPECIFICATION ##################################### 
+####### Nr = 10 ##################################################
+####### Np = 3 ##################################################
+####### Nj = 1 ##################################################
+################################################################# 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-15, the nowcast for 2026Q1 was 0.15 percent. 
+#- 
+#- Previous nowcast was 0.30 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Industrie (production) 
+#     forecast: -3.0 actual: -5.8 weight: 0.0113 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-30, the nowcast for 2026Q1 was 0.43 percent. 
+#- 
+#- Previous nowcast was 0.15 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Assessment of order-book levels (ESI) 
+#     forecast: -0.3 actual:  3.2 weight: 0.0198 impact: 0.07 
+#- 
+#-    Assessment of export order-book levels (ESI) 
+#     forecast: -0.7 actual:  2.0 weight: 0.0181 impact: 0.05 
+#- 
+#-    Financial situation over next 12 months (ESI) 
+#     forecast: -0.2 actual: -3.0 weight: -0.0165 impact: 0.05 
+#- 
+#-    Assessment of stocks of finished products (ESI) 
+#     forecast:  0.2 actual: -2.1 weight: -0.0165 impact: 0.04 
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast: -0.0 actual:  2.1 weight: 0.0174 impact: 0.04 
+#- 
+#-    Current level of capacity utilization (ESI) 
+#     forecast:  0.1 actual:  0.7 weight: -0.0573 impact: -0.03 
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  0.3 actual: -1.6 weight: -0.0177 impact: 0.03 
+#- 
+#-    Employment expectations for the months ahead (ESI) 
+#     forecast: -0.0 actual: -2.4 weight: 0.0135 impact: -0.03 
+#- 
+#-    Production trend observed in recent months (ESI) 
+#     forecast:  3.6 actual: 11.4 weight: 0.0035 impact: 0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-11-15, the nowcast for 2026Q1 was 0.49 percent. 
+#- 
+#- Previous nowcast was 0.43 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-11-30, the nowcast for 2026Q1 was 0.27 percent. 
+#- 
+#- Previous nowcast was 0.49 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  1.6 actual: -0.8 weight: 0.0338 impact: -0.08 
+#- 
+#-    Production expectations for the months ahead (ESI) 
+#     forecast:  2.3 actual: -4.6 weight: 0.0078 impact: -0.05 
+#- 
+#-    ifo_erwartung (ifo) 
+#     forecast:  1.0 actual: -2.2 weight: 0.0149 impact: -0.05 
+#- 
+#-    Bauhauptgewerbe (orders) 
+#     forecast:  2.5 actual:  7.4 weight: -0.0081 impact: -0.04 
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  1.3 actual: -2.3 weight: 0.0110 impact: -0.04 
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  0.9 actual: -0.6 weight: -0.0249 impact: 0.04 
+#- 
+#-    Employment expectations for the months ahead (ESI) 
+#     forecast:  2.1 actual: -0.2 weight: 0.0138 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-12-15, the nowcast for 2026Q1 was 0.34 percent. 
+#- 
+#- Previous nowcast was 0.27 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Investitionsg�ter (Inland) (orders) 
+#     forecast:  5.6 actual: 20.9 weight: -0.0017 impact: -0.03 
+#- 
+################################################################# 

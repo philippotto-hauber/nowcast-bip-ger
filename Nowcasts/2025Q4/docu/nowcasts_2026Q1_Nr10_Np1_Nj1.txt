@@ -1,0 +1,71 @@
+################################################################# 
+################################################################# 
+####### MODEL SPECIFICATION ##################################### 
+####### Nr = 10 ##################################################
+####### Np = 1 ##################################################
+####### Nj = 1 ##################################################
+################################################################# 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-15, the nowcast for 2026Q1 was 0.32 percent. 
+#- 
+#- Previous nowcast was 0.31 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-30, the nowcast for 2026Q1 was 0.39 percent. 
+#- 
+#- Previous nowcast was 0.32 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Current level of capacity utilization (ESI) 
+#     forecast: -0.5 actual:  0.7 weight: -0.0296 impact: -0.03 
+#- 
+#-    Financial situation over next 12 months (ESI) 
+#     forecast: -0.6 actual: -3.0 weight: -0.0113 impact: 0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-11-15, the nowcast for 2026Q1 was 0.35 percent. 
+#- 
+#- Previous nowcast was 0.39 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-11-30, the nowcast for 2026Q1 was 0.21 percent. 
+#- 
+#- Previous nowcast was 0.35 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Business activity expectations over the next 3 months (ESI) 
+#     forecast:  0.5 actual: -5.7 weight: 0.0075 impact: -0.05 
+#- 
+#-    ifo_erwartung (ifo) 
+#     forecast:  0.4 actual: -2.2 weight: 0.0160 impact: -0.04 
+#- 
+#-    Production expectations for the months ahead (ESI) 
+#     forecast:  1.0 actual: -4.6 weight: 0.0072 impact: -0.04 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-12-15, the nowcast for 2026Q1 was 0.27 percent. 
+#- 
+#- Previous nowcast was 0.21 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 

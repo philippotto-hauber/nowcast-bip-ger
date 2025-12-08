@@ -1,0 +1,61 @@
+################################################################# 
+################################################################# 
+####### MODEL SPECIFICATION ##################################### 
+####### equal-weight pool ####################################### 
+################################################################# 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-15, the nowcast for 2026Q1 was 0.26 percent. 
+#- 
+#- Previous nowcast was 0.26 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-30, the nowcast for 2026Q1 was 0.33 percent. 
+#- 
+#- Previous nowcast was 0.26 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-11-15, the nowcast for 2026Q1 was 0.33 percent. 
+#- 
+#- Previous nowcast was 0.33 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-11-30, the nowcast for 2026Q1 was 0.27 percent. 
+#- 
+#- Previous nowcast was 0.33 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Production expectations for the months ahead (ESI) 
+#     forecast:  0.4 actual: -4.6 weight: 0.0062 impact: -0.03 
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  0.6 actual: -0.8 weight: 0.0181 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-12-15, the nowcast for 2026Q1 was 0.26 percent. 
+#- 
+#- Previous nowcast was 0.27 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 

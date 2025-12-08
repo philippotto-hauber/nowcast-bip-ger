@@ -1,0 +1,76 @@
+################################################################# 
+################################################################# 
+####### MODEL SPECIFICATION ##################################### 
+####### Nr = 8 ##################################################
+####### Np = 3 ##################################################
+####### Nj = 0 ##################################################
+################################################################# 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-15, the nowcast for 2026Q1 was 0.23 percent. 
+#- 
+#- Previous nowcast was 0.21 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-30, the nowcast for 2026Q1 was 0.34 percent. 
+#- 
+#- Previous nowcast was 0.23 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Assessment of order-book levels (ESI) 
+#     forecast: -0.4 actual:  3.2 weight: 0.0169 impact: 0.06 
+#- 
+#-    Assessment of export order-book levels (ESI) 
+#     forecast: -0.4 actual:  2.0 weight: 0.0168 impact: 0.04 
+#- 
+#-    Assessment of stocks of finished products (ESI) 
+#     forecast:  0.2 actual: -2.1 weight: -0.0148 impact: 0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-11-15, the nowcast for 2026Q1 was 0.36 percent. 
+#- 
+#- Previous nowcast was 0.34 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-11-30, the nowcast for 2026Q1 was 0.27 percent. 
+#- 
+#- Previous nowcast was 0.36 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  1.0 actual: -0.8 weight: 0.0270 impact: -0.05 
+#- 
+#-    Bauhauptgewerbe (orders) 
+#     forecast:  4.2 actual:  7.4 weight: -0.0092 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-12-15, the nowcast for 2026Q1 was 0.22 percent. 
+#- 
+#- Previous nowcast was 0.27 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Bauhauptgewerbe (production) 
+#     forecast: -2.1 actual:  1.7 weight: -0.0135 impact: -0.05 
+#- 
+#-    Investitionsg�ter (turnover) 
+#     forecast:  4.1 actual:  0.5 weight: -0.0104 impact: 0.04 
+#- 
+################################################################# 
