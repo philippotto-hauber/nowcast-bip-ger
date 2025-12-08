@@ -4,7 +4,8 @@
 # with the vintage date as columns!
 
 args <- commandArgs(trailingOnly = TRUE)
-dir_main <- args[length(args)]
+dir_main <- args[1]
+dir_repo <- args[2]
 
 # keep this comment for future debugging sessions
 # dir_main <- "C:/Users/Hauber-P/Documents/GitHub/nowcast-bip-ger/Echtzeitdatensatz/raw data"
@@ -45,7 +46,7 @@ for (v in vintages)
 }
 
 #----- MERGE WITH EARLIER VINTAGES
-load(paste0(dirname, "vintages_destatis_2019M12020M8.Rda"))
+load(paste0(dir_repo, "/aux_real_time_data", "/vintages_destatis_2019M12020M8.Rda"))
 
 df <- rbind(df, dat)
 
@@ -63,8 +64,12 @@ df_wide$date <- ifelse(lubridate::month(df_wide$date)>=10,
                       )
 
 #----- EXPORT AS CSV
+
+# create store_dir if it does not already exist
+dir_store <- paste0(dir_main, "/lkw_maut/")
+if (!dir.exists(dir_store)) dir.create(dir_store, recursive = TRUE)
 write.csv(df_wide, 
-          file = paste0(dirname, "vintages_lkwmautindex.csv"), 
+          file = paste0(dir_store, "vintages_lkwmautindex.csv"), 
           row.names = F,
           quote = T,
           na = "")
