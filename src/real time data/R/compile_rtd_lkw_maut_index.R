@@ -13,12 +13,14 @@ dir_repo <- args[2]
 vintages <- list.files(path = paste0(dir_repo, "/aux_real_time_data/releases/lkw_maut/"), pattern = "lkw_maut_index_", full.names = TRUE)
 filename <- "lkw_maut_index_"
 
-extract_date_from_filename <- function(f){
-  len_f <- nchar(f)
-  d <- as.Date(substr(f, len_f - 13, len_f - 4))
-  stopifnot(class(d) == "Date")
-  return(d)
-}
+# extract_date_from_filename <- function(f){
+#   len_f <- nchar(f)
+#   d <- as.Date(substr(f, len_f - 13, len_f - 4))
+#   stopifnot(class(d) == "Date")
+#   return(d)
+# }
+
+source("extract_date_from_filename.R")
 
 #----- READ IN CSV VINTAGES
 
@@ -38,7 +40,7 @@ for (v in vintages)
   
   dat <- rbind(dat, data.frame(date = lubridate::make_date(year = substr(tmp[, col_date], 1, 4), 
                                                            month = substr(tmp[, col_date], 6, 7)), 
-                               vintage = extract_date_from_filename(v),
+                               vintage = extract_date_from_filename(v, start = 13),
                                value = tmp[, col_val])
                )               
 }
