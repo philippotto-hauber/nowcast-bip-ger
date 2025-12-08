@@ -1,0 +1,215 @@
+################################################################# 
+################################################################# 
+####### MODEL SPECIFICATION ##################################### 
+####### equal-weight pool ####################################### 
+################################################################# 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-11-30, the nowcast for 2026Q1 was 0.27 percent... 
+#- 
+#- ... a revision of -0.06 percentage points... 
+#- 
+#- ... compared to the previous nowcast, made on 2025-11-15. 
+#- 
+#- Impact by newly released variables (in descending absolute order): 
+#- 
+#-    Production expectations for the months ahead (ESI) 
+#     forecast:  0.4,  actual: -4.6,  weight: 0.0062,  impact: -0.0301 
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  0.6,  actual: -0.8,  weight: 0.0181,  impact: -0.0274 
+#- 
+#-    ifo_erwartung (ifo) 
+#     forecast:  0.2,  actual: -2.2,  weight: 0.0086,  impact: -0.0203 
+#- 
+#-    Selling price expectations for the months ahead (ESI) 
+#     forecast:  0.6,  actual:  3.8,  weight: 0.0043,  impact: 0.0136 
+#- 
+#-    Business activity expectations over the next 3 months (ESI) 
+#     forecast:  0.0,  actual: -5.7,  weight: 0.0024,  impact: -0.0124 
+#- 
+#-    Unemployment expectations over next 12 months (ESI) 
+#     forecast: -0.7,  actual: -1.6,  weight: -0.0111,  impact: 0.0120 
+#- 
+#-    Expectations of the employment over the next 3 months (ESI) 
+#     forecast: -0.5,  actual: -3.3,  weight: 0.0037,  impact: -0.0096 
+#- 
+#-    Expectation of the demand over the next 3 months (ESI) 
+#     forecast:  0.2,  actual:  2.9,  weight: 0.0030,  impact: 0.0091 
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  0.1,  actual: -2.3,  weight: 0.0033,  impact: -0.0077 
+#- 
+#-    Assessment of export order-book levels (ESI) 
+#     forecast:  0.7,  actual:  2.4,  weight: 0.0056,  impact: 0.0077 
+#- 
+#-    Expectations of the prices over the next 3 months (ESI) 
+#     forecast:  0.4,  actual:  3.0,  weight: 0.0028,  impact: 0.0074 
+#- 
+#-    Employment expectations over the next 3 months (ESI) 
+#     forecast:  0.6,  actual: -0.7,  weight: 0.0063,  impact: -0.0069 
+#- 
+#-    Employment expectations over the next 3 months (ESI) 
+#     forecast:  0.4,  actual:  3.6,  weight: 0.0020,  impact: 0.0067 
+#- 
+#-    Employment expectations for the months ahead (ESI) 
+#     forecast:  0.6,  actual: -0.2,  weight: 0.0062,  impact: -0.0063 
+#- 
+#-    Prices expectations over the next 3 months (ESI) 
+#     forecast:  0.7,  actual:  2.3,  weight: 0.0034,  impact: 0.0057 
+#- 
+#-    Bauhauptgewerbe (orders) 
+#     forecast:  0.5,  actual:  7.4,  weight: -0.0011,  impact: -0.0055 
+#- 
+#-    Prices expectations over the next 3 months (ESI) 
+#     forecast:  0.4,  actual:  2.6,  weight: 0.0024,  impact: 0.0051 
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  0.4,  actual:  1.3,  weight: 0.0044,  impact: 0.0049 
+#- 
+#-    VPI: andere Gebrauchs- und Verbrauchsg�ter (prices) 
+#     forecast:  0.1,  actual: -0.1,  weight: 0.0241,  impact: -0.0046 
+#- 
+#-    Major purchases at present (ESI) 
+#     forecast:  0.0,  actual:  3.0,  weight: 0.0012,  impact: 0.0041 
+#- 
+#-    Production trend observed in recent months (ESI) 
+#     forecast: -1.4,  actual: -3.1,  weight: 0.0021,  impact: -0.0038 
+#- 
+#-    Financial situation over last 12 months (ESI) 
+#     forecast:  0.0,  actual: -2.1,  weight: -0.0017,  impact: 0.0038 
+#- 
+#-    Savings over next 12 months (ESI) 
+#     forecast: -0.4,  actual:  2.0,  weight: -0.0016,  impact: -0.0036 
+#- 
+#-    VPI: Nahrungsmittel (prices) 
+#     forecast:  0.2,  actual: -0.1,  weight: 0.0096,  impact: -0.0035 
+#- 
+#-    Assessment of order-book levels (ESI) 
+#     forecast:  0.8,  actual:  1.9,  weight: 0.0051,  impact: 0.0034 
+#- 
+#-    VPI: insgesamt (ex Energie) (prices) 
+#     forecast:  0.1,  actual:  0.1,  weight: 0.0474,  impact: -0.0027 
+#- 
+#-    Orders expectations over the next 3 months (ESI) 
+#     forecast:  0.6,  actual:  1.0,  weight: 0.0030,  impact: 0.0025 
+#- 
+#-    Business activity (sales) development over the past 3 months (ESI) 
+#     forecast:  0.5,  actual: -1.8,  weight: 0.0009,  impact: -0.0024 
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  0.3,  actual:  1.3,  weight: 0.0020,  impact: 0.0024 
+#- 
+#-    ifo_lage (ifo) 
+#     forecast:  0.4,  actual:  0.2,  weight: 0.0157,  impact: -0.0024 
+#- 
+#-    Erwerbst�tige: Gesamtwirtschaft (labor market) 
+#     forecast:  0.1,  actual: -0.0,  weight: -0.0449,  impact: 0.0022 
+#- 
+#-    VPI: insgesamt (prices) 
+#     forecast:  0.2,  actual:  0.2,  weight: 0.0726,  impact: -0.0019 
+#- 
+#-    VPI: Dienstleistungen (prices) 
+#     forecast:  0.2,  actual:  0.3,  weight: 0.0221,  impact: 0.0019 
+#- 
+#-    Financial situation over next 12 months (ESI) 
+#     forecast:  0.3,  actual:  0.4,  weight: -0.0004,  impact: 0.0015 
+#- 
+#-    Bauhauptgewerbe, �ffentliche Auftraggeber und Stra�enbau (orders) 
+#     forecast: -0.2,  actual: 16.1,  weight: -0.0001,  impact: -0.0011 
+#- 
+#-    Assessment of stocks of finished products (ESI) 
+#     forecast: -0.2,  actual: -0.3,  weight: -0.0059,  impact: -0.0011 
+#- 
+#-    Major purchases over next 12 months (ESI) 
+#     forecast:  0.3,  actual: -1.5,  weight: 0.0009,  impact: -0.0010 
+#- 
+#-    VPI: insgesamt (ex Energie und Nahrungsmittel) (prices) 
+#     forecast:  0.1,  actual:  0.1,  weight: 0.0374,  impact: -0.0009 
+#- 
+#-    Tiefbau (orders) 
+#     forecast:  2.5,  actual: 12.4,  weight: -0.0001,  impact: -0.0007 
+#- 
+#-    PPI: industrielle Produkte (ex Energie) (prices) 
+#     forecast:  0.2,  actual:  0.0,  weight: 0.0025,  impact: -0.0007 
+#- 
+#-    Einzelhandel (ohne KFZ) (turnover) 
+#     forecast:  0.0,  actual: -0.3,  weight: -0.0022,  impact: 0.0007 
+#- 
+#-    General economic situation over next 12 months (ESI) 
+#     forecast:  0.2,  actual:  0.4,  weight: 0.0019,  impact: 0.0007 
+#- 
+#-    Price trends over last 12 months (ESI) 
+#     forecast:  0.5,  actual:  0.8,  weight: 0.0028,  impact: 0.0006 
+#- 
+#-    Volume of stock currently hold (ESI) 
+#     forecast:  0.2,  actual: -0.4,  weight: -0.0013,  impact: 0.0005 
+#- 
+#-    Confidence Indicator (ESI) 
+#     forecast:  0.2,  actual: -0.6,  weight: 0.0023,  impact: -0.0004 
+#- 
+#-    Hochbau (orders) 
+#     forecast: -1.8,  actual:  1.7,  weight: -0.0001,  impact: -0.0004 
+#- 
+#-    Exportpreise (prices) 
+#     forecast:  0.2,  actual:  0.2,  weight: 0.0025,  impact: -0.0004 
+#- 
+#-    Evolution of your current overall order books (ESI) 
+#     forecast:  0.4,  actual: -1.0,  weight: 0.0004,  impact: -0.0003 
+#- 
+#-    Business situation development over the past 3 months (ESI) 
+#     forecast:  0.5,  actual:  0.7,  weight: 0.0011,  impact: 0.0003 
+#- 
+#-    Importpreise (prices) 
+#     forecast:  0.5,  actual:  0.1,  weight: 0.0004,  impact: -0.0003 
+#- 
+#-    Bauhauptgewerbe, gewerbliche Auftraggeber (orders) 
+#     forecast:  1.4,  actual:  0.0,  weight: -0.0001,  impact: 0.0002 
+#- 
+#-    Evolution of the demand over the past 3 months (ESI) 
+#     forecast:  0.4,  actual:  0.3,  weight: 0.0031,  impact: 0.0002 
+#- 
+#-    PPI: industrielle Produkte (prices) 
+#     forecast:  0.4,  actual:  0.1,  weight: -0.0010,  impact: 0.0002 
+#- 
+#-    Sozialversichungspflichtig Besch�ftigte (labor market) 
+#     forecast:  0.0,  actual:  0.0,  weight: -0.0040,  impact: -0.0001 
+#- 
+#-    Building activity development over the past 3 months (ESI) 
+#     forecast:  0.3,  actual: -0.9,  weight: -0.0001,  impact: 0.0001 
+#- 
+#-    Wohnungsbau (orders) 
+#     forecast: -0.3,  actual:  9.8,  weight: -0.0000,  impact: -0.0001 
+#- 
+#-    VPI: Energie (prices) 
+#     forecast:  0.6,  actual:  0.6,  weight: 0.0076,  impact: -0.0001 
+#- 
+#-    General economic situation over last 12 months (ESI) 
+#     forecast:  0.3,  actual: -0.8,  weight: 0.0004,  impact: -0.0001 
+#- 
+#-    Bauhauptgewerbe, gewerbliche Auftraggeber (turnover) 
+#     forecast: -0.6,  actual:  1.5,  weight: -0.0000,  impact: -0.0000 
+#- 
+#-    Price trends over next 12 months (ESI) 
+#     forecast:  0.4,  actual:  0.3,  weight: 0.0005,  impact: -0.0000 
+#- 
+#-    BLG: Bauhauptgewerbe (labor market) 
+#     forecast:  0.2,  actual: -0.4,  weight: -0.0000,  impact: 0.0000 
+#- 
+#-    Bauhauptgewerbe (turnover) 
+#     forecast: -0.1,  actual: -0.7,  weight: -0.0000,  impact: 0.0000 
+#- 
+#-    Erwerbst�tigenstunden: Bauhauptgewerbe (labor market) 
+#     forecast: -0.1,  actual:  0.0,  weight: -0.0000,  impact: 0.0000 
+#- 
+#-    Statement on financial situation of household (ESI) 
+#     forecast: -0.1,  actual: -0.1,  weight: 0.0011,  impact: -0.0000 
+#- 
+#-    Bauhauptgewerbe, �ffentliche Auftraggeber und Stra�enbau (turnover) 
+#     forecast: -0.6,  actual:  1.1,  weight: -0.0000,  impact: 0.0000 
+#- 
+#-    Wohnungsbau (turnover) 
+#     forecast: -1.5,  actual: -3.8,  weight: -0.0000,  impact: -0.0000 
+#- 
+################################################################# 

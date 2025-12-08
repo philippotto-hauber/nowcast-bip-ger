@@ -8,123 +8,30 @@
 ################################################################# 
 #---------------------------------------------------------------# 
 #- 
-#- On 2025-07-15, the nowcast for 2025Q4 was 0.30 percent. 
+#- On 2025-10-15, the nowcast for 2025Q4 was -0.14 percent. 
 #- 
-#- Previous nowcast was 0.30 percent. 
-#- 
-#- Variables with an absolute impact larger than 0.02 were...
-#- 
-# ...none! 
-################################################################# 
-#---------------------------------------------------------------# 
-#- 
-#- On 2025-07-30, the nowcast for 2025Q4 was 0.31 percent. 
-#- 
-#- Previous nowcast was 0.30 percent. 
-#- 
-#- Variables with an absolute impact larger than 0.02 were...
-#- 
-# ...none! 
-################################################################# 
-#---------------------------------------------------------------# 
-#- 
-#- On 2025-08-15, the nowcast for 2025Q4 was 0.31 percent. 
-#- 
-#- Previous nowcast was 0.31 percent. 
-#- 
-#- Variables with an absolute impact larger than 0.02 were...
-#- 
-# ...none! 
-################################################################# 
-#---------------------------------------------------------------# 
-#- 
-#- On 2025-08-30, the nowcast for 2025Q4 was 0.32 percent. 
-#- 
-#- Previous nowcast was 0.31 percent. 
-#- 
-#- Variables with an absolute impact larger than 0.02 were...
-#- 
-#-    Production expectations for the months ahead (ESI) 
-#     forecast: -0.3 actual: -6.0 weight: 0.0065 impact: -0.04 
-#- 
-#-    Employment expectations over the next 3 months (ESI) 
-#     forecast: -0.1 actual:  4.4 weight: 0.0078 impact: 0.04 
-#- 
-#-    Orders expectations over the next 3 months (ESI) 
-#     forecast: -0.4 actual:  6.0 weight: 0.0044 impact: 0.03 
-#- 
-################################################################# 
-#---------------------------------------------------------------# 
-#- 
-#- On 2025-09-15, the nowcast for 2025Q4 was 0.24 percent. 
-#- 
-#- Previous nowcast was 0.32 percent. 
+#- Previous nowcast was -0.05 percent. 
 #- 
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 #-    lkw_maut (production) 
-#     forecast:  0.3 actual: -2.3 weight: 0.0269 impact: -0.07 
-#- 
-################################################################# 
-#---------------------------------------------------------------# 
-#- 
-#- On 2025-09-30, the nowcast for 2025Q4 was -0.06 percent. 
-#- 
-#- Previous nowcast was 0.24 percent. 
-#- 
-#- Variables with an absolute impact larger than 0.02 were...
-#- 
-#-    Production expectations for the months ahead (ESI) 
-#     forecast: -0.4 actual:  4.6 weight: 0.0116 impact: 0.06 
-#- 
-#-    Expectations of the prices over the next 3 months (ESI) 
-#     forecast:  0.2 actual: -5.3 weight: 0.0098 impact: -0.05 
-#- 
-#-    Assessment of order-book levels (ESI) 
-#     forecast:  0.0 actual: -4.0 weight: 0.0122 impact: -0.05 
-#- 
-#-    Expectations of the employment over the next 3 months (ESI) 
-#     forecast: -0.1 actual: -4.7 weight: 0.0101 impact: -0.05 
-#- 
-#-    Production trend observed in recent months (ESI) 
-#     forecast: -0.3 actual: -11.3 weight: 0.0034 impact: -0.04 
-#- 
-#-    Assessment of stocks of finished products (ESI) 
-#     forecast:  0.0 actual:  2.0 weight: -0.0156 impact: -0.03 
-#- 
-#-    Employment expectations for the months ahead (ESI) 
-#     forecast: -0.1 actual: -2.2 weight: 0.0143 impact: -0.03 
-#- 
-#-    Evolution of your current overall order books (ESI) 
-#     forecast:  0.1 actual: -4.6 weight: 0.0062 impact: -0.03 
-#- 
-################################################################# 
-#---------------------------------------------------------------# 
-#- 
-#- On 2025-10-15, the nowcast for 2025Q4 was -0.15 percent. 
-#- 
-#- Previous nowcast was -0.06 percent. 
-#- 
-#- Variables with an absolute impact larger than 0.02 were...
-#- 
-#-    lkw_maut (production) 
-#     forecast: -0.5 actual:  0.5 weight: 0.0506 impact: 0.05 
+#     forecast: -0.5 actual:  0.5 weight: 0.0499 impact: 0.05 
 #- 
 #-    Industrie (production) 
 #     forecast: -0.7 actual: -5.8 weight: 0.0087 impact: -0.04 
 #- 
 #-    Produzierendes Gewerbe ohne Bau (production) 
-#     forecast: -0.7 actual: -5.4 weight: 0.0092 impact: -0.04 
+#     forecast: -0.6 actual: -5.4 weight: 0.0091 impact: -0.04 
 #- 
 #-    Produzierendes Gewerbe (production) 
-#     forecast: -0.6 actual: -4.4 weight: 0.0097 impact: -0.04 
+#     forecast: -0.6 actual: -4.4 weight: 0.0096 impact: -0.04 
 #- 
 ################################################################# 
 #---------------------------------------------------------------# 
 #- 
-#- On 2025-10-30, the nowcast for 2025Q4 was 0.36 percent. 
+#- On 2025-10-30, the nowcast for 2025Q4 was 0.39 percent. 
 #- 
-#- Previous nowcast was -0.15 percent. 
+#- Previous nowcast was -0.14 percent. 
 #- 
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
@@ -132,66 +39,103 @@
 #     forecast: -0.3 actual:  0.0 weight: 0.2208 impact: 0.07 
 #- 
 #-    Confidence Indicator (ESI) 
-#     forecast: -0.0 actual:  2.1 weight: 0.0307 impact: 0.07 
+#     forecast: -0.0 actual:  2.1 weight: 0.0304 impact: 0.06 
 #- 
 #-    Current level of capacity utilization (ESI) 
-#     forecast: -0.1 actual:  0.7 weight: 0.0720 impact: 0.06 
+#     forecast: -0.1 actual:  0.7 weight: 0.0715 impact: 0.06 
 #- 
 #-    Expectations of the employment over the next 3 months (ESI) 
-#     forecast: -0.1 actual:  4.9 weight: 0.0119 impact: 0.06 
+#     forecast: -0.1 actual:  4.9 weight: 0.0118 impact: 0.06 
 #- 
 #-    Assessment of order-book levels (ESI) 
-#     forecast: -0.2 actual:  3.2 weight: 0.0146 impact: 0.05 
+#     forecast: -0.2 actual:  3.2 weight: 0.0144 impact: 0.05 
 #- 
 #-    Production trend observed in recent months (ESI) 
-#     forecast:  0.0 actual: 11.3 weight: 0.0040 impact: 0.04 
+#     forecast:  0.0 actual: 11.4 weight: 0.0039 impact: 0.04 
 #- 
 #-    Employment expectations over the next 3 months (ESI) 
-#     forecast:  0.0 actual: -2.6 weight: 0.0166 impact: -0.04 
-#- 
-#-    Employment expectations for the months ahead (ESI) 
-#     forecast: -0.1 actual: -2.5 weight: 0.0169 impact: -0.04 
+#     forecast:  0.0 actual: -2.6 weight: 0.0164 impact: -0.04 
 #- 
 #-    Assessment of stocks of finished products (ESI) 
-#     forecast:  0.0 actual: -2.1 weight: -0.0185 impact: 0.04 
+#     forecast:  0.0 actual: -2.1 weight: -0.0184 impact: 0.04 
 #- 
-#-    ifo_lage (ifo) 
-#     forecast: -0.0 actual: -0.9 weight: 0.0435 impact: -0.04 
-#- 
-#-    ifo_erwartung (ifo) 
-#     forecast:  0.1 actual:  2.1 weight: 0.0189 impact: 0.04 
+#-    Employment expectations for the months ahead (ESI) 
+#     forecast: -0.1 actual: -2.4 weight: 0.0168 impact: -0.04 
 #- 
 #-    Assessment of export order-book levels (ESI) 
-#     forecast: -0.2 actual:  1.8 weight: 0.0165 impact: 0.03 
+#     forecast: -0.2 actual:  2.0 weight: 0.0163 impact: 0.04 
+#- 
+#-    ifo_erwartung (ifo) 
+#     forecast:  0.1 actual:  1.9 weight: 0.0188 impact: 0.03 
+#- 
+#-    ifo_lage (ifo) 
+#     forecast: -0.0 actual: -0.8 weight: 0.0432 impact: -0.03 
 #- 
 #-    VPI: insgesamt (prices) 
-#     forecast:  0.1 actual:  0.3 weight: 0.1500 impact: 0.03 
-#- 
-#-    Prices expectations over the next 3 months (ESI) 
-#     forecast: -0.1 actual:  3.0 weight: 0.0081 impact: 0.03 
+#     forecast:  0.1 actual:  0.3 weight: 0.1491 impact: 0.03 
 #- 
 ################################################################# 
 #---------------------------------------------------------------# 
 #- 
 #- On 2025-11-15, the nowcast for 2025Q4 was 0.47 percent. 
 #- 
-#- Previous nowcast was 0.36 percent. 
+#- Previous nowcast was 0.39 percent. 
 #- 
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 #-    Produzierendes Gewerbe ohne Bau (production) 
-#     forecast: -0.7 actual:  1.9 weight: 0.0163 impact: 0.04 
+#     forecast: -0.7 actual:  1.9 weight: 0.0159 impact: 0.04 
 #- 
 #-    Industrie (production) 
-#     forecast: -0.8 actual:  1.9 weight: 0.0155 impact: 0.04 
+#     forecast: -0.7 actual:  1.9 weight: 0.0151 impact: 0.04 
 #- 
 #-    Produzierendes Gewerbe (production) 
-#     forecast: -0.7 actual:  1.3 weight: 0.0172 impact: 0.03 
+#     forecast: -0.6 actual:  1.3 weight: 0.0167 impact: 0.03 
 #- 
 #-    Industrie (turnover) 
-#     forecast: -0.7 actual: -2.2 weight: 0.0218 impact: -0.03 
+#     forecast: -0.7 actual: -2.2 weight: 0.0212 impact: -0.03 
 #- 
 #-    Industrie (Ausland) (turnover) 
-#     forecast: -0.7 actual: -4.6 weight: 0.0069 impact: -0.03 
+#     forecast: -0.7 actual: -4.6 weight: 0.0067 impact: -0.03 
 #- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-11-30, the nowcast for 2025Q4 was 0.44 percent. 
+#- 
+#- Previous nowcast was 0.47 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Production expectations for the months ahead (ESI) 
+#     forecast: -0.4 actual: -4.6 weight: 0.0097 impact: -0.04 
+#- 
+#-    Selling price expectations for the months ahead (ESI) 
+#     forecast:  0.4 actual:  3.8 weight: 0.0114 impact: 0.04 
+#- 
+#-    Unemployment expectations over next 12 months (ESI) 
+#     forecast: -0.1 actual: -1.6 weight: -0.0200 impact: 0.03 
+#- 
+#-    Expectations of the employment over the next 3 months (ESI) 
+#     forecast: -0.1 actual: -3.3 weight: 0.0089 impact: -0.03 
+#- 
+#-    Assessment of export order-book levels (ESI) 
+#     forecast:  0.2 actual:  2.4 weight: 0.0127 impact: 0.03 
+#- 
+#-    PPI: industrielle Produkte (ex Energie) (prices) 
+#     forecast:  0.3 actual:  0.0 weight: 0.1019 impact: -0.03 
+#- 
+#-    ifo_erwartung (ifo) 
+#     forecast: -0.3 actual: -2.2 weight: 0.0131 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-12-15, the nowcast for 2025Q4 was 0.44 percent. 
+#- 
+#- Previous nowcast was 0.44 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
 ################################################################# 
