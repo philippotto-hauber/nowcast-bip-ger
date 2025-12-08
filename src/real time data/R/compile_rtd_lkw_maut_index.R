@@ -33,7 +33,7 @@ for (v in vintages)
   
   dat <- rbind(dat, data.frame(date = lubridate::make_date(year = substr(tmp[, col_date], 1, 4), 
                                                            month = substr(tmp[, col_date], 6, 7)), 
-                               vintage = extract_date_from_filename(v, start = 13),
+                               vintage = extract_date_from_filename(v),
                                value = tmp[, col_val])
                )               
 }
