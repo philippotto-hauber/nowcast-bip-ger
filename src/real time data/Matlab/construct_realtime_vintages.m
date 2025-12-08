@@ -1,11 +1,16 @@
-function out = construct_realtime_vintages(dir_realtimedata)
+function out = construct_realtime_vintages(dir_realtimedata, dir_repo)
     dir_rawdata = [dir_realtimedata, '/raw data'];
     dir_vintages = [dir_realtimedata, '/vintages'];
-    vintages = importdata('../../../dates_vintages.txt');
+
+    if not(isfolder(dir_vintages))
+       mkdir(dir_vintages);
+    end
+
+    vintages = importdata([dir_repo '/dates_vintages.txt']);
     for v = 1 : length(vintages)
-        dataset.data_ifo = f_load_ifo(vintages{v}, dir_rawdata) ;
+        dataset.data_ifo = f_load_ifo(vintages{v}, dir_rawdata, dir_repo) ;
         %toc
-        dataset.data_ESIBCI = f_load_ESIBCI(vintages{v}, dir_rawdata) ;
+        dataset.data_ESIBCI = f_load_ESIBCI(vintages{v}, dir_rawdata, dir_repo) ;
         %toc
         dataset.data_BuBaRTD = f_load_BuBaRTD(vintages{v}, dir_rawdata) ;
         % toc

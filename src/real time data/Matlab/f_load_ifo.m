@@ -1,4 +1,4 @@
-function data_ifo = f_load_ifo(vintage, dir_rawdata)
+function data_ifo = f_load_ifo(vintage, dir_rawdata, dir_repo)
 
 % add path data files
 dirname = [dir_rawdata '/ifo/'] ;
@@ -20,7 +20,7 @@ dates = year(dates_str{1},'mm/yyyy') + month(dates_str{1},'mm/yyyy')/12 + [0:(si
 ind_vars = [3, 4] - col_offset;
 
 %% determine available observations according to vintage
-releasedates = readtable([ dirname 'releasedates_ifo_csv.csv'], Delimiter=';' );
+releasedates = readtable([ dir_repo '/aux_real_time_data/releasedates_ifo_csv.csv'], Delimiter=';' );
 
 index_row = get_row_index_vintage(dates_str, releasedates, vintage, 'm', 'mm/yyyy');
 

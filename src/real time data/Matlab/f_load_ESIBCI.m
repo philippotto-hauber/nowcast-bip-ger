@@ -1,4 +1,4 @@
-function data_ESIBCI = f_load_ESIBCI(vintage, dir_rawdata)
+function data_ESIBCI = f_load_ESIBCI(vintage, dir_rawdata, dir_repo)
 
 % add path data files
 dirname = [dir_rawdata '/ESI BCI/'] ;
@@ -8,7 +8,7 @@ data_ESIBCI = f_loadoptions_ESIBCI ;
 data_ESIBCI.groups(:) = {'ESI'}; 
 
 % load release dates and 
-releasedates = readtable([ dirname 'releasedates_ESIBCI_csv.csv'], Delimiter=';' );
+releasedates = readtable([ dir_repo '/aux_real_time_data/releasedates_ESIBCI_csv.csv'], Delimiter=';' );
 
 % specify date format for dates in table
 dateformat = 'dd.mm.yyyy';

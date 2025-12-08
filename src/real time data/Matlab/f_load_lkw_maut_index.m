@@ -1,7 +1,7 @@
 function data_BuBaRTD = f_load_lkw_maut_index(data_BuBaRTD, vintage, dir_rawdata)
 
 % load vintages
-dir = [dir_rawdata '/lkw_maut_index/'];
+dir = [dir_rawdata '/lkw_maut/'];
 tmp = importdata([dir, 'vintages_lkwmautindex.csv'], ',');
 
 % extract dates
