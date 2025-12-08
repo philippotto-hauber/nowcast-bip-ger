@@ -3,7 +3,7 @@ dir_main <- args[length(args)]
 #dir_main = "C:/Users/Philipp/Desktop/Echtzeitdatensatz/raw data"
 
 # create store_dir if it does not already exist
-dir_dest <- paste0(dir_main, "/ifo/")
+dir_dest <- paste0(dir_main, "/ifo")
 if (!dir.exists(dir_dest)) dir.create(dir_dest, recursive = TRUE)
 
 file_dest <- paste0(dir_dest, "/ifo_current.xlsx")
@@ -21,7 +21,6 @@ while (looking_for_file)
     url_data <- paste0(url_start, yy, mm, url_end)
   
   if (class(try(download.file(url = url_data, destfile = file_dest, mode = "wb"))) == "try-error"){
-    unlink(file_dest)
     # update yy and mm
     if (mm == 1)
     {
@@ -32,8 +31,7 @@ while (looking_for_file)
       mm = mm - 1
     }
   } else {
-    unlink(file_dest)
-    print(paste0("Done downloading ", url_data, " as ifo_current.xlsx!"))
+    print(paste0("Done downloading ", url_data, " to ", file_dest, "!"))
     looking_for_file <- FALSE
   }
 }
