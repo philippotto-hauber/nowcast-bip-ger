@@ -10,9 +10,7 @@ dir_repo <- args[2]
 # keep this comment for future debugging sessions
 # dir_main <- "C:/Users/Hauber-P/Documents/GitHub/nowcast-bip-ger/Echtzeitdatensatz/raw data"
 
-dirname <- paste0(dir_main, "/lkw_maut_index/")
-
-vintages <- list.files(path = paste0(dirname, "releases/"), pattern = "lkw_maut_index_", full.names = TRUE)
+vintages <- list.files(path = paste0(dir_repo, "/aux_real_time_data/releases/lkw_maut/"), pattern = "lkw_maut_index_", full.names = TRUE)
 filename <- "lkw_maut_index_"
 
 extract_date_from_filename <- function(f){
@@ -74,7 +72,7 @@ write.csv(df_wide,
           quote = T,
           na = "")
 
-print(paste0("Done compiling real-time truck toll mileage data and storing vintages to ", dirname, "!"))
+print(paste0("Done compiling real-time truck toll mileage data and storing vintages to ", dir_store, "!"))
 
 
 
