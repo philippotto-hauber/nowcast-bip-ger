@@ -6,7 +6,7 @@ SET /p QUARTER="Quarter: "
 SET DIR_ROOT=%CD%
 SET DIR_REALTIMEDATA=%DIR_ROOT%/Echtzeitdatensatz
 
-SET /A switch_download_data = 0
+SET /A switch_download_data = 1
 CD "src\real time data\R\"
 IF %switch_download_data%==1 (
     ECHO Downloading data...

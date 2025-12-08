@@ -318,12 +318,33 @@
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 #-    Production expectations for the months ahead (ESI) 
-#     forecast: -1.2 actual:  4.5 weight: 0.0060 impact: 0.03 
+#     forecast: -1.2 actual:  4.5 weight: 0.0061 impact: 0.03 
 #- 
 #-    Expectations of the employment over the next 3 months (ESI) 
-#     forecast: -0.2 actual: -4.7 weight: 0.0076 impact: -0.03 
+#     forecast: -0.2 actual: -4.7 weight: 0.0075 impact: -0.03 
 #- 
 #-    Evolution of your current overall order books (ESI) 
-#     forecast: -0.0 actual: -4.7 weight: 0.0055 impact: -0.03 
+#     forecast: -0.0 actual: -4.7 weight: 0.0054 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-15, the nowcast for 2025Q3 was -0.41 percent. 
+#- 
+#- Previous nowcast was -0.30 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Investitionsg�ter (turnover) 
+#     forecast: -3.9 actual: -0.1 weight: 0.0348 impact: 0.13 
+#- 
+#-    Industrie (turnover) 
+#     forecast: -2.6 actual: -0.6 weight: 0.0640 impact: 0.13 
+#- 
+#-    Industrie (orders) 
+#     forecast:  0.2 actual: -0.8 weight: 0.0274 impact: -0.03 
+#- 
+#-    Bauhauptgewerbe (production) 
+#     forecast: -3.7 actual: -1.3 weight: 0.0115 impact: 0.03 
 #- 
 ################################################################# 

@@ -315,7 +315,7 @@
 ################################################################# 
 #---------------------------------------------------------------# 
 #- 
-#- On 2025-09-30, the nowcast for 2025Q3 was -0.17 percent. 
+#- On 2025-09-30, the nowcast for 2025Q3 was -0.19 percent. 
 #- 
 #- Previous nowcast was -0.07 percent. 
 #- 
@@ -325,18 +325,42 @@
 #     forecast:  0.2 actual: -4.7 weight: 0.0135 impact: -0.07 
 #- 
 #-    Evolution of your current overall order books (ESI) 
-#     forecast:  0.1 actual: -4.7 weight: 0.0081 impact: -0.04 
-#- 
-#-    PPI: industrielle Produkte (prices) 
-#     forecast:  0.2 actual: -0.5 weight: 0.0482 impact: -0.03 
+#     forecast:  0.1 actual: -4.7 weight: 0.0071 impact: -0.03 
 #- 
 #-    Expectations of the prices over the next 3 months (ESI) 
-#     forecast: -0.5 actual: -5.3 weight: 0.0065 impact: -0.03 
+#     forecast: -0.5 actual: -5.3 weight: 0.0064 impact: -0.03 
+#- 
+#-    PPI: industrielle Produkte (prices) 
+#     forecast:  0.2 actual: -0.5 weight: 0.0396 impact: -0.03 
 #- 
 #-    Major purchases over next 12 months (ESI) 
-#     forecast:  0.2 actual:  2.8 weight: 0.0119 impact: 0.03 
+#     forecast:  0.2 actual:  2.8 weight: 0.0107 impact: 0.03 
 #- 
 #-    Unemployment expectations over next 12 months (ESI) 
-#     forecast: -0.5 actual:  1.1 weight: -0.0167 impact: -0.03 
+#     forecast: -0.5 actual:  1.1 weight: -0.0161 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-15, the nowcast for 2025Q3 was -0.48 percent. 
+#- 
+#- Previous nowcast was -0.19 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Produzierendes Gewerbe ohne Bau (production) 
+#     forecast: -2.3 actual: -5.4 weight: 0.0280 impact: -0.09 
+#- 
+#-    Investitionsg�ter (production) 
+#     forecast: -4.1 actual: -10.0 weight: 0.0107 impact: -0.06 
+#- 
+#-    Industrie (production) 
+#     forecast: -2.6 actual: -5.8 weight: 0.0191 impact: -0.06 
+#- 
+#-    Produzierendes Gewerbe (production) 
+#     forecast: -2.1 actual: -4.4 weight: 0.0246 impact: -0.06 
+#- 
+#-    Industrie (orders) 
+#     forecast:  0.6 actual: -0.8 weight: 0.0234 impact: -0.03 
 #- 
 ################################################################# 

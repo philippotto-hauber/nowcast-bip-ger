@@ -265,22 +265,55 @@
 ################################################################# 
 #---------------------------------------------------------------# 
 #- 
-#- On 2025-09-30, the nowcast for 2025Q3 was 0.26 percent. 
+#- On 2025-09-30, the nowcast for 2025Q3 was 0.27 percent. 
 #- 
 #- Previous nowcast was 0.38 percent. 
 #- 
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 #-    Expectations of the employment over the next 3 months (ESI) 
-#     forecast: -0.1 actual: -4.7 weight: 0.0100 impact: -0.05 
+#     forecast: -0.1 actual: -4.7 weight: 0.0096 impact: -0.04 
 #- 
 #-    Expectations of the prices over the next 3 months (ESI) 
-#     forecast:  0.1 actual: -5.3 weight: 0.0066 impact: -0.04 
+#     forecast:  0.1 actual: -5.3 weight: 0.0060 impact: -0.03 
 #- 
 #-    Production expectations for the months ahead (ESI) 
-#     forecast: -0.6 actual:  4.5 weight: 0.0059 impact: 0.03 
+#     forecast: -0.6 actual:  4.5 weight: 0.0061 impact: 0.03 
 #- 
 #-    PPI: industrielle Produkte (prices) 
-#     forecast:  0.3 actual: -0.5 weight: 0.0384 impact: -0.03 
+#     forecast:  0.3 actual: -0.5 weight: 0.0353 impact: -0.03 
+#- 
+#-    VPI: Dienstleistungen (prices) 
+#     forecast:  0.2 actual:  0.5 weight: 0.0782 impact: 0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-15, the nowcast for 2025Q3 was -0.35 percent. 
+#- 
+#- Previous nowcast was 0.27 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Industrie (production) 
+#     forecast: -1.8 actual: -5.8 weight: 0.0506 impact: -0.20 
+#- 
+#-    Produzierendes Gewerbe ohne Bau (production) 
+#     forecast: -1.6 actual: -5.4 weight: 0.0469 impact: -0.18 
+#- 
+#-    Produzierendes Gewerbe (production) 
+#     forecast: -1.6 actual: -4.4 weight: 0.0271 impact: -0.07 
+#- 
+#-    Konsumg�ter (turnover) 
+#     forecast: -1.3 actual: -2.7 weight: 0.0394 impact: -0.06 
+#- 
+#-    Investitionsg�ter (production) 
+#     forecast: -2.6 actual: -10.0 weight: 0.0060 impact: -0.04 
+#- 
+#-    Bauhauptgewerbe (production) 
+#     forecast: -4.1 actual: -1.3 weight: 0.0141 impact: 0.04 
+#- 
+#-    Verbrauchsg�ter (turnover) 
+#     forecast: -1.2 actual: -2.8 weight: 0.0201 impact: -0.03 
 #- 
 ################################################################# 

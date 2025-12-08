@@ -196,13 +196,34 @@
 ################################################################# 
 #---------------------------------------------------------------# 
 #- 
-#- On 2025-09-30, the nowcast for 2025Q3 was 0.22 percent. 
+#- On 2025-09-30, the nowcast for 2025Q3 was 0.21 percent. 
 #- 
 #- Previous nowcast was 0.30 percent. 
 #- 
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 #-    Expectations of the employment over the next 3 months (ESI) 
-#     forecast: -0.1 actual: -4.7 weight: 0.0067 impact: -0.03 
+#     forecast: -0.1 actual: -4.7 weight: 0.0066 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-15, the nowcast for 2025Q3 was -0.41 percent. 
+#- 
+#- Previous nowcast was 0.21 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Produzierendes Gewerbe ohne Bau (production) 
+#     forecast: -0.9 actual: -5.4 weight: 0.0262 impact: -0.12 
+#- 
+#-    Industrie (production) 
+#     forecast: -1.2 actual: -5.8 weight: 0.0234 impact: -0.11 
+#- 
+#-    Produzierendes Gewerbe (production) 
+#     forecast: -0.7 actual: -4.4 weight: 0.0244 impact: -0.09 
+#- 
+#-    Investitionsg�ter (production) 
+#     forecast: -1.5 actual: -10.0 weight: 0.0069 impact: -0.06 
 #- 
 ################################################################# 

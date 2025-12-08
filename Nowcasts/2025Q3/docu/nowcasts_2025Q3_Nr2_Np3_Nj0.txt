@@ -237,16 +237,31 @@
 #- 
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
-#-    PPI: industrielle Produkte (prices) 
-#     forecast:  0.3 actual: -0.5 weight: 0.0425 impact: -0.03 
-#- 
 #-    PPI: industrielle Produkte (ex Energie) (prices) 
-#     forecast:  0.2 actual: -0.2 weight: 0.0940 impact: -0.03 
+#     forecast:  0.2 actual: -0.2 weight: 0.0754 impact: -0.03 
 #- 
-#-    Expectations of the prices over the next 3 months (ESI) 
-#     forecast:  0.1 actual: -5.3 weight: 0.0049 impact: -0.03 
+#-    PPI: industrielle Produkte (prices) 
+#     forecast:  0.3 actual: -0.5 weight: 0.0335 impact: -0.03 
 #- 
-#-    Assessment of order-book levels (ESI) 
-#     forecast: -0.0 actual: -4.1 weight: 0.0062 impact: -0.03 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-15, the nowcast for 2025Q3 was -0.34 percent. 
+#- 
+#- Previous nowcast was 0.07 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Industrie (production) 
+#     forecast: -0.7 actual: -5.8 weight: 0.0162 impact: -0.08 
+#- 
+#-    Produzierendes Gewerbe ohne Bau (production) 
+#     forecast: -0.7 actual: -5.4 weight: 0.0171 impact: -0.08 
+#- 
+#-    Produzierendes Gewerbe (production) 
+#     forecast: -0.6 actual: -4.4 weight: 0.0180 impact: -0.07 
+#- 
+#-    Investitionsg�ter (production) 
+#     forecast: -1.1 actual: -10.0 weight: 0.0051 impact: -0.05 
 #- 
 ################################################################# 

@@ -141,10 +141,10 @@
 #     forecast: -0.5 actual:  4.5 weight: 0.0119 impact: 0.06 
 #- 
 #-    Expectations of the employment over the next 3 months (ESI) 
-#     forecast:  0.1 actual: -4.7 weight: 0.0118 impact: -0.06 
+#     forecast:  0.1 actual: -4.7 weight: 0.0117 impact: -0.06 
 #- 
 #-    Expectations of the prices over the next 3 months (ESI) 
-#     forecast: -0.4 actual: -5.3 weight: 0.0078 impact: -0.04 
+#     forecast: -0.4 actual: -5.3 weight: 0.0077 impact: -0.04 
 #- 
 #-    Assessment of order-book levels (ESI) 
 #     forecast:  0.4 actual: -4.1 weight: 0.0084 impact: -0.04 
@@ -153,13 +153,13 @@
 #     forecast:  0.2 actual: -4.7 weight: 0.0061 impact: -0.03 
 #- 
 #-    Assessment of stocks of finished products (ESI) 
-#     forecast: -0.0 actual:  2.0 weight: -0.0145 impact: -0.03 
+#     forecast: -0.0 actual:  2.0 weight: -0.0144 impact: -0.03 
 #- 
 #-    Production trend observed in recent months (ESI) 
 #     forecast: -6.8 actual: -11.5 weight: 0.0060 impact: -0.03 
 #- 
 #-    Employment expectations for the months ahead (ESI) 
-#     forecast:  0.1 actual: -2.1 weight: 0.0127 impact: -0.03 
+#     forecast:  0.1 actual: -2.1 weight: 0.0126 impact: -0.03 
 #- 
 #-    Confidence Indicator (ESI) 
 #     forecast: -0.1 actual: -2.6 weight: 0.0108 impact: -0.03 
@@ -168,6 +168,27 @@
 #     forecast:  0.2 actual:  2.8 weight: 0.0100 impact: 0.03 
 #- 
 #-    Financial situation over next 12 months (ESI) 
-#     forecast:  0.2 actual:  2.1 weight: 0.0136 impact: 0.03 
+#     forecast:  0.2 actual:  2.1 weight: 0.0135 impact: 0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-15, the nowcast for 2025Q4 was -0.24 percent. 
+#- 
+#- Previous nowcast was -0.01 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Produzierendes Gewerbe ohne Bau (production) 
+#     forecast: -0.9 actual: -5.4 weight: 0.0118 impact: -0.05 
+#- 
+#-    Industrie (production) 
+#     forecast: -1.1 actual: -5.8 weight: 0.0107 impact: -0.05 
+#- 
+#-    Produzierendes Gewerbe (production) 
+#     forecast: -0.7 actual: -4.4 weight: 0.0115 impact: -0.04 
+#- 
+#-    Investitionsg�ter (production) 
+#     forecast: -1.5 actual: -10.0 weight: 0.0034 impact: -0.03 
 #- 
 ################################################################# 

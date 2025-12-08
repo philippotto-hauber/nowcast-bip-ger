@@ -303,31 +303,55 @@
 ################################################################# 
 #---------------------------------------------------------------# 
 #- 
-#- On 2025-09-30, the nowcast for 2025Q3 was -0.07 percent. 
+#- On 2025-09-30, the nowcast for 2025Q3 was -0.08 percent. 
 #- 
 #- Previous nowcast was 0.09 percent. 
 #- 
 #- Variables with an absolute impact larger than 0.02 were...
 #- 
 #-    Expectations of the employment over the next 3 months (ESI) 
-#     forecast:  0.7 actual: -4.7 weight: 0.0150 impact: -0.08 
-#- 
-#-    PPI: industrielle Produkte (prices) 
-#     forecast:  0.3 actual: -0.5 weight: 0.0544 impact: -0.04 
+#     forecast:  0.7 actual: -4.7 weight: 0.0149 impact: -0.08 
 #- 
 #-    Unemployment expectations over next 12 months (ESI) 
-#     forecast: -1.1 actual:  1.1 weight: -0.0189 impact: -0.04 
-#- 
-#-    Evolution of your current overall order books (ESI) 
-#     forecast:  0.0 actual: -4.7 weight: 0.0086 impact: -0.04 
+#     forecast: -1.1 actual:  1.1 weight: -0.0182 impact: -0.04 
 #- 
 #-    Expectations of the prices over the next 3 months (ESI) 
-#     forecast: -0.1 actual: -5.3 weight: 0.0073 impact: -0.04 
+#     forecast: -0.1 actual: -5.3 weight: 0.0070 impact: -0.04 
+#- 
+#-    Evolution of your current overall order books (ESI) 
+#     forecast:  0.0 actual: -4.7 weight: 0.0075 impact: -0.04 
+#- 
+#-    PPI: industrielle Produkte (prices) 
+#     forecast:  0.3 actual: -0.5 weight: 0.0433 impact: -0.04 
 #- 
 #-    Major purchases over next 12 months (ESI) 
-#     forecast:  0.0 actual:  2.8 weight: 0.0128 impact: 0.04 
+#     forecast:  0.0 actual:  2.8 weight: 0.0118 impact: 0.03 
 #- 
 #-    Confidence Indicator (ESI) 
-#     forecast:  0.8 actual: -2.6 weight: 0.0079 impact: -0.03 
+#     forecast:  0.8 actual: -2.6 weight: 0.0078 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-15, the nowcast for 2025Q3 was -0.43 percent. 
+#- 
+#- Previous nowcast was -0.08 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Produzierendes Gewerbe ohne Bau (production) 
+#     forecast: -2.3 actual: -5.4 weight: 0.0260 impact: -0.08 
+#- 
+#-    Investitionsg�ter (production) 
+#     forecast: -4.2 actual: -10.0 weight: 0.0118 impact: -0.07 
+#- 
+#-    Industrie (production) 
+#     forecast: -2.6 actual: -5.8 weight: 0.0178 impact: -0.06 
+#- 
+#-    Produzierendes Gewerbe (production) 
+#     forecast: -2.0 actual: -4.4 weight: 0.0240 impact: -0.06 
+#- 
+#-    Konsumg�ter (turnover) 
+#     forecast: -1.4 actual: -2.7 weight: 0.0326 impact: -0.04 
 #- 
 ################################################################# 

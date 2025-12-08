@@ -1,0 +1,106 @@
+################################################################# 
+################################################################# 
+####### MODEL SPECIFICATION ##################################### 
+####### Nr = 10 ##################################################
+####### Np = 1 ##################################################
+####### Nj = 0 ##################################################
+################################################################# 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-07-15, the nowcast for 2026Q1 was 0.24 percent. 
+#- 
+#- Previous nowcast was 0.23 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-07-30, the nowcast for 2026Q1 was 0.31 percent. 
+#- 
+#- Previous nowcast was 0.24 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-08-15, the nowcast for 2026Q1 was 0.33 percent. 
+#- 
+#- Previous nowcast was 0.31 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-08-30, the nowcast for 2026Q1 was 0.32 percent. 
+#- 
+#- Previous nowcast was 0.33 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-09-15, the nowcast for 2026Q1 was 0.32 percent. 
+#- 
+#- Previous nowcast was 0.32 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-09-30, the nowcast for 2026Q1 was 0.28 percent. 
+#- 
+#- Previous nowcast was 0.32 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-15, the nowcast for 2026Q1 was 0.28 percent. 
+#- 
+#- Previous nowcast was 0.28 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-30, the nowcast for 2026Q1 was 0.37 percent. 
+#- 
+#- Previous nowcast was 0.28 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    VPI: insgesamt (prices) 
+#     forecast:  0.1 actual:  0.3 weight: 0.1633 impact: 0.03 
+#- 
+#-    Financial situation over next 12 months (ESI) 
+#     forecast:  0.0 actual: -3.0 weight: -0.0084 impact: 0.03 
+#- 
+#-    VPI: insgesamt (ex Energie und Nahrungsmittel) (prices) 
+#     forecast:  0.1 actual:  0.4 weight: 0.0890 impact: 0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-11-15, the nowcast for 2026Q1 was 0.32 percent. 
+#- 
+#- Previous nowcast was 0.37 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+# ...none! 
+################################################################# 

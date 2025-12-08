@@ -311,7 +311,7 @@
 ################################################################# 
 #---------------------------------------------------------------# 
 #- 
-#- On 2025-09-30, the nowcast for 2025Q3 was -0.16 percent. 
+#- On 2025-09-30, the nowcast for 2025Q3 was -0.17 percent. 
 #- 
 #- Previous nowcast was -0.03 percent. 
 #- 
@@ -320,13 +320,37 @@
 #-    Expectations of the employment over the next 3 months (ESI) 
 #     forecast:  0.3 actual: -4.7 weight: 0.0084 impact: -0.04 
 #- 
-#-    PPI: industrielle Produkte (prices) 
-#     forecast:  0.4 actual: -0.5 weight: 0.0437 impact: -0.04 
-#- 
 #-    Production expectations for the months ahead (ESI) 
-#     forecast: -0.3 actual:  4.5 weight: 0.0074 impact: 0.04 
+#     forecast: -0.3 actual:  4.5 weight: 0.0075 impact: 0.04 
 #- 
-#-    Evolution of your current overall order books (ESI) 
-#     forecast:  0.1 actual: -4.7 weight: 0.0053 impact: -0.03 
+#-    PPI: industrielle Produkte (prices) 
+#     forecast:  0.4 actual: -0.5 weight: 0.0353 impact: -0.03 
+#- 
+################################################################# 
+#---------------------------------------------------------------# 
+#- 
+#- On 2025-10-15, the nowcast for 2025Q3 was -0.38 percent. 
+#- 
+#- Previous nowcast was -0.17 percent. 
+#- 
+#- Variables with an absolute impact larger than 0.02 were...
+#- 
+#-    Investitionsg�ter (turnover) 
+#     forecast: -2.9 actual: -0.1 weight: 0.0403 impact: 0.11 
+#- 
+#-    Industrie (turnover) 
+#     forecast: -1.9 actual: -0.6 weight: 0.0605 impact: 0.08 
+#- 
+#-    Bauhauptgewerbe (production) 
+#     forecast: -4.4 actual: -1.3 weight: 0.0142 impact: 0.04 
+#- 
+#-    Investitionsg�ter (production) 
+#     forecast: -2.6 actual: -10.0 weight: 0.0045 impact: -0.03 
+#- 
+#-    Konsumg�ter (turnover) 
+#     forecast: -1.2 actual: -2.7 weight: 0.0209 impact: -0.03 
+#- 
+#-    Produzierendes Gewerbe ohne Bau (production) 
+#     forecast: -1.6 actual: -5.4 weight: -0.0069 impact: 0.03 
 #- 
 ################################################################# 
