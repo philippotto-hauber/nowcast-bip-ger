@@ -7,7 +7,6 @@ dir_repo <- args[2]
 
 
 vintages <- list.files(path = paste0(dir_repo, "/aux_real_time_data/releases/umsatz_gastgewerbe/"), pattern = "umsatz-gastgewerbe-", full.names = TRUE)
-print(vintages)
 
 source("extract_date_from_filename.R")
 
