@@ -4,9 +4,9 @@
 
 This repo estimates mixed-frequency factor models to produce now- and forecasts[^1] of the growth in German gross domestic product (GDP). This class of models is commonly used in the literature (see [here](https://www.newyorkfed.org/research/staff_reports/sr830), [here](https://ideas.repec.org/a/eee/moneco/v55y2008i4p665-676.html), and [here](https://www.sciencedirect.com/science/article/abs/pii/S0169207008000393) for example). The main methodological difference is that I estimate several different specifications of factor models and combine their nowcasts by equally weighting the models' nowcasts (partly motivated by the results in [this paper](https://www.bundesbank.de/resource/blob/703462/5e9829f75a56c8087e83051012fb4d5d/mL/2009-02-17-dkp-03-data.pdf)).
 
-The models are estimated with real-time vintages that are compiled in this repo. These vintages exactly replicate the information set available to forecasters at a specific point in time and include a large cross-section of publicly available macroeconomic data covering the real economy (industrial production, turnover, orders), prices, financial and labor markets as well survey-based sentiment indicators. 
+The models are estimated with real-time vintages that exactly replicate the information set available to forecasters at a specific point in time and include a large cross-section of publicly available macroeconomic data covering the real economy (industrial production, turnover, orders), prices, financial and labor markets as well survey-based sentiment indicators. 
 
-Besides the now- and forecast the scripts also decompose revisions in the now- and forecast over time as new data are released following the approach in [Banbura and Modugno (2010)](https://www.ecb.europa.eu/pub/pdf/scpwps/ecbwp1189.pdf).
+Besides generating now- and forecast of GDP the scripts also decompose revisions in the now- and forecast over time as new data are released following the approach in [Banbura and Modugno (2010)](https://www.ecb.europa.eu/pub/pdf/scpwps/ecbwp1189.pdf).
 
 Once everything has been set up (see below for details), the scripts performing all the above steps can be run by executing the following batch script `run-nowcast.bat`.
 
@@ -20,7 +20,9 @@ Nowcast evolution (top) and news decomposition (bottom)
 
 ### Folder structure
 
-The folder `Echtzeitdatensatz` in this repo contains the raw data which is largely downloaed automatically as well as the real-time vintages that are needed to estimate the models and compute the nowcasts. The output is stored in the directory `Nowcasts`.
+The repo structure follows the logic that everything that has been created manually is put under version control (see suggestion **3c** [here](https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.1001745&type=printable)). As such, it contains the source code to generate real-time vintages and the now- and forecasts as well as a few auxiliary files that are needed to download the raw data and construct vintages. These are located in `aux_real_time_data`, see below for details. 
+
+The raw data, vintages and the model outputs are **not** stored in the repo as these can reproduced with the scripts and auxililary files when needed . The real-time vintages are stored in a local folder `DIR_ROOT/Echtzeitdatensatz` and the model output in `DIR_ROOT/Nowcasts` where `DIR_ROOT` needs to be specified in the batch script `run-nowcast.bat`. 
 
 ### Data
 
@@ -28,11 +30,7 @@ Most of the time series can be downloaded automatically. However, for a few seri
 
 #### ifo-index
 
-1. download latest release from the [ifo's website](https://www.ifo.de/umfrage/ifo-geschaeftsklima-deutschland). The file currently has the name format `gsk-d-YYYYMM.xlsx` where YYYY and MM are the year and month of the release
-
-2. rename the file to `ifo_current.xlsx`and place in `Echtzeitdatensatz\raw data\ifo` 
-
-3. update the release dates of the index in the file `release_dates_ifo.csv`
+The latest xlsx-file containing the ifo indices is downloaded automatically. However, the release dates of the index that are needed for the construction of the real-time vintages need to be updated manually in the file `aux_real_time_data/release_dates_ifo.csv`.
 
 #### Lkw-Maut-Index
 
@@ -44,7 +42,7 @@ All vintages that have been released since the last time the model was run have 
 
 3. rename the file as `lkw_index_YYYY-MM-DD.csv` where YYYY, MM and DD are the year, month and day of the release
 
-4. move the file to `Echtzeitdatensatz\raw data\lkw_maut_index\releases` 
+4. move the file to `aux_real_time_data/releases/lkw_maut` 
 
 #### Gastgewerbeumsatz
 
@@ -56,17 +54,11 @@ Downloading the vintages for the turnover in the hospitality sector is very simi
 
 3. rename the file as `umsatz-gastgewerbe-YYYY-MM-DD.csv` where YYYY, MM and DD are the year, month and day of the release
 
-4. move the file to `Echtzeitdatensatz\raw data\umsatz_gastgewerbe\releases` 
-
-5. update the file `release_dates.csv` by entering the date of the release and the latest data point in the format e.g. 2023M3 for March 2023 
+4. move the file to `aux_real_time_data\releases\umsatz_gastgewerbe` 
 
 #### ESI surveys
 
-The download of the ESI surveys is automated. However, the release dates need to be updated manually!
-
-1. go to the list of [ESI press releases](https://economy-finance.ec.europa.eu/economic-forecast-and-surveys/business-and-consumer-surveys/download-business-and-consumer-survey-data/press-releases_en)
-
-2. update the file `*\Echtzeitdatensatz\raw data\ESI BCI\releasedates_ESIBCI_csv.csv` by entering the date of the release and the latest data point in the format e.g. 2023M4 for April 2023 
+The download of the ESI surveys is automated. However, the release dates need to be updated manually! To this end, update the file `aux_real_time_data/releasedates_ESIBCI_csv.csv` by entering the date of the release and the latest data point in the format e.g. 2023M4 for April 2023 
 
 ### Configure the batch script
 
