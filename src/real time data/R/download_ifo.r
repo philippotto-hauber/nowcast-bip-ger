@@ -19,8 +19,8 @@ while (looking_for_file)
     url_data <- paste0(url_start, yy, "0", mm, url_end)
   else
     url_data <- paste0(url_start, yy, mm, url_end)
-  
-  if (class(try(download.file(url = url_data, destfile = file_dest, mode = "wb"))) == "try-error"){
+
+  if (httr::HEAD(url_data)$status_code == 403){
     # update yy and mm
     if (mm == 1)
     {
@@ -31,6 +31,7 @@ while (looking_for_file)
       mm = mm - 1
     }
   } else {
+    download.file(url = url_data, destfile = file_dest, mode = "wb")
     print(paste0("Done downloading ", url_data, " to ", file_dest, "!"))
     looking_for_file <- FALSE
   }
