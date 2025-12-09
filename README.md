@@ -44,6 +44,8 @@ All vintages that have been released since the last time the model was run have 
 
 4. move the file to `aux_real_time_data/releases/lkw_maut` 
 
+Note that the file `aux_real_time_data/vintages_destatis_2019M12020M8.Rda` contains earlier historic vintages of the truck toll mileage index. Unfortunately, I do not remember how I came across these vintages. Perhaps they were provided by Destatis. When constructing the vintages, the file is merged with the manually downloaded releases. These earlier vintages are only needed when the models' performance in that period is evaluated. 
+
 #### Gastgewerbeumsatz
 
 Downloading the vintages for the turnover in the hospitality sector is very similar to those for the Lkw-Maut-Index
@@ -61,6 +63,8 @@ Downloading the vintages for the turnover in the hospitality sector is very simi
 The download of the ESI surveys is automated. However, the release dates need to be updated manually! To this end, update the file `aux_real_time_data/releasedates_ESIBCI_csv.csv` by entering the date of the release and the latest data point in the format e.g. 2023M4 for April 2023 
 
 ### Configure the batch script
+
+With `DIR_ROOT` set to the desired directory where the subdirectories `Echtzeitdatensatz` and `Nowcasts` that will contain the raw data and vintages as well as the model output, respectively, the entire folder structure will be implemented automatically and requires no further action! 
 
 ### Choose vintages
 
@@ -135,6 +139,11 @@ ERROR: MATLAB error Exit Status: 0x00000001
 
 - To produce sensible results, the news decomposition assumes that for any time series no more than one observation is released at once. This is usually the case except when data errors lead to two or more new observations. The model then doesn't generate an error but the news decomposition produces awkward results. To avoid this, prior to actually estimating the model and generating the nowcasts and news decomposition, the code checks if this pattern is observed for any of the series and then removes them. The variables in question are stored in `list_remove_vars.txt` in the results folder of the quarter that you are nowcasting. 
 
+### To-Dos
+
+- dashboards to visualize vintages and now- or forecasts
+- (expenditure-side) bottom-up predicitons of GDP
+- `renv` the repo! 
 
 [^1]: The terms nowcast and forecast are largely used interchangeably in this description.
 
