@@ -113,12 +113,12 @@ if options.Nq_flow>0
         idios = Yestim - Xestim*lambdaQ_flow(i,:)';
         if options.Nj > 0
             y = idios(options.Nj+1:end,:);
-            X = [];
+            X_idios = [];
             for j = 1 : options.Nj
-                X = [X idios(options.Nj+1-j:end-j,:)];
+                X_idios = [X_idios idios(options.Nj+1-j:end-j,:)];
             end
-            rhoQ_flow( i , : ) = inv(X'*X)*X'*y;
-            resids = y - X * rhoQ_flow( i , :)';
+            rhoQ_flow( i , : ) = inv(X_idios'*X_idios)*X_idios'*y;
+            resids = y - X_idios * rhoQ_flow( i , :)';
             SigQ_flow(i,1) = var(resids);
         else
             SigQ_flow(i,1) = (3/sqrt(19))^2 * idios'*idios/length(idios);
