@@ -1,7 +1,7 @@
 args <- commandArgs(trailingOnly = TRUE)
 dir_main <- args[length(args)]
-dir_main <- "C:/Users/Hauber-P/Documents/dev/Echtzeitdatensatz/raw data"
-
+# for debugging
+# dir_main <- "C:/Users/Hauber-P/Documents/dev/Echtzeitdatensatz/raw data"
 subdirs <- c("labor market", "national accounts", "orders", "prices", "production", "turnover")
 
 for (s in subdirs){
@@ -29,9 +29,9 @@ for (s in subdirs){
     num <- dat[, 2:ncol(dat)]
     vintages <-colnames(dat)[2:ncol(dat)]
 
-    write.csv(t(dates), paste0(substr(f, 1, nchar(f)- 4), "_dates.csv"), row.names = FALSE, col.names = FALSE)
-    write.csv(num, paste0(substr(f, 1, nchar(f)- 4), "_num.csv"), row.names = FALSE)
-    write.csv(t(vintages), paste0(substr(f, 1, nchar(f)- 4), "_vintages.csv"), row.names = FALSE, col.names = FALSE)
+    write.table(t(dates), paste0(substr(f, 1, nchar(f)- 4), "_dates.csv"), row.names = FALSE, col.names = FALSE, sep = ",")
+    write.table(num, paste0(substr(f, 1, nchar(f)- 4), "_num.csv"), row.names = FALSE, col.names = FALSE, na = "NaN")
+    write.table(t(vintages), paste0(substr(f, 1, nchar(f)- 4), "_vintages.csv"), row.names = FALSE, col.names = FALSE, sep = ",")
 
     print(paste0("Done post-processing file ", f, "!"))
   }
