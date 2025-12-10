@@ -26,13 +26,13 @@ for n = 1 : length(data_BuBaRTD.names)
     
     % load data, dates and vintages
     dir_tmp = [ dir_rawdata '\BuBa RTD\' data_BuBaRTD.groups{n} '\' data_BuBaRTD.seriesnames{n}];
-    num = readtable([ dir_tmp '_num.csv']);
-    dates = readmatrix([ dir_tmp '_dates.csv'], 'OutputType','string');
-    firstdate = year(dates(1)) + month(dates(1)) / 12 ;  
+    num = readmatrix([ dir_tmp '_num.csv']);
+    dates_tmp = readmatrix([ dir_tmp '_dates.csv'], 'OutputType','string');
+    firstdate = year(dates_tmp(1)) + month(dates_tmp(1)) / 12 ;  
     tempvintages =  readmatrix([ dir_tmp '_vintages.csv'], 'OutputType','string');
     datavintages_num = datenum(tempvintages) ; 
 
-    clearvars dates tempvintages
+    clearvars dates_tmp tempvintages
  
     % get column index corresponding to latest available vintage
     index_col = sum(datavintages_num <= datenum(vintage)) ; 
