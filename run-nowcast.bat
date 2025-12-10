@@ -4,7 +4,7 @@ SET /p YEAR="Year: "
 SET /p QUARTER="Quarter: "
 
 SET DIR_REPO=%CD%
-SET DIR_ROOT="C:\Users\Hauber-P\Documents"
+SET DIR_ROOT="C:\Users\Hauber-P\Documents\dev"
 SET DIR_REALTIMEDATA=%DIR_ROOT%\Echtzeitdatensatz
 
 SET /A switch_download_data = 1
