@@ -1,4 +1,4 @@
-function  f_docu(nowcast_new,vintages,details,options,savename,flag_ewpool,threshold,dirname)
+function  f_docu(nowcast_new,vintages,details,Nr, Np, Nj,savename,flag_ewpool,threshold,dirname)
 
 fid=fopen([dirname '\docu\' savename '.txt'],'w');
 temp = '#################################################################';
@@ -10,9 +10,9 @@ if flag_ewpool == 1
     temp = '####### equal-weight pool #######################################' ;
     fprintf(fid,'%s \r\n',temp);
 else
-    fprintf(fid,'####### Nr = %d ##################################################\r\n',options.Nr);
-    fprintf(fid,'####### Np = %d ##################################################\r\n',options.Np);
-    fprintf(fid,'####### Nj = %d ##################################################\r\n',options.Nj);
+    fprintf(fid,'####### Nr = %d ##################################################\r\n',Nr);
+    fprintf(fid,'####### Np = %d ##################################################\r\n',Np);
+    fprintf(fid,'####### Nj = %d ##################################################\r\n',Nj);
 end
 temp = '#################################################################';
 fprintf(fid,'%s \r\n',temp);

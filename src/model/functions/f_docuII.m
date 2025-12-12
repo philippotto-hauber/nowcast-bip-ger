@@ -1,4 +1,4 @@
-function  f_docuII(nowcast_new,vintages,details,options,savenamemaster,flag_ewpool,dirname)
+function  f_docuII(nowcast_new,vintages,details,Nr,Np,Nj,savenamemaster,flag_ewpool,dirname)
 
 
 for v = 2 : size(nowcast_new,2) 
@@ -13,9 +13,9 @@ for v = 2 : size(nowcast_new,2)
         temp = '####### equal-weight pool #######################################' ;
         fprintf(fid,'%s \r\n',temp);
     else
-        fprintf(fid,'####### Nr = %d ##################################################\r\n',options.Nr);
-        fprintf(fid,'####### Np = %d ##################################################\r\n',options.Np);
-        fprintf(fid,'####### Nj = %d ##################################################\r\n',options.Nj);
+        fprintf(fid,'####### Nr = %d ##################################################\r\n',Nr);
+        fprintf(fid,'####### Np = %d ##################################################\r\n',Np);
+        fprintf(fid,'####### Nj = %d ##################################################\r\n',Nj);
     end
     temp = '#################################################################';
     fprintf(fid,'%s \r\n',temp);
