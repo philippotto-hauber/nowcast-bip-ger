@@ -1,4 +1,4 @@
-function [impact_by_group, impacts_restand, actuals_restand, forecasts_restand, weights_restand, varnames] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options)
+function [impact_by_group, impacts_restand, actuals_restand, forecasts_restand, weights_restand, varnames] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options, index_target, std_target)
 % this function computes the news in a different way!
 % First, given the unrevised data and new observations, compute the news. 
 % Then, run the Kalman smoother on the new data to 
@@ -53,7 +53,7 @@ for j = 1 : length(js)
         end
         covarPtT = covarPtT * (eye(options.Ns) - ks_output_old.N(:,:,tjs(j)) * ks_output_old.P(:,:,tjs(j))) ; 
 
-        E_ykI(j) =  Z(options.index_gdp,:) * covarPtT  * Z(js(j),1:options.Ns)' ;
+        E_ykI(j) =  Z(index_target,:) * covarPtT  * Z(js(j),1:options.Ns)' ;
     else
         covarPtT = ks_output_old.P(:,:,tjs(j)) ;
         for t = tjs(j):tks-1
@@ -61,14 +61,14 @@ for j = 1 : length(js)
         end
         covarPtT = covarPtT * (eye(options.Ns) - ks_output_old.N(:,:,tks) * ks_output_old.P(:,:,tks)) ; 
 
-        E_ykI(j) = Z(options.index_gdp,:) * covarPtT'  * Z(js(j),:)' ;
+        E_ykI(j) = Z(index_target,:) * covarPtT'  * Z(js(j),:)' ;
     end
 end
 
 % weights and impact
 weights =  E_ykI/E_II ;
 impacts =  (weights' .* news) ; 
-impacts_restand = options.stdgdp * impacts ; 
+impacts_restand = std_target * impacts ; 
 
 % ----------------------------------------------------------------------- %
 % - store names and also re-standardize actuals, forecasts & weights ---- %
@@ -77,7 +77,7 @@ for j = 1 : length(js)
     varnames{j,1} = [options.names{js(j)} ' (' options.groups{js(j)} ')'] ; 
     actuals_restand(j,1) = actuals(j)*options.stds(js(j)) + options.means(js(j)) ;
     forecasts_restand(j,1) = forecasts(j)*options.stds(js(j)) + options.means(js(j)) ;
-    weights_restand(j,1) = weights(j) * options.stds(options.index_gdp)/options.stds(js(j)) ; 
+    weights_restand(j,1) = weights(j) * options.stds(index_target)/options.stds(js(j)) ; 
 end
 
 
