@@ -137,6 +137,10 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                 options.Nr = Nr ; 
                 options.Np = Np ; 
                 options.Nj = Nj ; 
+
+                results.Nr{modcounter} = Nr;
+                results.Np{modcounter} = Np;
+                results.Nj{modcounter} = Nj;
                 
                 % ----------------- %
                 % - load params --- %
@@ -153,6 +157,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                 % - calculate some more options --- %
                 
                 [options.index_gdp, options.meangdp, options.stdgdp] = get_index_mean_std(options, 'gross domestic product');
+                results.groupnames = unique(options.groups);
                 options.groupnames = unique(options.groups);
                 options.Nm = size(dataM,1) ;
                 options.Nq = size(dataQ,1) ; 
@@ -172,13 +177,13 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                 P0 = 10 * eye(size(T,1)) ; 
                 ks_output_old = f_KalmanSmootherDK(data,T,Z,H,R,Q,s0,P0) ;
 
-                results.nowcast.new(1,1,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_old.stT(:,options.index_nowcast) ) + options.meangdp ; 
-                results.forecast.new(1,1,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_old.stT(:,options.index_forecast) ) + options.meangdp ;
+                % results.nowcast.new(1,1,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_old.stT(:,options.index_nowcast) ) + options.meangdp ; 
+                % results.forecast.new(1,1,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_old.stT(:,options.index_forecast) ) + options.meangdp ;
 
                 for n = 1:length(names_news_decomp)
                     [i, m, std] = get_index_mean_std(options, names_news_decomp{n}) ;
-                    results_test.nowcast.(mnemonic_news_decomp{n}).new(1,1,modcounter) = std * ( Z(i,:) * ks_output_old.stT(:,options.index_nowcast) ) + m ; 
-                    results_test.forecast.(mnemonic_news_decomp{n}).new(1,1,modcounter) = std * ( Z(i,:) * ks_output_old.stT(:,options.index_forecast) ) + m ;
+                    results.nowcast.(mnemonic_news_decomp{n}).new(1,1,modcounter) = std * ( Z(i,:) * ks_output_old.stT(:,options.index_nowcast) ) + m ; 
+                    results.forecast.(mnemonic_news_decomp{n}).new(1,1,modcounter) = std * ( Z(i,:) * ks_output_old.stT(:,options.index_forecast) ) + m ;
                 end
 
                 % rename data as old
@@ -205,12 +210,12 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                     ks_output_new = f_KalmanSmootherDK(data_new,T,Z,H,R,Q,s0,P0) ;
                     for n = 1:length(names_news_decomp)
                         [i, m, std] = get_index_mean_std(options, names_news_decomp{n}) ;
-                        results_test.nowcast.(mnemonic_news_decomp{n}).new(1,v,modcounter) = std * ( Z(i,:) * ks_output_new.stT(:,options.index_nowcast) ) + m ; 
-                        results_test.forecast.(mnemonic_news_decomp{n}).new(1,v,modcounter) = std * ( Z(i,:) * ks_output_new.stT(:,options.index_forecast) ) + m ;
+                        results.nowcast.(mnemonic_news_decomp{n}).new(1,v,modcounter) = std * ( Z(i,:) * ks_output_new.stT(:,options.index_nowcast) ) + m ; 
+                        results.forecast.(mnemonic_news_decomp{n}).new(1,v,modcounter) = std * ( Z(i,:) * ks_output_new.stT(:,options.index_forecast) ) + m ;
                     end
 
-                    results.nowcast.new(1,v,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_new.stT(:,options.index_nowcast == 1) ) + options.meangdp ;
-                    results.forecast.new(1,v,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_new.stT(:,options.index_forecast == 1) ) + options.meangdp ;
+                    % results.nowcast.new(1,v,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_new.stT(:,options.index_nowcast == 1) ) + options.meangdp ;
+                    % results.forecast.new(1,v,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_new.stT(:,options.index_forecast == 1) ) + options.meangdp ;
                     
                     % calculate monthly m/m and 3m/3m GDP change
                     gdp_mm = Z( options.index_gdp , 1:options.Nr+1 ) * ks_output_new.stT(1:options.Nr+1,:);
@@ -223,19 +228,23 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                     foldername = [dir_nowcast '\monthlyGDP\' vintages{v}] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
                     dates_converted = f_convertdates(options.dates); 
                     gdp_realizations = options.stdgdp * data_new(options.index_gdp, :) + options.meangdp; 
-                    save([dir_nowcast '\monthlyGDP\' vintages{v} '\monthlyGDP_Nr' num2str(options.Nr) '_Np' num2str(options.Np) '_Nj' num2str(options.Nj) '.mat'], 'gdp_mm', 'gdp_3m3m', 'dates_converted', 'gdp_realizations', 'mean_gdp', 'std_gdp');
-                    
+                    results.monthly_gdp.gdp_mm{:, v, modcounter} = gdp_mm;
+                    results.monthly_gdp.gdp_3m3m{:, v, modcounter} = gdp_3m3m;
+                    results.monthly_gdp.dates{:, v} = dates_converted;
+                    results.monthly_gdp.gdp_realizations{:, v} = gdp_realizations;
+                    results.monhtly_gdp.mean_gdp{v, 1} = mean_gdp;
+                    results.monhtly_gdp.std_gdp{v, 1} = std_gdp;        
                     
                     % calculate forecasts for specific monthly variables
-                    if v == Nvintages
-                        for i = 1:length(names_export)
-                            ind = find(strcmp(options.names, names_export{i}) & strcmp(options.groups, groups_export{i}));
-                            out.dat = options.stds(ind)* data_new(ind, :) + options.means(ind);
-                            out.xi = options.stds(ind)* (Z(ind,:) * ks_output_new.stT) + options.means(ind);
-                            save([dir_nowcast '\non gdp forecasts\' mnemonic_export{i} '_fore_model_' num2str(modcounter), '_v_' results.vintages{v}, '.mat'], 'out'); 
-                        end
-                        save([dir_nowcast '\non gdp forecasts\dates.mat'], 'dates_converted'); 
-                    end
+                    % if v == Nvintages
+                    %     for i = 1:length(names_export)
+                    %         ind = find(strcmp(options.names, names_export{i}) & strcmp(options.groups, groups_export{i}));
+                    %         out.dat = options.stds(ind)* data_new(ind, :) + options.means(ind);
+                    %         out.xi = options.stds(ind)* (Z(ind,:) * ks_output_new.stT) + options.means(ind);
+                    %         save([dir_nowcast '\non gdp forecasts\' mnemonic_export{i} '_fore_model_' num2str(modcounter), '_v_' results.vintages{v}, '.mat'], 'out'); 
+                    %     end
+                    %     save([dir_nowcast '\non gdp forecasts\dates.mat'], 'dates_converted'); 
+                    % end
                     
                     % ----------------------------- %
                     % - index of new obs ---------- %                    
@@ -257,50 +266,50 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                     % nowcast
                     tks = find(options.index_nowcast == 1) ;    
                     
-                    [results.nowcast.impact_by_group(:,v,modcounter), ...
-                     results.nowcast.details(v,modcounter).impacts, ...
-                     results.nowcast.details(v,modcounter).actuals, ...
-                     results.nowcast.details(v,modcounter).forecasts, ...
-                     results.nowcast.details(v,modcounter).weights, ...
-                     results.nowcast.details(v,modcounter).varnames ] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options, options.index_gdp, options.stdgdp) ;
+                    % [results.nowcast.impact_by_group(:,v,modcounter), ...
+                    %  results.nowcast.details(v,modcounter).impacts, ...
+                    %  results.nowcast.details(v,modcounter).actuals, ...
+                    %  results.nowcast.details(v,modcounter).forecasts, ...
+                    %  results.nowcast.details(v,modcounter).weights, ...
+                    %  results.nowcast.details(v,modcounter).varnames ] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options, options.index_gdp, options.stdgdp) ;
                     
                     for n = 1 : length(names_news_decomp)
                         [i, m, std] = get_index_mean_std(options, names_news_decomp{n}) ;
-                        [results_test.nowcast.(mnemonic_news_decomp{n}).impact_by_group(:,v,modcounter), ...
-                            results_test.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).impacts, ...
-                            results_test.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).actuals, ...
-                            results_test.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).forecasts, ...
-                            results_test.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).weights, ...
-                            results_test.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).varnames ] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options, i, std) ;
+                        [results.nowcast.(mnemonic_news_decomp{n}).impact_by_group(:,v,modcounter), ...
+                            results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).impacts, ...
+                            results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).actuals, ...
+                            results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).forecasts, ...
+                            results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).weights, ...
+                            results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).varnames ] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options, i, std) ;
                     end
 
 
                     % forecast
-                    tks = find(options.index_forecast == 1) ; 
-                    [results.forecast.impact_by_group(:,v,modcounter), ...
-                     results.forecast.details(v,modcounter).impacts, ...
-                     results.forecast.details(v,modcounter).actuals, ...
-                     results.forecast.details(v,modcounter).forecasts, ...
-                     results.forecast.details(v,modcounter).weights, ...
-                     results.forecast.details(v,modcounter).varnames ] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options,options.index_gdp, options.stdgdp) ;
+                    % tks = find(options.index_forecast == 1) ; 
+                    % [results.forecast.impact_by_group(:,v,modcounter), ...
+                    %  results.forecast.details(v,modcounter).impacts, ...
+                    %  results.forecast.details(v,modcounter).actuals, ...
+                    %  results.forecast.details(v,modcounter).forecasts, ...
+                    %  results.forecast.details(v,modcounter).weights, ...
+                    %  results.forecast.details(v,modcounter).varnames ] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options,options.index_gdp, options.stdgdp) ;
                     
                     for n = 1 : length(names_news_decomp)
                         [i, m, std] = get_index_mean_std(options, names_news_decomp{n}) ;
-                        [results_test.forecast.(mnemonic_news_decomp{n}).impact_by_group(:,v,modcounter), ...
-                            results_test.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).impacts, ...
-                            results_test.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).actuals, ...
-                            results_test.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).forecasts, ...
-                            results_test.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).weights, ...
-                            results_test.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).varnames ] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options, i, std) ;
+                        [results.forecast.(mnemonic_news_decomp{n}).impact_by_group(:,v,modcounter), ...
+                            results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).impacts, ...
+                            results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).actuals, ...
+                            results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).forecasts, ...
+                            results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).weights, ...
+                            results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).varnames ] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options, i, std) ;
                     end
                  
                     % compute nowcast due to data revisions
-                    results.nowcast.revised_data(1,v,modcounter) = results.nowcast.new(1,v,modcounter) - sum(results.nowcast.impact_by_group( : , v , modcounter ) ) ; 
-                    results.forecast.revised_data(1,v,modcounter) = results.forecast.new(1,v,modcounter) - sum(results.forecast.impact_by_group( : , v , modcounter ) ) ;
+                    % results.nowcast.revised_data(1,v,modcounter) = results.nowcast.new(1,v,modcounter) - sum(results.nowcast.impact_by_group( : , v , modcounter ) ) ; 
+                    % results.forecast.revised_data(1,v,modcounter) = results.forecast.new(1,v,modcounter) - sum(results.forecast.impact_by_group( : , v , modcounter ) ) ;
                     
                     for n = 1 : length(names_news_decomp)
-                        results_test.nowcast.(mnemonic_news_decomp{n}).revised_data(1,v,modcounter) = results_test.nowcast.(mnemonic_news_decomp{n}).new(1,v,modcounter) - sum(results_test.nowcast.(mnemonic_news_decomp{n}).impact_by_group( : , v , modcounter ) ) ; 
-                        results_test.forecast.(mnemonic_news_decomp{n}).revised_data(1,v,modcounter) = results_test.forecast.(mnemonic_news_decomp{n}).new(1,v,modcounter) - sum(results_test.forecast.(mnemonic_news_decomp{n}).impact_by_group( : , v , modcounter ) ) ; 
+                        results.nowcast.(mnemonic_news_decomp{n}).revised_data(1,v,modcounter) = results.nowcast.(mnemonic_news_decomp{n}).new(1,v,modcounter) - sum(results.nowcast.(mnemonic_news_decomp{n}).impact_by_group( : , v , modcounter ) ) ; 
+                        results.forecast.(mnemonic_news_decomp{n}).revised_data(1,v,modcounter) = results.forecast.(mnemonic_news_decomp{n}).new(1,v,modcounter) - sum(results.forecast.(mnemonic_news_decomp{n}).impact_by_group( : , v , modcounter ) ) ; 
                     end
 
                     % ------------------------------------------------ %
@@ -309,97 +318,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                     data_old = data_new ; 
                 end
    
-                % --------------------------------------------------------------- %
-                % - plot nowcast & forecast evolution for current model --------- %
-                
-                if options.dates(options.index_nowcast) == floor(options.dates(options.index_nowcast)) % Q4
-                    str_nowcast = [ num2str(floor(options.dates(options.index_nowcast)) - 1 ) 'Q4' ] ; 
-                else 
-                    str_nowcast = [ num2str(floor(options.dates(options.index_nowcast))) 'Q' num2str((options.dates(options.index_nowcast) - floor(options.dates(options.index_nowcast)))*12/3) ] ; 
-                end
-                
-                titlename = ['nowcasts '  str_nowcast ' (Nr = ' num2str(options.Nr) ', Np = ' num2str(options.Np) ', Nj = ' num2str(options.Nj) ')'] ;
-                savename = ['nowcasts_' str_nowcast '_Nr' num2str(options.Nr) '_Np' num2str(options.Np) '_Nj' num2str(options.Nj)] ;
-                f_graphnowcastevolve(squeeze(results.nowcast.new(1,:,modcounter)),...
-                                     squeeze(results.nowcast.impact_by_group(:,:,modcounter)),...
-                                     [0 (squeeze(results.nowcast.revised_data(1,2:end,modcounter)) - squeeze(results.nowcast.new(1,1:end-1,modcounter)) ) ],...
-                                     titlename,results.vintages,options.groupnames) ;
-                if switch_savegraphs == 1
-                    print([dir_nowcast '\graphs\' savename],'-dpdf','-fillpage')
-                end
-                close            
-                
-                if options.dates(options.index_forecast) == floor(options.dates(options.index_forecast)) % Q4
-                    str_forecast = [ num2str(floor(options.dates(options.index_forecast)) - 1 ) 'Q4' ] ; 
-                else 
-                    str_forecast = [ num2str(floor(options.dates(options.index_forecast))) 'Q' num2str((options.dates(options.index_forecast) - floor(options.dates(options.index_forecast)))*12/3) ] ; 
-                end
-                
-                titlename = ['nowcasts ' str_forecast ' (Nr = ' num2str(options.Nr) ', Np = ' num2str(options.Np) ', Nj = ' num2str(options.Nj) ')'] ;
-                savename = ['nowcasts_' str_forecast '_Nr' num2str(options.Nr) '_Np' num2str(options.Np) '_Nj' num2str(options.Nj)] ;
-                f_graphnowcastevolve(squeeze(results.forecast.new(1,:,modcounter)),...
-                                     squeeze(results.forecast.impact_by_group(:,:,modcounter)),...
-                                     [0 (squeeze(results.forecast.revised_data(1,2:end,modcounter)) - squeeze(results.forecast.new(1,1:end-1,modcounter)) ) ],...
-                                     titlename,results.vintages,options.groupnames) ;
-                if switch_savegraphs == 1
-                    print([dir_nowcast '\graphs\' savename],'-dpdf','-fillpage') 
-                end
-                close
-                
-                % --------------------------------------------------------------- %
-                % - assemble forecast revision docu and store as txt-file ------- %
-                
-                if switch_savedocus == 1
-                    flag_ewpool = 0 ; 
-                    threshold = 0.02 ; 
-                    % nowcasts
-                    savename = ['nowcasts_' str_nowcast '_Nr' num2str(options.Nr) '_Np' num2str(options.Np) '_Nj' num2str(options.Nj)] ;
-                    f_docu(squeeze(results.nowcast.new(1,:,modcounter)), ...
-                           results.vintages, ...
-                           results.nowcast.details(:,modcounter), ...
-                           options, ...
-                           savename, ...
-                           flag_ewpool, ...
-                           threshold,...
-                           dir_nowcast) ;               
-    
-                    % forecasts
-                    savename = ['nowcasts_' str_forecast '_Nr' num2str(options.Nr) '_Np' num2str(options.Np) '_Nj' num2str(options.Nj)] ;
-                    f_docu(squeeze(results.forecast.new(1,:,modcounter)), ...
-                           results.vintages, ...
-                           results.forecast.details(:,modcounter), ...
-                           options, ...
-                           savename, ...
-                           flag_ewpool, ...
-                           threshold, ...
-                           dir_nowcast) ; 
-                end
-                
-                % ----------------------------------------- %
-                % - export tables to xls ------------------ %
-    
-                if switch_savetables == 1    
-                    %varnames = {'Prognose', options.groupnames{:}, 'Revision'};
-                    % nowcast
-                    savename =  ['nowcasts_' str_nowcast '_Nr' num2str(options.Nr) '_Np' num2str(options.Np) '_Nj' num2str(options.Nj)] ;
-                    f_table(results.nowcast.new( 1 , : , modcounter ), ...
-                        [0 results.nowcast.revised_data(1,2:end,modcounter) - results.nowcast.new(1,1:end-1,modcounter)] , ...
-                        results.nowcast.impact_by_group( : , : , modcounter ), ...
-                        results.vintages, ...
-                        savename, ...
-                        options.groupnames, ...
-                        dir_nowcast)
-    
-                    % forecast
-                    savename =  ['nowcasts_' str_forecast '_Nr' num2str(options.Nr) '_Np' num2str(options.Np) '_Nj' num2str(options.Nj)] ;
-                    f_table(results.forecast.new( 1 , : , modcounter ), ...
-                        [0 results.forecast.revised_data(1,2:end,modcounter) - results.forecast.new(1,1:end-1,modcounter)],...
-                        mean(results.forecast.impact_by_group,3), ...
-                        results.vintages, ...
-                        savename, ...
-                        options.groupnames,...
-                        dir_nowcast)
-                end
+
                 
                 % --------------------------------------------------------------- %
                 % - update model counter ---------------------------------------- %
@@ -410,165 +329,33 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
         end
     end
 
-    save([dir_nowcast '\output_mat\' 'results_test.mat'], 'results_test')
     save([dir_nowcast '\output_mat\' 'results.mat'], 'results')
-    
-    % ------------------------------------------------------------------- %
-    % - plot nowcast & forecast evolution for equal-weigth pool --------- %
-    
-    titlename = ['nowcasts ' str_nowcast ' (equal-weight pool)'] ;
-    savename = ['nowcasts_' str_nowcast '_equalweightpool'] ;
-    f_graphnowcastevolve(mean(results.nowcast.new(1,:,:),3),...
-                         mean(results.nowcast.impact_by_group(:,:,:),3),...
-                         [0 (mean(results.nowcast.revised_data(1,2:end,:),3) - mean(results.nowcast.new(1,1:end-1,:),3) ) ],...
-                         titlename,results.vintages,options.groupnames) ;
-    
-    if switch_savegraphs == 1
-        print([dir_nowcast '\graphs\' savename],'-dpdf','-fillpage') 
-    end
-    close
-    
-    titlename = ['nowcasts ' str_forecast ' (equal-weight pool)'] ;
-    savename = ['nowcasts_' str_forecast '_equalweightpool'] ;
-    f_graphnowcastevolve(mean(results.forecast.new(1,:,:),3),...
-                         mean(results.forecast.impact_by_group(:,:,:),3),...
-                         [0 (mean(results.forecast.revised_data(1,2:end,:),3) - mean(results.forecast.new(1,1:end-1,:),3) ) ],...
-                         titlename,results.vintages,options.groupnames) ;
-    
-    if switch_savegraphs == 1
-        print([dir_nowcast '\graphs\' savename],'-dpdf','-fillpage') 
-    end
-    close
-    
-    % ------------------------------------------------------------------- %
-    % - plot fan charts ------------------------------------------------- %
-    
-    figure
-    fig = gcf;
-    fig.PaperOrientation = 'landscape';
-    subplot(2,1,1)
-    nametitle = [' fan chart, nowcasts ' str_nowcast] ;
-    f_plotfanchart(squeeze(results.nowcast.new(1,:,:)),nametitle,results.vintages)
-    subplot(2,1,2)
-    nametitle = [' fan chart, nowcasts ' str_forecast] ;
-    f_plotfanchart(squeeze(results.forecast.new(1,:,:)),nametitle,results.vintages)
-    
-    if switch_savegraphs == 1
-        print([dir_nowcast '\graphs\fancharts'],'-dpdf','-fillpage') 
-    end
-    close
-    
-    % --------------------------------------------------------------- %
-    % - assemble forecast revision docu and store as txt-file ------- %
-    
-    if switch_savedocus == 1
-        flag_ewpool = 1 ; 
-        threshold = 0.02 ; 
-        
-        % nowcasts
-        ew_pool_details = [] ;
-        
-        for v = 2 : Nvintages
-            temp_forecasts = [] ; 
-            temp_weights = [] ; 
-            temp_impacts = [] ; 
-            for m = 1 : Nmodels
-                temp_forecasts(:,m) = results.nowcast.details(v,m).forecasts ; 
-                temp_weights(:,m) = results.nowcast.details(v,m).weights ;
-                temp_impacts(:,m) = results.nowcast.details(v,m).impacts ;
-                if m == 1
-                    ew_pool_details(v,1).varnames = results.nowcast.details(v,m).varnames ; 
-                    ew_pool_details(v,1).actuals = results.nowcast.details(v,m).actuals ; 
-                end
-            end
-            ew_pool_details(v,1).forecasts = mean(temp_forecasts,2) ; 
-            ew_pool_details(v,1).weights = mean(temp_weights,2) ; 
-            ew_pool_details(v,1).impacts = mean(temp_impacts,2) ; 
-        end
-        
-        savename = ['nowcasts_' str_nowcast '_equalweightpool'] ;
-        f_docu(mean(results.nowcast.new(1,:,:),3), ...
-               results.vintages, ...
-               ew_pool_details, ...
-               options, ...
-               savename, ...
-               flag_ewpool, ...
-               threshold, ...
-               dir_nowcast) ; 
-           
-        f_docuII(mean(results.nowcast.new(1,:,:),3), ...
-                 results.vintages, ...
-                 ew_pool_details, ...
-                 options, ...
-                 savename, ...
-                 flag_ewpool, ...
-                 dir_nowcast)   
-    
-        % forecasts
-        ew_pool_details = [] ; 
-        
-        for v = 2 : Nvintages
-            temp_forecasts = [] ; 
-            temp_weights = [] ; 
-            temp_impacts = [] ; 
-            for m = 1 : Nmodels
-                temp_forecasts(:,m) = results.forecast.details(v,m).forecasts ; 
-                temp_weights(:,m) = results.forecast.details(v,m).weights ;
-                temp_impacts(:,m) = results.forecast.details(v,m).impacts ;
-                if m == 1
-                    ew_pool_details(v,1).varnames = results.forecast.details(v,m).varnames ; 
-                    ew_pool_details(v,1).actuals = results.forecast.details(v,m).actuals ; 
-                end
-            end
-            ew_pool_details(v,1).forecasts = mean(temp_forecasts,2) ; 
-            ew_pool_details(v,1).weights = mean(temp_weights,2) ; 
-            ew_pool_details(v,1).impacts = mean(temp_impacts,2) ; 
-        end
-        
-        savename = ['nowcasts_' str_forecast '_equalweightpool'] ;
-        f_docu(mean(results.forecast.new(1,:,:),3), ...
-               results.vintages, ...
-               ew_pool_details, ...
-               options, ...
-               savename, ...
-               flag_ewpool, ...
-               threshold,...
-               dir_nowcast) ; 
-           
-        f_docuII(mean(results.forecast.new(1,:,:),3), ...
-                 results.vintages, ...
-                 ew_pool_details, ...
-                 options, ...
-                 savename, ...
-                 flag_ewpool, ...
-                 dir_nowcast)   
-    end
-    
+
     % --------------------------------------------------------------- %
     % - export tables to xls ---------------------------------------- %
     
-    if switch_savetables == 1    
-        %varnames = {'Prognose', options.groupnames{:}, 'Revision'};
-        % nowcast
-        savename = ['nowcasts_' str_nowcast '_equalweightpool'] ;
-        f_table(mean(results.nowcast.new,3), ...
-            [0 mean(results.nowcast.revised_data(1,2:end,:),3) - mean(results.nowcast.new(1,1:end-1,:),3)] , ...
-            mean(results.nowcast.impact_by_group,3), ...
-            results.vintages, ...
-            savename, ...
-            options.groupnames, ...
-            dir_nowcast)
+    % if switch_savetables == 1    
+    %     %varnames = {'Prognose', options.groupnames{:}, 'Revision'};
+    %     % nowcast
+    %     savename = ['nowcasts_' str_nowcast '_equalweightpool'] ;
+    %     f_table(mean(results.nowcast.new,3), ...
+    %         [0 mean(results.nowcast.revised_data(1,2:end,:),3) - mean(results.nowcast.new(1,1:end-1,:),3)] , ...
+    %         mean(results.nowcast.impact_by_group,3), ...
+    %         results.vintages, ...
+    %         savename, ...
+    %         options.groupnames, ...
+    %         dir_nowcast)
         
-        % forecast
-        savename = ['nowcasts_' str_forecast '_equalweightpool'] ;
-        f_table(mean(results.forecast.new,3), ...
-            [0 mean(results.forecast.revised_data(1,2:end,:),3) - mean(results.forecast.new(1,1:end-1,:),3)],...
-            mean(results.forecast.impact_by_group,3), ...
-            results.vintages, ...
-            savename, ...
-            options.groupnames, ...
-            dir_nowcast)
-    end
+    %     % forecast
+    %     savename = ['nowcasts_' str_forecast '_equalweightpool'] ;
+    %     f_table(mean(results.forecast.new,3), ...
+    %         [0 mean(results.forecast.revised_data(1,2:end,:),3) - mean(results.forecast.new(1,1:end-1,:),3)],...
+    %         mean(results.forecast.impact_by_group,3), ...
+    %         results.vintages, ...
+    %         savename, ...
+    %         options.groupnames, ...
+    %         dir_nowcast)
+    % end
     disp('Done generating nowcasts!')
     out = [];
 end
