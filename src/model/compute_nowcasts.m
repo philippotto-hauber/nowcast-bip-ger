@@ -21,6 +21,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     % - make sure graphs and params folders exist --------------------------- %
     % ----------------------------------------------------------------------- %
     
+    foldername = [dir_nowcast '\output_mat'] ;if exist(foldername, 'dir') ~= 7;mkdir(foldername);end  
     foldername = [dir_nowcast '\graphs'] ;if exist(foldername, 'dir') ~= 7;mkdir(foldername);end  
     foldername = [dir_nowcast '\params'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
     foldername = [dir_nowcast '\docu'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
@@ -85,11 +86,18 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     names_export = {'Industrie', 'Industrie', 'lkw_maut', 'ifo_lage', 'ifo_erwartung'};
     groups_export = {'production', 'orders', 'production', 'ifo', 'ifo'};
     mnemonic_export = {'ip', 'ord', 'lkwm', 'ifoLage', 'ifoErw'};
+    names_news_decomp = {'gross domestic product', 'private consumption', 'gross fixed capital formation', 'exports'};
+    groups_news_decomp = {'national accounts', 'national accounts', 'national accounts', 'national accounts'};
+    mnemonic_news_decomp = {'Y', 'C', 'I', 'X'};
     
     if length(names_export) ~= length(groups_export) || length(names_export) ~= length(mnemonic_export)
-        error('names, groups and mnemonics vector must be of the same length!')
+        error('names, groups and mnemonics vector for non-gdp forecasts must be of the same length!')
     end
     
+    if length(names_news_decomp) ~= length(groups_news_decomp) || length(names_news_decomp) ~= length(mnemonic_news_decomp)
+        error('names and groups vectors for news decomp must be of the same length!')
+    end
+
     % ----------------------------------------------------------------------- %
     % - estimate models ----------------------------------------------------- %
     % ----------------------------------------------------------------------- %               
@@ -105,8 +113,8 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     % ----------------------------- %
     % - compute a few things ------ %  
     
-    Nmodels = length(Nrs) * length(Nps) * length(Njs) ; % # of models
-    modcounter = 1 ; % set model counter to 1 
+    Nmodels = length(Nrs) * length(Nps) * length(Njs) ;
+    modcounter = 1 ;
     
     
     % ------------------------------------------------------------ %
@@ -144,10 +152,8 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                 % --------------------------------- %
                 % - calculate some more options --- %
                 
-                options.index_gdp = strcmp(options.names,'gross domestic product') ; 
+                [options.index_gdp, options.meangdp, options.stdgdp] = get_index_mean_std(options, 'gross domestic product');
                 options.groupnames = unique(options.groups);
-                options.meangdp = options.means(options.index_gdp) ; % DO I NEED THIS?
-                options.stdgdp = options.stds(options.index_gdp) ; % DO I NEED THIS?
                 options.Nm = size(dataM,1) ;
                 options.Nq = size(dataQ,1) ; 
                 
@@ -165,17 +171,22 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                 s0 = zeros(size(T,1),1) ; 
                 P0 = 10 * eye(size(T,1)) ; 
                 ks_output_old = f_KalmanSmootherDK(data,T,Z,H,R,Q,s0,P0) ;
-                
+
                 results.nowcast.new(1,1,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_old.stT(:,options.index_nowcast) ) + options.meangdp ; 
                 results.forecast.new(1,1,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_old.stT(:,options.index_forecast) ) + options.meangdp ;
-                
-             
+
+                for n = 1:length(names_news_decomp)
+                    [i, m, std] = get_index_mean_std(options, names_news_decomp{n}) ;
+                    results_test.nowcast.(mnemonic_news_decomp{n}).new(1,1,modcounter) = std * ( Z(i,:) * ks_output_old.stT(:,options.index_nowcast) ) + m ; 
+                    results_test.forecast.(mnemonic_news_decomp{n}).new(1,1,modcounter) = std * ( Z(i,:) * ks_output_old.stT(:,options.index_forecast) ) + m ;
+                end
+
                 % rename data as old
                 data_old = data ; 
                 clearvars dataM dataQ data ; 
 			    
-			    % ------------------------------------------ %
-                % - now loop over 2:Nvintages -------------- %  
+			    % ------------------------------------------------- %
+                % - now loop over remaining vintages -------------- %  
                 
                 for v = 2 : Nvintages 
                 %for v = Nvintages  
@@ -192,6 +203,12 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                     % ----------------------------------- %
                     % - nowcast with new data ----------- %
                     ks_output_new = f_KalmanSmootherDK(data_new,T,Z,H,R,Q,s0,P0) ;
+                    for n = 1:length(names_news_decomp)
+                        [i, m, std] = get_index_mean_std(options, names_news_decomp{n}) ;
+                        results_test.nowcast.(mnemonic_news_decomp{n}).new(1,v,modcounter) = std * ( Z(i,:) * ks_output_new.stT(:,options.index_nowcast) ) + m ; 
+                        results_test.forecast.(mnemonic_news_decomp{n}).new(1,v,modcounter) = std * ( Z(i,:) * ks_output_new.stT(:,options.index_forecast) ) + m ;
+                    end
+
                     results.nowcast.new(1,v,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_new.stT(:,options.index_nowcast == 1) ) + options.meangdp ;
                     results.forecast.new(1,v,modcounter) = options.stdgdp * ( Z(options.index_gdp,:) * ks_output_new.stT(:,options.index_forecast == 1) ) + options.meangdp ;
                     
@@ -245,8 +262,19 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                      results.nowcast.details(v,modcounter).actuals, ...
                      results.nowcast.details(v,modcounter).forecasts, ...
                      results.nowcast.details(v,modcounter).weights, ...
-                     results.nowcast.details(v,modcounter).varnames ] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options) ;
-                   
+                     results.nowcast.details(v,modcounter).varnames ] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options, options.index_gdp, options.stdgdp) ;
+                    
+                    for n = 1 : length(names_news_decomp)
+                        [i, m, std] = get_index_mean_std(options, names_news_decomp{n}) ;
+                        [results_test.nowcast.(mnemonic_news_decomp{n}).impact_by_group(:,v,modcounter), ...
+                            results_test.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).impacts, ...
+                            results_test.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).actuals, ...
+                            results_test.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).forecasts, ...
+                            results_test.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).weights, ...
+                            results_test.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).varnames ] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options, i, std) ;
+                    end
+
+
                     % forecast
                     tks = find(options.index_forecast == 1) ; 
                     [results.forecast.impact_by_group(:,v,modcounter), ...
@@ -254,19 +282,33 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                      results.forecast.details(v,modcounter).actuals, ...
                      results.forecast.details(v,modcounter).forecasts, ...
                      results.forecast.details(v,modcounter).weights, ...
-                     results.forecast.details(v,modcounter).varnames ] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options) ;
+                     results.forecast.details(v,modcounter).varnames ] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options,options.index_gdp, options.stdgdp) ;
                     
+                    for n = 1 : length(names_news_decomp)
+                        [i, m, std] = get_index_mean_std(options, names_news_decomp{n}) ;
+                        [results_test.forecast.(mnemonic_news_decomp{n}).impact_by_group(:,v,modcounter), ...
+                            results_test.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).impacts, ...
+                            results_test.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).actuals, ...
+                            results_test.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).forecasts, ...
+                            results_test.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).weights, ...
+                            results_test.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).varnames ] = f_newsdecomp_v2(js,tjs,tks,data_new,ks_output_old,params,options, i, std) ;
+                    end
                  
                     % compute nowcast due to data revisions
                     results.nowcast.revised_data(1,v,modcounter) = results.nowcast.new(1,v,modcounter) - sum(results.nowcast.impact_by_group( : , v , modcounter ) ) ; 
                     results.forecast.revised_data(1,v,modcounter) = results.forecast.new(1,v,modcounter) - sum(results.forecast.impact_by_group( : , v , modcounter ) ) ;
                     
+                    for n = 1 : length(names_news_decomp)
+                        results_test.nowcast.(mnemonic_news_decomp{n}).revised_data(1,v,modcounter) = results_test.nowcast.(mnemonic_news_decomp{n}).new(1,v,modcounter) - sum(results_test.nowcast.(mnemonic_news_decomp{n}).impact_by_group( : , v , modcounter ) ) ; 
+                        results_test.forecast.(mnemonic_news_decomp{n}).revised_data(1,v,modcounter) = results_test.forecast.(mnemonic_news_decomp{n}).new(1,v,modcounter) - sum(results_test.forecast.(mnemonic_news_decomp{n}).impact_by_group( : , v , modcounter ) ) ; 
+                    end
+
                     % ------------------------------------------------ %
                     % - "update" data Kalman smoother output --------- %
                     ks_output_old = ks_output_new ;  
                     data_old = data_new ; 
                 end
-    
+   
                 % --------------------------------------------------------------- %
                 % - plot nowcast & forecast evolution for current model --------- %
                 
@@ -367,6 +409,9 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
             end
         end
     end
+
+    save([dir_nowcast '\output_mat\' 'results_test.mat'], 'results_test')
+    save([dir_nowcast '\output_mat\' 'results.mat'], 'results')
     
     % ------------------------------------------------------------------- %
     % - plot nowcast & forecast evolution for equal-weigth pool --------- %
