@@ -86,7 +86,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     names_export = {'Industrie', 'Industrie', 'lkw_maut', 'ifo_lage', 'ifo_erwartung'};
     groups_export = {'production', 'orders', 'production', 'ifo', 'ifo'};
     mnemonic_export = {'ip', 'ord', 'lkwm', 'ifoLage', 'ifoErw'};
-    names_news_decomp = {'gross domestic product', 'private consumption', 'gross fixed capital formation', 'exports'};
+    names_news_decomp = {'gross domestic product', 'private consumption', 'private gross fixed capital formation', 'exports'};
     groups_news_decomp = {'national accounts', 'national accounts', 'national accounts', 'national accounts'};
     mnemonic_news_decomp = {'Y', 'C', 'I', 'X'};
     
