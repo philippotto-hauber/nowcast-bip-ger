@@ -1,4 +1,4 @@
-function  f_docu(nowcast_new,vintages,details,Nr, Np, Nj,savename,flag_ewpool,threshold,dirname)
+function  f_docu(nowcast_new,vintages,details,Nr, Np, Nj,savename, varname, flag_ewpool,threshold,dirname)
 
 fid=fopen([dirname '\docu\' savename '.txt'],'w');
 temp = '#################################################################';
@@ -23,7 +23,7 @@ for v = 2 : size(nowcast_new,2)
     fprintf(fid,'%s \r\n',temp);
     temp = '#-';
     fprintf(fid,'%s \r\n',temp);
-    fprintf(fid, ['#- On ' vintages{v} ', the nowcast for ' savename(10:15) ' was %4.2f percent. \r\n'], round(nowcast_new(1,v),2));
+    fprintf(fid, ['#- On ' vintages{v} ', the nowcast for ' varname ' was %4.2f percent. \r\n'], round(nowcast_new(1,v),2));
     temp = '#-';
     fprintf(fid,'%s \r\n',temp);
     fprintf(fid, '#- Previous nowcast was %4.2f percent. \r\n', round(nowcast_new(1,v-1),2));

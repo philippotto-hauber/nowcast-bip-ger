@@ -1,4 +1,4 @@
-function  f_docuII(nowcast_new,vintages,details,Nr,Np,Nj,savenamemaster,flag_ewpool,dirname)
+function  f_docuII(nowcast_new,vintages,details,Nr,Np,Nj,savenamemaster, varname, flag_ewpool,dirname)
 
 
 for v = 2 : size(nowcast_new,2) 
@@ -25,7 +25,7 @@ for v = 2 : size(nowcast_new,2)
     fprintf(fid,'%s \r\n',temp);
     temp = '#-';
     fprintf(fid,'%s \r\n',temp);
-    fprintf(fid, ['#- On ' vintages{v} ', the nowcast for ' savenamemaster(10:15) ' was %4.2f percent... \r\n'], round(nowcast_new(1,v),2));
+    fprintf(fid, ['#- On ' vintages{v} ', the nowcast for ' varname ' was %4.2f percent... \r\n'], round(nowcast_new(1,v),2));
     temp = '#-';
     fprintf(fid,'%s \r\n',temp);
     fprintf(fid, '#- ... a revision of %4.2f percentage points... \r\n',round(nowcast_new(1,v),2)-round(nowcast_new(1,v-1),2));
