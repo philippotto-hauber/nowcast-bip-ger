@@ -182,6 +182,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
 
                 for n = 1:length(names_news_decomp)
                     [i, m, std] = get_index_mean_std(options, names_news_decomp{n}) ;
+                    results.nowcast.(mnemonic_news_decomp{n}).varname_long = names_news_decomp{n};
                     results.nowcast.(mnemonic_news_decomp{n}).new(1,1,modcounter) = std * ( Z(i,:) * ks_output_old.stT(:,options.index_nowcast) ) + m ; 
                     results.forecast.(mnemonic_news_decomp{n}).new(1,1,modcounter) = std * ( Z(i,:) * ks_output_old.stT(:,options.index_forecast) ) + m ;
                 end
