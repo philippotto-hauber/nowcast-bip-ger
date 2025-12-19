@@ -156,5 +156,5 @@ function out = print_news_docu(dir_root, year_nowcast, quarter_nowcast)
         end
     end
     disp('Done printing news to txt!')
-    out = [];
+    quit(0);
 end

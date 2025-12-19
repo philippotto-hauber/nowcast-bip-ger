@@ -92,5 +92,5 @@ function out = plot_nowcast_evolution(dir_root, year_nowcast, quarter_nowcast)
         close
     end
     disp('Done plotting nowcast evolution!')
-    out = [];
+    quit(0);
 end

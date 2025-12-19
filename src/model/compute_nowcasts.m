@@ -321,5 +321,5 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
 
     save([dir_nowcast '\output_mat\' 'results.mat'], 'results')    
     disp('Done generating nowcasts!')
-    out = [];
+    quit(0)
 end
