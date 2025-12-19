@@ -1,24 +1,14 @@
-function [nowcast_new, nowcast_new_revonly, impact_by_group, impacts_restand, actuals_restand, forecasts_restand, weights_restand, varnames] = f_newsdecomp(js,tjs,tks,data_new,data_new_revonly,params,options)
-
-% actuals_sorted = [] ; 
-% forecasts_sorted = [] ; 
-% weights_sorted = [] ; 
-% impacts_sorted = [] ; 
-% names_sorted = [] ; 
-
-% --------------------------------------------- %
-% - run Kalman smoother over revised data ----- %
-
-[T, Z, R, Q, H] = f_statespaceparams_news(params,options) ;
-
-s0 = zeros(size(T,1),1) ; 
-P0 = 10 * eye(size(T,1)) ;
-
-ks_output = f_KalmanSmootherDK(data_new_revonly,T,Z,H,R,Q,s0,P0) ;
-nowcast_new_revonly = options.stdgdp * ( Z(options.index_gdp,:) * ks_output.stT(:,tks) ) + options.meangdp ;
+function [impact_by_group, impacts_restand, actuals_restand, forecasts_restand, weights_restand, varnames] = f_newsdecomp(js,tjs,tks,data_new,ks_output_old,params,options, index_target, std_target)
+% this function computes the news in a different way!
+% First, given the unrevised data and new observations, compute the news. 
+% Then, run the Kalman smoother on the new data to 
+% get the new forecast which includes revisions!!!!!!
 
 % ----------------------------------- %
 % - news decomposition -------------- %
+
+% state space params
+[T, Z, R, Q, H] = f_statespaceparams_news(params,options) ;
 
 % empty mats to store results
 E_II = NaN(length(js)) ; 
@@ -29,7 +19,7 @@ forecasts = NaN(length(js),1) ;
 
 % loop over js
 for j = 1 : length(js)    
-    x_fore = Z(js(j),:) * ks_output.stT(:,tjs(j)) ; 
+    x_fore = Z(js(j),:) * ks_output_old.stT(:,tjs(j)) ; 
     x_actual = data_new(js(j),tjs(j)) ; 
     news(j) = x_actual - x_fore ; 
     actuals(j) = x_actual ; 
@@ -38,50 +28,47 @@ for j = 1 : length(js)
     % second loop over js
     for l = 1 : length(js)
         if tjs(j) < tjs(l)
-            covarPtT = ks_output.P(:,:,tjs(j)) ;
+            covarPtT = ks_output_old.P(:,:,tjs(j)) ;
             for t = tjs(j):tjs(l)-1
-                  covarPtT = covarPtT * ks_output.L(:,:,t)' ; 
+                  covarPtT = covarPtT * ks_output_old.L(:,:,t)' ; 
             end
-            covarPtT = covarPtT * (eye(options.Ns) - ks_output.N(:,:,tjs(l)) * ks_output.P(:,:,tjs(l))) ; 
+            covarPtT = covarPtT * (eye(options.Ns) - ks_output_old.N(:,:,tjs(l)) * ks_output_old.P(:,:,tjs(l))) ; 
             
             E_II(j,l) = Z(js(j),:) * covarPtT * Z(js(l),:)' + H(js(j),js(l)) ;
         else
-            covarPtT = ks_output.P(:,:,tjs(l)) ;
+            covarPtT = ks_output_old.P(:,:,tjs(l)) ;
             for t = tjs(l):tjs(j)-1
-                   covarPtT = covarPtT * ks_output.L(:,:,t)' ; 
+                   covarPtT = covarPtT * ks_output_old.L(:,:,t)' ; 
             end
-            covarPtT = covarPtT * (eye(options.Ns) - ks_output.N(:,:,tjs(j)) * ks_output.P(:,:,tjs(j))) ; 
+            covarPtT = covarPtT * (eye(options.Ns) - ks_output_old.N(:,:,tjs(j)) * ks_output_old.P(:,:,tjs(j))) ; 
             
             E_II(j,l) = Z(js(j),:) * covarPtT' * Z(js(l),:)' + H(js(j),js(l)) ;
         end        
     end
 
     if tks < tjs(j)
-        covarPtT = ks_output.P(:,:,tks) ;
+        covarPtT = ks_output_old.P(:,:,tks) ;
         for t = tks:tjs(j)-1
-              covarPtT = covarPtT * ks_output.L(:,:,t)' ; 
+              covarPtT = covarPtT * ks_output_old.L(:,:,t)' ; 
         end
-        covarPtT = covarPtT * (eye(options.Ns) - ks_output.N(:,:,tjs(j)) * ks_output.P(:,:,tjs(j))) ; 
+        covarPtT = covarPtT * (eye(options.Ns) - ks_output_old.N(:,:,tjs(j)) * ks_output_old.P(:,:,tjs(j))) ; 
 
-        E_ykI(j) =  Z(options.index_gdp,:) * covarPtT  * Z(js(j),1:Ns)' ;
+        E_ykI(j) =  Z(index_target,:) * covarPtT  * Z(js(j),1:options.Ns)' ;
     else
-        covarPtT = ks_output.P(:,:,tjs(j)) ;
+        covarPtT = ks_output_old.P(:,:,tjs(j)) ;
         for t = tjs(j):tks-1
-              covarPtT = covarPtT * ks_output.L(:,:,t)' ; 
+              covarPtT = covarPtT * ks_output_old.L(:,:,t)' ; 
         end
-        covarPtT = covarPtT * (eye(options.Ns) - ks_output.N(:,:,tks) * ks_output.P(:,:,tks)) ; 
+        covarPtT = covarPtT * (eye(options.Ns) - ks_output_old.N(:,:,tks) * ks_output_old.P(:,:,tks)) ; 
 
-        E_ykI(j) = Z(options.index_gdp,:) * covarPtT'  * Z(js(j),:)' ;
+        E_ykI(j) = Z(index_target,:) * covarPtT'  * Z(js(j),:)' ;
     end
 end
 
 % weights and impact
 weights =  E_ykI/E_II ;
 impacts =  (weights' .* news) ; 
-impacts_restand = options.stdgdp * impacts ; 
-
-% new nowcast as the sum of the nowcast with revised data and the summed impact
-nowcast_new = nowcast_new_revonly + sum(impacts_restand) ; 
+impacts_restand = std_target * impacts ; 
 
 % ----------------------------------------------------------------------- %
 % - store names and also re-standardize actuals, forecasts & weights ---- %
@@ -90,7 +77,7 @@ for j = 1 : length(js)
     varnames{j,1} = [options.names{js(j)} ' (' options.groups{js(j)} ')'] ; 
     actuals_restand(j,1) = actuals(j)*options.stds(js(j)) + options.means(js(j)) ;
     forecasts_restand(j,1) = forecasts(j)*options.stds(js(j)) + options.means(js(j)) ;
-    weights_restand(j,1) = weights(j) * options.stds(options.index_gdp)/options.stds(js(j)) ; 
+    weights_restand(j,1) = weights(j) * options.stds(index_target)/options.stds(js(j)) ; 
 end
 
 
@@ -104,15 +91,4 @@ for g = 1 : length(options.groupnames)
     impact_by_group(g,1) = sum(impacts_restand(indexgroup)) ; 
 end 
 
-
-
-% ----------------------------------- %
-% - nowcast with new data ----------- %
-ks_output = f_KalmanSmootherDK(data_new,T,Z,H,R,Q,s0,P0) ;
-
-nowcast_new_check = options.stdgdp * ( Z(options.index_gdp,:) * ks_output.stT(:,tks) ) + options.meangdp ;
-if abs(nowcast_new - nowcast_new_check)>1e-04
-    disp('Summed impacts and revised forecast do not add up to new one!')
-    disp(['Difference is ' num2str( nowcast_new_check - nowcast_new ) ] )
-end
 
