@@ -16,12 +16,14 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     % - add functions ------------------------------------------------------- %
     % ----------------------------------------------------------------------- %
     addpath('functions')
-    
+
+  
     % ----------------------------------------------------------------------- %
     % - make sure graphs and params folders exist --------------------------- %
     % ----------------------------------------------------------------------- %
     
     foldername = [dir_nowcast '\output_mat'] ;if exist(foldername, 'dir') ~= 7;mkdir(foldername);end  
+    foldername = [dir_nowcast '\output_csv'] ;if exist(foldername, 'dir') ~= 7;mkdir(foldername);end  
     foldername = [dir_nowcast '\graphs'] ;if exist(foldername, 'dir') ~= 7;mkdir(foldername);end  
     foldername = [dir_nowcast '\params'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
     foldername = [dir_nowcast '\docu'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
@@ -126,7 +128,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     
     % ----------------------------- %
     % - loop over models ---------- %  
-    
+
     for Nr = Nrs
         for Np = Nps
             for Nj = Njs
@@ -146,6 +148,21 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                 % - load params --- %
                 
                 load([dir_nowcast '\params\params_Nr' num2str(Nr) '_Np' num2str(Np) '_Nj' num2str(Nj) '.mat']) ; 
+
+                % ----------------------------------------------------------------------- %
+                % - setup tables to store output for csv-export ------------------------- %
+                % ----------------------------------------------------------------------- %
+
+                chunk = 20000; 
+                t_fore = table(...
+                    NaT(chunk,1), ... 
+                    NaT(chunk,1), ... 
+                    strings(chunk,1), ...  
+                    strings(chunk,1), ...    
+                    strings(chunk,1), ...  
+                    NaN(chunk, 1), ...
+                    'VariableNames', {'vintage', 'period', 'model', 'variable', 'group', 'value'});
+                k_fore = 0; 
            
                 % ----------------------------- %
                 % - load/construct data set --- %
@@ -168,7 +185,6 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                     options.Ns = 5*(options.Nr+options.Nq) ;
                 end
                 
-                disp()
                 [T, Z, R, Q, H] = f_statespaceparams_news(params,options) ;
               
                 % ------------------------------------------ %
@@ -229,22 +245,17 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                     results.monthly_gdp.dates{:, v} = dates_converted;
                     results.monthly_gdp.gdp_realizations{:, v} = gdp_realizations;
                     results.monhtly_gdp.mean_gdp{v, 1} = mean_gdp;
-                    results.monhtly_gdp.std_gdp{v, 1} = std_gdp;        
+                    results.monhtly_gdp.std_gdp{v, 1} = std_gdp;   
 
-                    % store forecasts for all variables
-                    
-                    
-                    % calculate forecasts for specific monthly variables
-                    % if v == Nvintages
-                    %     for i = 1:length(names_export)
-                    %         ind = find(strcmp(options.names, names_export{i}) & strcmp(options.groups, groups_export{i}));
-                    %         out.dat = options.stds(ind)* data_new(ind, :) + options.means(ind);
-                    %         out.xi = options.stds(ind)* (Z(ind,:) * ks_output_new.stT) + options.means(ind);
-                    %         save([dir_nowcast '\non gdp forecasts\' mnemonic_export{i} '_fore_model_' num2str(modcounter), '_v_' results.vintages{v}, '.mat'], 'out'); 
-                    %     end
-                    %     save([dir_nowcast '\non gdp forecasts\dates.mat'], 'dates_converted'); 
-                    % end
-                    
+                    % store forecasts for all variables    
+                    [t_fore, k_fore] = write_forecasts_to_table(...
+                        t_fore, k_fore, chunk, ...
+                        data_new, Z, ks_output_new, ...
+                        dates_converted, ...
+                        vintages{v}, ...
+                        ['Nr_' num2str(Nr) '_Np_' num2str(Np) '_Nj_' num2str(Nj)], ...
+                        options.names, options.groups, options.means, options.stds);
+
                     % ----------------------------- %
                     % - index of new obs ---------- %                    
                                    
@@ -302,13 +313,13 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                 % - update model counter ---------------------------------------- %
                 
                 modcounter = modcounter + 1 ;
-                
+                t_fore = t_fore(1:k_fore, :);
+                writetable(t_fore, [dir_nowcast '\output_csv\' 'out_forecasts_' num2str(Nr) '_Np_' num2str(Np) '_Nj_' num2str(Nj) '.csv']);                
             end
         end
     end
 
-    save([dir_nowcast '\output_mat\' 'results.mat'], 'results')
-
+    save([dir_nowcast '\output_mat\' 'results.mat'], 'results')    
     disp('Done generating nowcasts!')
     out = [];
 end
