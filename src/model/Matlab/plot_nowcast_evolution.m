@@ -2,9 +2,9 @@ function out = plot_nowcast_evolution(dir_root, year_nowcast, quarter_nowcast)
     dir_nowcast = [dir_root '\Nowcasts\' year_nowcast 'Q' quarter_nowcast] ;
     load([dir_nowcast '\output_mat\results.mat'])
 
-    Nrs = readmatrix('../../model_specs_Nrs.csv'); % # number of factors
-    Nps = readmatrix('../../model_specs_Nps.csv'); % # of lags in factor VAR
-    Njs = readmatrix('../../model_specs_Njs.csv'); % # of lags in idiosysncratic component
+    Nrs = readmatrix('../../../model_specs_Nrs.csv'); % # number of factors
+    Nps = readmatrix('../../../model_specs_Nps.csv'); % # of lags in factor VAR
+    Njs = readmatrix('../../../model_specs_Njs.csv'); % # of lags in idiosysncratic component
 
     str_nowcast = [year_nowcast 'Q' quarter_nowcast]; 
     
