@@ -1,4 +1,4 @@
-function [impact_by_group, impacts_restand, actuals_restand, forecasts_restand, weights_restand, varnames] = f_newsdecomp(js,tjs,tks,data_new,ks_output_old,params,options, index_target, std_target)
+function [impact_by_group, impacts_restand, actuals_restand, forecasts_restand, weights_restand, varnames, groupnames] = f_newsdecomp(js,tjs,tks,data_new,ks_output_old,params,options, index_target, std_target)
 % this function computes the news in a different way!
 % First, given the unrevised data and new observations, compute the news. 
 % Then, run the Kalman smoother on the new data to 
@@ -74,7 +74,8 @@ impacts_restand = std_target * impacts ;
 % - store names and also re-standardize actuals, forecasts & weights ---- %
 for j = 1 : length(js)
     % store name => name + group
-    varnames{j,1} = [options.names{js(j)} ' (' options.groups{js(j)} ')'] ; 
+    varnames{j,1} = options.names{js(j)};
+    groupnames{j, 1} = options.groups{js(j)};
     actuals_restand(j,1) = actuals(j)*options.stds(js(j)) + options.means(js(j)) ;
     forecasts_restand(j,1) = forecasts(j)*options.stds(js(j)) + options.means(js(j)) ;
     weights_restand(j,1) = weights(j) * options.stds(index_target)/options.stds(js(j)) ; 
