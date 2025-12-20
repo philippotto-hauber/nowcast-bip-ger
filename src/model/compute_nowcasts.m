@@ -12,15 +12,8 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     dir_nowcast = [dir_root '\Nowcasts\' year_nowcast 'Q' quarter_nowcast] ;
     if exist(dir_nowcast, 'dir') ~= 7;mkdir(dir_nowcast);end 
     
-    % ----------------------------------------------------------------------- %
-    % - add functions ------------------------------------------------------- %
-    % ----------------------------------------------------------------------- %
     addpath('functions')
 
-  
-    % ----------------------------------------------------------------------- %
-    % - make sure graphs and params folders exist --------------------------- %
-    % ----------------------------------------------------------------------- %
     
     foldername = [dir_nowcast '\output_mat'] ;if exist(foldername, 'dir') ~= 7;mkdir(foldername);end  
     foldername = [dir_nowcast '\output_csv'] ;if exist(foldername, 'dir') ~= 7;mkdir(foldername);end  
@@ -30,7 +23,14 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     foldername = [dir_nowcast '\tables'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
     foldername = [dir_nowcast '\monthlyGDP'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
     foldername = [dir_nowcast '\non gdp forecasts'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
-    
+
+    str_nowcast = [year_nowcast 'Q' quarter_nowcast]; 
+    if strcmp(quarter_nowcast, '4')
+        str_forecast = [ num2str(str2double(year_nowcast) + 1) 'Q1'] ; 
+    else 
+        str_forecast = [ year_nowcast 'Q' quarter_nowcast] ; 
+    end
+
     % ----------------------------------------------------------------------- %
     % - user specified settings --------------------------------------------- %
     % ----------------------------------------------------------------------- %
@@ -150,7 +150,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                 load([dir_nowcast '\params\params_Nr' num2str(Nr) '_Np' num2str(Np) '_Nj' num2str(Nj) '.mat']) ; 
 
                 % ----------------------------------------------------------------------- %
-                % - setup tables to store output for csv-export ------------------------- %
+                % - set up tables to store output for csv-export ------------------------- %
                 % ----------------------------------------------------------------------- %
 
                 chunk = 20000; 
@@ -163,6 +163,21 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                     NaN(chunk, 1), ...
                     'VariableNames', {'vintage', 'period', 'model', 'variable', 'group', 'value'});
                 k_fore = 0; 
+
+                t_news = table(...
+                    NaT(chunk,1), ... 
+                    strings(chunk,1), ...   
+                    strings(chunk,1), ...  
+                    strings(chunk,1), ...  
+                    strings(chunk,1), ...  
+                        strings(chunk,1), ...  
+                    NaN(chunk, 1), ...
+                    NaN(chunk, 1), ...
+                    NaN(chunk, 1), ...
+                    NaN(chunk, 1), ...
+                    'VariableNames', {'vintage', 'period', 'target', 'model', 'variable', 'group', 'forecast', 'actual', 'weight', 'impact'});
+                k_news = 0; 
+           
            
                 % ----------------------------- %
                 % - load/construct data set --- %
@@ -273,48 +288,92 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                     % ------------------------------- %
                     % - news decomposition ---------- %
                     
-                    % nowcast
-                    tks = find(options.index_nowcast == 1) ;    
+
+                    tks_nowcast = find(options.index_nowcast == 1) ;    
+                    tks_forecast = find(options.index_forecast == 1) ;    
                     
-                    for n = 1 : length(names_news_decomp)
-                        [i, m, std] = get_index_mean_std(options, names_news_decomp{n}) ;
-                        [results.nowcast.(mnemonic_news_decomp{n}).impact_by_group(:,v,modcounter), ...
-                            results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).impacts, ...
-                            results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).actuals, ...
-                            results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).forecasts, ...
-                            results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).weights, ...
-                            results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).varnames ] = f_newsdecomp(js,tjs,tks,data_new,ks_output_old,params,options, i, std) ;
+                    % for n = 1 : length(names_news_decomp)
+                    %     [i, ~, std] = get_index_mean_std(options, names_news_decomp{n}) ;
+                    %     [results.nowcast.(mnemonic_news_decomp{n}).impact_by_group(:,v,modcounter), ...
+                    %         results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).impacts, ...
+                    %         results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).actuals, ...
+                    %         results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).forecasts, ...
+                    %         results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).weights, ...
+                    %         results.nowcast.(mnemonic_news_decomp{n}).details(v,modcounter).varnames ] = f_newsdecomp(js,tjs,tks_nowcast,data_new,ks_output_old,params,options, i, std) ;
+                    % end
+
+                    for n = 1:length(names_news_decomp)
+
+                        [i, ~, std] = get_index_mean_std(options, names_news_decomp{n});
+
+                        % nowcasts
+                        [tmp_impact_by_group, tmp_impacts, tmp_actuals, tmp_forecasts, tmp_weights, tmp_varnames, tmp_groupnames] = ...
+                            f_newsdecomp(js,tjs,tks_nowcast,data_new,ks_output_old,params,options, i, std);
+
+                        key = mnemonic_news_decomp{n};                        
+                        results.nowcast.(key).impact_by_group(:, v, modcounter) = tmp_impact_by_group;
+                        results.nowcast.(key).details(v, modcounter).impacts   = tmp_impacts;
+                        results.nowcast.(key).details(v, modcounter).actuals   = tmp_actuals;
+                        results.nowcast.(key).details(v, modcounter).forecasts = tmp_forecasts;
+                        results.nowcast.(key).details(v, modcounter).weights   = tmp_weights;
+                        results.nowcast.(key).details(v, modcounter).varnames  = strcat(tmp_varnames, ' (', tmp_groupnames, ')');
+                        
+                        [t_news, k_news] = write_news_to_table(...
+                            t_news, k_news, chunk, ...
+                            tmp_weights, tmp_actuals, tmp_forecasts, tmp_impacts, tmp_varnames, tmp_groupnames, ...
+                            str_nowcast, ...
+                            vintages{v}, ...
+                             ['Nr_' num2str(Nr) '_Np_' num2str(Np) '_Nj_' num2str(Nj)], ...
+                             names_news_decomp{n});
+
+                        % forecasts
+                        [tmp_impact_by_group, tmp_impacts, tmp_actuals, tmp_forecasts, tmp_weights, tmp_varnames, tmp_groupnames] = ...
+                            f_newsdecomp(js,tjs,tks_forecast,data_new,ks_output_old,params,options, i, std);
+                        
+                        key = mnemonic_news_decomp{n};                        
+                        results.forecast.(key).impact_by_group(:, v, modcounter) = tmp_impact_by_group;
+                        results.forecast.(key).details(v, modcounter).impacts   = tmp_impacts;
+                        results.forecast.(key).details(v, modcounter).actuals   = tmp_actuals;
+                        results.forecast.(key).details(v, modcounter).forecasts = tmp_forecasts;
+                        results.forecast.(key).details(v, modcounter).weights   = tmp_weights;
+                        results.forecast.(key).details(v, modcounter).varnames  = strcat(tmp_varnames, ' (', tmp_groupnames, ')');
+
+                        [t_news, k_news] = write_news_to_table(...
+                            t_news, k_news, chunk, ...
+                            tmp_weights, tmp_actuals, tmp_forecasts, tmp_impacts, tmp_varnames, tmp_groupnames, ...
+                            str_forecast, ...
+                            vintages{v}, ...
+                             ['Nr_' num2str(Nr) '_Np_' num2str(Np) '_Nj_' num2str(Nj)], ...
+                             names_news_decomp{n});
                     end
 
-                    for n = 1 : length(names_news_decomp)
-                        [i, m, std] = get_index_mean_std(options, names_news_decomp{n}) ;
-                        [results.forecast.(mnemonic_news_decomp{n}).impact_by_group(:,v,modcounter), ...
-                            results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).impacts, ...
-                            results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).actuals, ...
-                            results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).forecasts, ...
-                            results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).weights, ...
-                            results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).varnames ] = f_newsdecomp(js,tjs,tks,data_new,ks_output_old,params,options, i, std) ;
-                    end
+                    % for n = 1 : length(names_news_decomp)
+                    %     [i, ~, std] = get_index_mean_std(options, names_news_decomp{n}) ;
+                    %     [results.forecast.(mnemonic_news_decomp{n}).impact_by_group(:,v,modcounter), ...
+                    %         results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).impacts, ...
+                    %         results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).actuals, ...
+                    %         results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).forecasts, ...
+                    %         results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).weights, ...
+                    %         results.forecast.(mnemonic_news_decomp{n}).details(v,modcounter).varnames ] = f_newsdecomp(js,tjs,tks,data_new,ks_output_old,params,options, i, std) ;
+                    % end
 
                     for n = 1 : length(names_news_decomp)
                         results.nowcast.(mnemonic_news_decomp{n}).revised_data(1,v,modcounter) = results.nowcast.(mnemonic_news_decomp{n}).new(1,v,modcounter) - sum(results.nowcast.(mnemonic_news_decomp{n}).impact_by_group( : , v , modcounter ) ) ; 
                         results.forecast.(mnemonic_news_decomp{n}).revised_data(1,v,modcounter) = results.forecast.(mnemonic_news_decomp{n}).new(1,v,modcounter) - sum(results.forecast.(mnemonic_news_decomp{n}).impact_by_group( : , v , modcounter ) ) ; 
                     end
 
-                    % ------------------------------------------------ %
                     % - "update" data Kalman smoother output --------- %
                     ks_output_old = ks_output_new ;  
                     data_old = data_new ; 
                 end
-   
-
-                
-                % --------------------------------------------------------------- %
-                % - update model counter ---------------------------------------- %
                 
                 modcounter = modcounter + 1 ;
+                
                 t_fore = t_fore(1:k_fore, :);
-                writetable(t_fore, [dir_nowcast '\output_csv\' 'out_forecasts_' num2str(Nr) '_Np_' num2str(Np) '_Nj_' num2str(Nj) '.csv']);                
+                writetable(t_fore, [dir_nowcast '\output_csv\' 'out_forecasts_' num2str(Nr) '_Np_' num2str(Np) '_Nj_' num2str(Nj) '.csv']);      
+                
+                t_news = t_news(1:k_news, :);
+                writetable(t_news, [dir_nowcast '\output_csv\' 'out_news_' num2str(Nr) '_Np_' num2str(Np) '_Nj_' num2str(Nj) '.csv']);      
             end
         end
     end
