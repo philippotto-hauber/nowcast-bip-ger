@@ -12,7 +12,6 @@ patterns <- c("forecasts", "news")
 
 for (p in patterns){
     files <- list.files(path = dir_nowcast, pattern = paste0("_", p, "_"), full.names = TRUE)
-    print(files)
     dat_out <- do.call(
         rbind,
         lapply(files, read.csv)
@@ -21,3 +20,5 @@ for (p in patterns){
     write.csv(dat_out, paste0(dir_nowcast, "/", p, ".csv"), row.names = FALSE)
     file.remove(files)
 }
+
+print("Done combining output files into one csv and deleting the old files")
