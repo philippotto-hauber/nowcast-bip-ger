@@ -135,7 +135,7 @@ Note that the list of variables for which these forecasts are produced is hard-c
 
 - dashboards to visualize vintages and now- or forecasts
 - (expenditure-side) bottom-up predicitons of GDP
-- `renv` the repo! 
+- ~~`renv` the repo!~~ 
 
 [^1]: The terms nowcast and forecast are largely used interchangeably in this description.
 
