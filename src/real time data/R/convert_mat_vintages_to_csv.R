@@ -81,7 +81,18 @@ wrangle_raw_and_transformed_data <- function(lst, df_aux, vintage){
   
 }
 
-# loop over vintages ----
+
+wrapper <- function(lst_all, group){
+  lst <- lst_all[[get_index(lst_all, g)]]
+  df_out <- wrangle_raw_and_transformed_data(
+    lst,
+    get_name_group_trafo(lst),
+    as.character(lst_all[[get_index(lst_all, "vintagedate")]])
+  )
+  return(df_out)
+}
+
+# loop over vintages, then variable groups ----
 vintages <- list.files(
   path = dir_main,
   pattern = "dataset_",
@@ -89,47 +100,16 @@ vintages <- list.files(
 )
 
 df_out <- data.frame()
+groups <- c("data_ifo", "data_ESIBCI", "data_BuBaRTD", "data_financial")
 for (v in vintages){
   dat <- R.matlab::readMat(v, fixNames = FALSE)
-  lst_ifo <- dat$dataset[[get_index(dat$dataset, "data_ifo")]]
-  df_out <- rbind(
-      df_out,
-      wrangle_raw_and_transformed_data(
-        lst_ifo,
-        get_name_group_trafo(lst_ifo),
-        as.character(dat$dataset[[get_index(dat$dataset, "vintagedate")]])
-      )
-  )
-  
-  lst_esi <- dat$dataset[[get_index(dat$dataset, "data_ESIBCI")]]
-  df_out <- rbind(
-    df_out,
-    wrangle_raw_and_transformed_data(
-      lst_esi,
-      get_name_group_trafo(lst_esi),
-      as.character(dat$dataset[[get_index(dat$dataset, "vintagedate")]])
+
+  for (g in groups){
+    df_out <- rbind(
+      df_out, 
+      wrapper(dat$dataset, g)
     )
-  )
-  
-  lst_bbk <- dat$dataset[[get_index(dat$dataset, "data_BuBaRTD")]]
-  df_out <- rbind(
-    df_out,
-    wrangle_raw_and_transformed_data(
-      lst_bbk,
-      get_name_group_trafo(lst_bbk),
-      as.character(dat$dataset[[get_index(dat$dataset, "vintagedate")]])
-    )
-  )
-  
-  lst_financial <- dat$dataset[[get_index(dat$dataset, "data_financial")]]
-  df_out <- rbind(
-    df_out,
-    wrangle_raw_and_transformed_data(
-      lst_financial,
-      get_name_group_trafo(lst_financial),
-      as.character(dat$dataset[[get_index(dat$dataset, "vintagedate")]])
-    )
-  )
+  }  
 }
 
 write.csv(
