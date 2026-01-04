@@ -33,8 +33,9 @@ for (s in subdirs){
     write.table(num, paste0(substr(f, 1, nchar(f)- 4), "_num.csv"), row.names = FALSE, col.names = FALSE, na = "NaN")
     write.table(t(vintages), paste0(substr(f, 1, nchar(f)- 4), "_vintages.csv"), row.names = FALSE, col.names = FALSE, sep = ",")
 
-    print(paste0("Done post-processing file ", f, "!"))
+    
   }
+  print(paste0("Done post-processing files!"))
 }
 
 
