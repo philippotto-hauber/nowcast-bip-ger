@@ -13,7 +13,7 @@ dir_repo <- args[2]
 vintages <- list.files(path = paste0(dir_repo, "/aux_real_time_data/releases/lkw_maut/"), pattern = "lkw_maut_index_", full.names = TRUE)
 filename <- "lkw_maut_index_"
 
-source("extract_date_from_filename.R")
+source(here::here("src", "real time data", "R", "extract_date_from_filename.R"))
 
 #----- READ IN CSV VINTAGES
 
