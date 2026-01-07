@@ -35,7 +35,7 @@ for (s in subdirs){
 
     
   }
-  print(paste0("Done post-processing files!"))
+  print(paste0("Done post-processing files in ", s, "!"))
 }
 
 
