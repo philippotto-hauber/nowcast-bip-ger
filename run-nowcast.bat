@@ -8,7 +8,6 @@ SET DIR_ROOT="C:\Users\Hauber-P\Documents\dev"
 SET DIR_REALTIMEDATA=%DIR_ROOT%\Echtzeitdatensatz
 
 SET /A switch_download_data = 0
-Rem CD "src\real time data\R\"
 IF %switch_download_data%==1 (
     ECHO Downloading data...    
     Rscript --no-save --no-restore "./src/real time data/R/download_bbk_rtd.R" "%DIR_REALTIMEDATA%/raw data"
@@ -23,30 +22,24 @@ IF %switch_download_data%==1 (
 )
 
 SET /A switch_construct_vintages = 0
-Rem CD "..\Matlab"
 IF %switch_construct_vintages%==1 (
     ECHO Constructing real-time vintages...     
     matlab -noFigureWindows -batch "addpath('./src/model/Matlab'); construct_realtime_vintages('%DIR_REALTIMEDATA%', '%DIR_REPO%').m" 
-    Rem CD "..\R"
     Rscript --no-save --no-restore "./src/real time data/R/convert_mat_vintages_to_csv.R "%DIR_REALTIMEDATA%/vintages"   
 ) ELSE (
     ECHO "Switch set to 0. Do not construct vintages"
 )
 
-Rem CD "..\..\.."
 SET /A switch_compute_nowcasts = 1
 SET /A switch_estimate_models = 0
 IF %switch_compute_nowcasts%==1 (
     ECHO Computing nowcasts...
     matlab -noFigureWindows -batch "addpath('./src/model/Matlab'); addpath('./src/model/Matlab/functions');compute_nowcasts('%DIR_ROOT%', '%YEAR%', '%QUARTER%', '%switch_estimate_models%').m"
-    Rem matlab -noFigureWindows -batch "addpath('./src/model/Matlab'); plot_nowcast_evolution('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
+    matlab -noFigureWindows -batch "addpath('./src/model/Matlab'); plot_nowcast_evolution('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
     matlab -noFigureWindows -batch "addpath('./src/model/Matlab'); addpath('./src/model/Matlab/functions'); print_news_docu('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
-    Rem CD "..\R"
     Rscript --no-save --no-restore "./src/model/R/combine_csv_files.R "%DIR_ROOT%" "%YEAR%" "%QUARTER%"
     Rscript --no-save --no-restore "./src/model/R/gen_plts.R" "%DIR_ROOT%" "%YEAR%" "%QUARTER%"
 ) ELSE (
     ECHO "Switch set to 0. Do not compute nowcasts"
 )
-
-Rem CD ../../..
 CMD /k
