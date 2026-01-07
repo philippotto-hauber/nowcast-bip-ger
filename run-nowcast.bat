@@ -22,30 +22,31 @@ IF %switch_download_data%==1 (
     ECHO "Switch set to 0. Do not download data"
 )
 
-SET /A switch_construct_vintages = 1
+SET /A switch_construct_vintages = 0
 CD "..\Matlab"
 IF %switch_construct_vintages%==1 (
     ECHO Constructing real-time vintages...     
-    Rem matlab -noFigureWindows -batch "construct_realtime_vintages('%DIR_REALTIMEDATA%', '%DIR_REPO%').m" 
+    matlab -noFigureWindows -batch "construct_realtime_vintages('%DIR_REALTIMEDATA%', '%DIR_REPO%').m" 
     CD "..\R"
     Rscript --vanilla convert_mat_vintages_to_csv.R "%DIR_REALTIMEDATA%/vintages"   
 ) ELSE (
     ECHO "Switch set to 0. Do not construct vintages"
 )
 
-CD "..\..\model\Matlab"
-SET /A switch_compute_nowcasts = 0
+CD "..\..\.."
+SET /A switch_compute_nowcasts = 1
 SET /A switch_estimate_models = 0
 IF %switch_compute_nowcasts%==1 (
     ECHO Computing nowcasts...
-    matlab -noFigureWindows -batch "compute_nowcasts('%DIR_ROOT%', '%YEAR%', '%QUARTER%', '%switch_estimate_models%').m"
-    matlab -noFigureWindows -batch "plot_nowcast_evolution('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
-    matlab -noFigureWindows -batch "print_news_docu('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
-    CD "..\R"
-    Rscript --vanilla combine_csv_files.R "%DIR_ROOT%" "%YEAR%" "%QUARTER%"
+    Rem matlab -noFigureWindows -batch "compute_nowcasts('%DIR_ROOT%', '%YEAR%', '%QUARTER%', '%switch_estimate_models%').m"
+    Rem matlab -noFigureWindows -batch "plot_nowcast_evolution('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
+    Rem matlab -noFigureWindows -batch "print_news_docu('%DIR_ROOT%', '%YEAR%', '%QUARTER%').m"
+    Rem CD "..\R"
+    Rem Rscript --vanilla combine_csv_files.R "%DIR_ROOT%" "%YEAR%" "%QUARTER%"
+    Rscript --no-save --no-restore "./src/model/R/gen_plts.R" "%DIR_ROOT%" "%YEAR%" "%QUARTER%"
 ) ELSE (
     ECHO "Switch set to 0. Do not compute nowcasts"
 )
 
-CD ../../..
+Rem CD ../../..
 CMD /k
