@@ -6,7 +6,7 @@ storedir <- paste0(dir_main, "/BuBa RTD/")
 if (!dir.exists(storedir)) dir.create(storedir, recursive = TRUE)
 
 # load function
-source("get_var_codes_bbk_rtd.R")
+source(here::here("src", "real time data", "R", "get_var_codes_bbk_rtd.R"))
 
 # write function that exports data to csv
 exportseries2csv <- function( x , dirname , varname ){

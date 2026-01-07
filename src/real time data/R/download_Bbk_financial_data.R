@@ -9,7 +9,7 @@ store_dir <- paste0(dir_main, "/Finanzmarktdaten/")
 if (!dir.exists(store_dir)) dir.create(store_dir, recursive = TRUE)
 
 # function that returns vector of series codes
-source("get_var_codes_bbk_financial.R")
+source(here::here("src", "real time data", "R", "get_var_codes_bbk_financial.R"))
 
 # Bundesbank API
 url_base <- "https://api.statistiken.bundesbank.de/rest/download/"
