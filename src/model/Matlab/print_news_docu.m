@@ -1,10 +1,14 @@
 function out = print_news_docu(dir_root, year_nowcast, quarter_nowcast)
+    % dir_root = 'G:/Geteilte Ablagen/02_Konjunktur/04_Prognose/9_Prognosemodelle/03_DFM';
+    % year_nowcast = '2025';
+    % quarter_nowcast = '2';
+    % addpath('functions')
     dir_nowcast = [dir_root '\Nowcasts\' year_nowcast 'Q' quarter_nowcast] ;
     load([dir_nowcast '\output_mat\results.mat'])
 
-    Nrs = readmatrix('../../../model_specs_Nrs.csv'); % # number of factors
-    Nps = readmatrix('../../../model_specs_Nps.csv'); % # of lags in factor VAR
-    Njs = readmatrix('../../../model_specs_Njs.csv'); % # of lags in idiosysncratic component
+    Nrs = readmatrix('./model_specs_Nrs.csv'); % # number of factors
+    Nps = readmatrix('./model_specs_Nps.csv'); % # of lags in factor VAR
+    Njs = readmatrix('./model_specs_Njs.csv'); % # of lags in idiosysncratic component
 
     str_nowcast = [year_nowcast 'Q' quarter_nowcast]; 
     
@@ -13,8 +17,6 @@ function out = print_news_docu(dir_root, year_nowcast, quarter_nowcast)
     else 
         str_forecast = [ year_nowcast 'Q' quarter_nowcast] ; 
     end
-
-    addpath('functions')
 
     vars = fieldnames(results.nowcast);
     Nvintages = length(results.vintages);
