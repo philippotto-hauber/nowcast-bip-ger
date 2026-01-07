@@ -9,14 +9,8 @@ nowcast_quarter <- args[3]
 
 # functions ----
 clean_up_model_name <- function(x){
-  # 1. Replace the first underscore in each pair with " = "
-  # Matches an underscore followed by a digit
-  res <- gsub("_(\\d)", " = \\1", x)
-  
-  # 2. Replace the remaining underscores with ", "
-  # Matches an underscore followed by a letter
-  res <- gsub("_([A-Za-z])", ", \\1", res)
-  
+  res <- gsub("_(\\d)", " = \\1", x)  
+  res <- gsub("_([A-Za-z])", ", \\1", res)  
   return(res)
 }
 
@@ -33,11 +27,11 @@ get_now_and_forecast_periods <- function(year_nowcast, quarter_nowcast) {
   if (quarter_nowcast == "4") {
     # Increment the year and set quarter to Q1
     next_year <- as.numeric(year_nowcast) + 1
-    fore <- as.Date(paste0(next_year, "-03-01"))
+    next_quarter <- 1
+    fore <- convert_str_to_date(next_year, next_quarter)
   } else {
-    fore <- as.Date(paste0(year_nowcast, "-", 3 * (as.numeric(quarter_nowcast) + 1), "-01"))
-  }
-  
+    fore <- convert_str_to_date(year_nowcast, quarter_nowcast + 1)
+  }  
   return(c(now, fore))
 }
 
@@ -54,8 +48,6 @@ vars <- data.frame(
 )
 
 periods <- get_now_and_forecast_periods(nowcast_year, nowcast_quarter)
-
-for (flt_period in periods) print(flt_period)
 
 dir_graphs <- paste0(dir_root, "/Nowcasts/", nowcast_year, "Q", nowcast_quarter, "/graphs/")
 
