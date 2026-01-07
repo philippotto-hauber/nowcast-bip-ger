@@ -65,7 +65,8 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
     theme_minimal()+
     theme(
       legend.position = "bottom",
-      legend.title = element_blank()
+      legend.title = element_blank(),
+      legend.text=element_text(size=6)
     )+
     scale_fill_manual(values = npg_modified)
   
