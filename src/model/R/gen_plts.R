@@ -1,11 +1,11 @@
-# args <- commandArgs(trailingOnly = TRUE)
-# dir_root <- args[1]
-# nowcast_year <- args[2]
-# nowcast_quarter <- args[3]
+args <- commandArgs(trailingOnly = TRUE)
+dir_root <- args[1]
+nowcast_year <- args[2]
+nowcast_quarter <- args[3]
 # for debugging
-dir_root <- "C:/Users/Hauber-P/Documents/dev"
-nowcast_year <- 2025
-nowcast_quarter <- 4
+# dir_root <- "C:/Users/Hauber-P/Documents/dev"
+# nowcast_year <- 2025
+# nowcast_quarter <- 4
 
 # functions ----
 clean_up_model_name <- function(x){
@@ -49,13 +49,17 @@ library(ggplot2)
 library(collapse)
 
 vars <- data.frame(
-  name = c("gross domestic product", "private consumption", "private gross fixed capital formation", "exports", "imports"),
-  mnemonic = c("Y", "C", "I", "X", "M")
+  name = c("gross domestic product", "private consumption", "private gross fixed capital formation", "exports"),
+  mnemonic = c("Y", "C", "I", "X")
 )
 
 periods <- get_now_and_forecast_periods(nowcast_year, nowcast_quarter)
 
-dir_graphs <- paste0(dir_root, "Nowcasts/", nowcast_year, "Q", nowcast_quarter, "/graphs/")
+for (flt_period in periods) print(flt_period)
+
+dir_graphs <- paste0(dir_root, "/Nowcasts/", nowcast_year, "Q", nowcast_quarter, "/graphs/")
+
+if (!dir.exists(paste0(dir_graphs, "/models"))) dir.create(paste0(dir_graphs, "/models"))
 
 # load data ----
 df_fore <- read.csv(paste0(dir_root, "/Nowcasts/", nowcast_year, "Q", nowcast_quarter, "/output_csv/forecasts.csv"))
@@ -75,7 +79,8 @@ models <- unique(df_news$model)
 for (i in seq(1, nrow(vars))){
   flt_variable <- vars$name[i]
   
-  for (flt_period in periods){
+  for (j in seq(1, length(periods))){
+    flt_period <- periods[j]
     plt_nowcast_and_news(
       fsubset(df_fore, period == flt_period  & variable == flt_variable),
       fsubset(df_news, period == paste0(lubridate::year(flt_period), "Q", ceiling(lubridate::month(flt_period) / 3))  & target == flt_variable),
@@ -89,7 +94,7 @@ for (i in seq(1, nrow(vars))){
       height = 15, 
       units = "cm"
     )
-    
+
     for (flt_model in models){
       plt_nowcast_and_news(
         fsubset(df_fore, period == flt_period  & variable == flt_variable & model == flt_model),
@@ -99,7 +104,7 @@ for (i in seq(1, nrow(vars))){
       )
       
       ggsave(
-        paste0(dir_graphs, vars$mnemonic[i], "_", convert_date_to_str(flt_period), "_", flt_model, ".pdf"), 
+        paste0(dir_graphs, "models/", vars$mnemonic[i], "_", convert_date_to_str(flt_period), "_", flt_model, ".pdf"), 
         width = 20, 
         height = 15, 
         units = "cm"
@@ -120,3 +125,5 @@ for (i in seq(1, nrow(vars))){
     )
   }
 }
+
+print("Done generating plots!")
