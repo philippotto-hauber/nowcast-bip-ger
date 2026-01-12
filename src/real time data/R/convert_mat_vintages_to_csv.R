@@ -73,12 +73,12 @@ wrangle_raw_and_transformed_data <- function(lst, df_aux, vintage){
       ),
      on = c("period", "variable"),
      how = "left",
-     verbose = 1
+     verbose = 0
     ) |> collapse::join(
       df_aux_g, 
       on = c("variable"),
       how = "left",
-      verbose = 1
+      verbose = 0
     ) 
     
     df_dat <- rbind(
@@ -110,8 +110,6 @@ vintages <- list.files(
   pattern = "dataset_",
   full.names = TRUE
 )
-
-print(vintages)
 
 df_out <- data.frame()
 sources <- c("data_ifo", "data_ESIBCI", "data_BuBaRTD", "data_financial")
