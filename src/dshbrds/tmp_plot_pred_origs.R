@@ -28,9 +28,11 @@ vintages <- unique(df_fore$vintage)
 df_preds <- data.frame()
 flt_variable <- "Hochbau"
 flt_group <- "production"
+flt_vintage <- max(vintages)
+
 tmp_historic <- fsubset(
   df_historic, 
-  variable == flt_variable & group == flt_group & vintage == max(vintages)
+  variable == flt_variable & group == flt_group & vintage == flt_vintage
 )
 
 tmp_historic$raw <- round(tmp_historic$raw, 1)
@@ -78,12 +80,12 @@ df_preds$pred_orig <- round(df_preds$pred_orig, 1)
 p <- ggplot()+
   geom_line(
     mapping = aes(x = period, y = raw), 
-    data = fsubset(tmp_historic, period >= "2024-01-01"),
+    data = fsubset(tmp_historic, period >= "2025-01-01"),
     color = "black"
   )+
   geom_point(
     mapping = aes(x = period, y = raw), 
-    data = fsubset(tmp_historic, period >= "2024-01-01"),
+    data = fsubset(tmp_historic, period >= "2025-01-01"),
     color = "black", size = 2.5
   )+
   geom_line(
@@ -111,7 +113,7 @@ p <- ggplot()+
   )+
   scale_x_date(date_labels = "%b %y")+ 
   scale_y_continuous(labels = function(x) format(x, nsmall = 1))+
-  labs(title = paste0(flt_variable, " (", flt_group, ")"), x = "Date", y = "Index")+
+  labs(title = paste0(flt_variable, " (", flt_group, ")"), caption = paste0("Vintage: ", flt_vintage), x = "Date", y = "Index")+
   theme_minimal()
 
 
