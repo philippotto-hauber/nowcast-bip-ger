@@ -32,6 +32,7 @@ get_name_group_trafo <- function(lst){
     group = as.vector(unlist(lst[[get_index(lst, "^groups$")]])),
     trafo = as.vector(lst[[get_index(lst, "^trafo$")]])
   )
+  df_aux$col_id <- seq(1, nrow(df_aux))
   return(df_aux)
 }
 
@@ -49,41 +50,52 @@ wrangle_raw_and_transformed_data <- function(lst, df_aux, vintage){
   # not sure why sapply returns a vector of numerics but this seems to fix it
   dates_conv <- as.Date(dates_conv)   
   
-  raw_dat$period = dates_conv
-  dat$period = dates_conv
+  raw_dat <- collapse::add_vars(raw_dat, period = dates_conv, pos = 1)
+  dat <- collapse::add_vars(dat, period = dates_conv, pos = 1)
+
+  df_dat <- data.frame()
+  for (g in unique(df_aux$group)){
+    df_aux_g <- collapse::fsubset(df_aux, group == g)
   
-  df_dat <- collapse::join(
-    collapse::pivot(
-      raw_dat, 
-      ids = "period",
-      names = list("variable", "raw"), 
-      how = "longer"
-    ),
-   collapse::pivot(
-      dat, 
-      ids = "period",
-      names = list("variable", "value"), 
-      how = "longer"
-    ),
-   on = c("period", "variable"),
-   how = "left",
-   verbose = 0
-  ) |> collapse::join(
-    df_aux, 
-    on = c("variable"),
-    how = "left",
-    verbose = 0
-  )
+  
+    df_dat_g <- collapse::join(
+      collapse::pivot(
+        raw_dat[, c(1, df_aux_g$col_id + 1)], 
+        ids = "period",
+        names = list("variable", "raw"), 
+        how = "longer"
+      ),
+     collapse::pivot(
+        dat[, c(1, df_aux_g$col_id + 1)], 
+        ids = "period",
+        names = list("variable", "value"), 
+        how = "longer"
+      ),
+     on = c("period", "variable"),
+     how = "left",
+     verbose = 1
+    ) |> collapse::join(
+      df_aux_g, 
+      on = c("variable"),
+      how = "left",
+      verbose = 1
+    ) 
+    
+    df_dat <- rbind(
+      df_dat, df_dat_g
+    )
+  }
   
   df_dat$vintage <- vintage
+  df_dat <- collapse::fselect(df_dat, -col_id)
   
   return(df_dat)
   
 }
 
 
-wrapper <- function(lst_all, group){
-  lst <- lst_all[[get_index(lst_all, g)]]
+wrapper <- function(lst_all, data_source){
+  lst <- lst_all[[get_index(lst_all, data_source)]]
   df_out <- wrangle_raw_and_transformed_data(
     lst,
     get_name_group_trafo(lst),
@@ -100,14 +112,14 @@ vintages <- list.files(
 )
 
 df_out <- data.frame()
-groups <- c("data_ifo", "data_ESIBCI", "data_BuBaRTD", "data_financial")
-for (v in vintages){
+sources <- c("data_ifo", "data_ESIBCI", "data_BuBaRTD", "data_financial")
+for (v in vintages[6]){
   dat <- R.matlab::readMat(v, fixNames = FALSE)
 
-  for (g in groups){
+  for (s in sources){
     df_out <- rbind(
       df_out, 
-      wrapper(dat$dataset, g)
+      wrapper(dat$dataset, s)
     )
   }  
 }
@@ -117,4 +129,3 @@ write.csv(
   file = paste0(dir_main, "/vintages.csv"),
   row.names = FALSE
 )
-
