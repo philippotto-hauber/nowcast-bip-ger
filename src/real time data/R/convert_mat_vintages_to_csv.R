@@ -111,6 +111,8 @@ vintages <- list.files(
   full.names = TRUE
 )
 
+print(vintages)
+
 df_out <- data.frame()
 sources <- c("data_ifo", "data_ESIBCI", "data_BuBaRTD", "data_financial")
 for (v in vintages[6]){
@@ -129,3 +131,5 @@ write.csv(
   file = paste0(dir_main, "/vintages.csv"),
   row.names = FALSE
 )
+
+print(paste0("Done converting mat vintages to csv and writing to", paste0(dir_main, "/vintages.csv")))
