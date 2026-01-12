@@ -19,6 +19,7 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
       size = 3
     )+
     scale_x_date(breaks = vintages, date_labels = "%b %d", limits = c(min(vintages) - lubridate::days(7), max(vintages) + lubridate::days(7)))+ 
+    scale_y_continuous(labels = function(x) format(x, nsmall = 2))+
     labs(
       title = str_title,
       subtitle = "Nowcasts",
@@ -57,6 +58,7 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
     ggplot(aes(x = vintage, y = impact_ew_pool, group = group, fill = group))+
     geom_bar(position = "stack", stat="identity", width = 6)+
     scale_x_date(breaks = vintages, date_labels = "%b %d", limits = c(min(vintages) - lubridate::days(7), max(vintages) + lubridate::days(7)))+ 
+    scale_y_continuous(labels = function(x) format(x, nsmall = 2))+
     labs(
       subtitle = "News decomposition", 
       caption = if(ew_pool) "Average impacts across different model specifications." else NULL,
