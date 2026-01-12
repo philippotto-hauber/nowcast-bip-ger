@@ -21,16 +21,18 @@ IF %switch_download_data%==1 (
     ECHO "Switch set to 0. Do not download data"
 )
 
-SET /A switch_construct_vintages = 0
+SET /A switch_construct_vintages = 1
 IF %switch_construct_vintages%==1 (
     ECHO Constructing real-time vintages...     
-    matlab -noFigureWindows -batch "addpath('./src/model/Matlab'); construct_realtime_vintages('%DIR_REALTIMEDATA%', '%DIR_REPO%').m" 
+    Rem matlab -noFigureWindows -batch "addpath('./src/model/Matlab'); construct_realtime_vintages('%DIR_REALTIMEDATA%', '%DIR_REPO%').m" 
+    ECHO Converting mat vintages to csv... 
     Rscript --no-save --no-restore "./src/real time data/R/convert_mat_vintages_to_csv.R "%DIR_REALTIMEDATA%/vintages"   
+    ECHO ... done converting mat vintages to csv.
 ) ELSE (
     ECHO "Switch set to 0. Do not construct vintages"
 )
 
-SET /A switch_compute_nowcasts = 1
+SET /A switch_compute_nowcasts = 0
 SET /A switch_estimate_models = 0
 IF %switch_compute_nowcasts%==1 (
     ECHO Computing nowcasts...
