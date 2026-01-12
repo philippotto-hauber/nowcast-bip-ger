@@ -24,10 +24,8 @@ IF %switch_download_data%==1 (
 SET /A switch_construct_vintages = 1
 IF %switch_construct_vintages%==1 (
     ECHO Constructing real-time vintages...     
-    Rem matlab -noFigureWindows -batch "addpath('./src/model/Matlab'); construct_realtime_vintages('%DIR_REALTIMEDATA%', '%DIR_REPO%').m" 
-    ECHO Converting mat vintages to csv... 
-    Rscript --no-save --no-restore "./src/real time data/R/convert_mat_vintages_to_csv.R "%DIR_REALTIMEDATA%/vintages"   
-    ECHO ... done converting mat vintages to csv.
+    Rem matlab -noFigureWindows -batch "addpath('./src/real time data/Matlab'); construct_realtime_vintages('%DIR_REALTIMEDATA%', '%DIR_REPO%').m" 
+    Rscript --no-save --no-restore "./src/real time data/R/convert_mat_vintages_to_csv.R" "%DIR_REALTIMEDATA%/vintages"   
 ) ELSE (
     ECHO "Switch set to 0. Do not construct vintages"
 )
