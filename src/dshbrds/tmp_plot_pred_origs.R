@@ -5,6 +5,8 @@ nowcast_quarter <- 4
 library(collapse)
 library(ggplot2)
 
+source(here::here("src", "model", "R", "reverse_trafos.R"))
+
 # load data
 df_historic <- read.csv(paste0(dir_root, "/Echtzeitdatensatz/vintages/vintages.csv"))
 df_historic$vintage <- readr::parse_date(df_historic$vintage)
@@ -24,8 +26,8 @@ models <- unique(df_fore$model)
 vintages <- unique(df_fore$vintage)
 
 df_preds <- data.frame()
-flt_variable <- "Wohnungsbau"
-flt_group <- "orders"
+flt_variable <- "Hochbau"
+flt_group <- "production"
 tmp_historic <- fsubset(
   df_historic, 
   variable == flt_variable & group == flt_group & vintage == max(vintages)
@@ -76,19 +78,20 @@ df_preds$pred_orig <- round(df_preds$pred_orig, 1)
 p <- ggplot()+
   geom_line(
     mapping = aes(x = period, y = raw), 
-    data = fsubset(tmp_historic, period >= "2025-01-01"),
+    data = fsubset(tmp_historic, period >= "2024-01-01"),
     color = "black"
   )+
   geom_point(
     mapping = aes(x = period, y = raw), 
-    data = fsubset(tmp_historic, period >= "2025-01-01"),
+    data = fsubset(tmp_historic, period >= "2024-01-01"),
     color = "black", size = 2.5
   )+
   geom_line(
     mapping = aes(x = period, y = pred_orig, group = model),
     data = df_preds,
-    color = "darkorange",
-    linetype = "dotted"
+    color = "sandybrown",
+    linetype = "dotted",
+    alpha = 0.5
   )+
   geom_line(
     mapping = aes(x = period, y = ew_pool),
