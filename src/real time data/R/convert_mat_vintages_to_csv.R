@@ -113,7 +113,7 @@ vintages <- list.files(
 
 df_out <- data.frame()
 sources <- c("data_ifo", "data_ESIBCI", "data_BuBaRTD", "data_financial")
-for (v in vintages[6]){
+for (v in vintages){
   dat <- R.matlab::readMat(v, fixNames = FALSE)
 
   for (s in sources){
