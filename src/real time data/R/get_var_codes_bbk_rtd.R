@@ -83,6 +83,7 @@ if (category == "production"){
                   "BBKRT.M.DE.Y.L.DE2.AA031.V.A") # Bruttoloehne und -gehaelter Bauhauptgewerbe
   } else if ( category == "national accounts"){
     varnames <- c("BBKRT.Q.DE.Y.A.AG1.CA010.A.I", # Bruttoinlandsprodukt
+                  "BBKRT.Q.DE.Y.A.AG1.CA010.V.A",
                   "BBKRT.Q.DE.Y.A.CA1.BA100.A.I",
                   "BBKRT.Q.DE.Y.A.CA1.BA100.V.A",
                   "BBKRT.Q.DE.Y.A.CA1.BA200.A.I",
