@@ -26,8 +26,8 @@ models <- unique(df_fore$model)
 vintages <- unique(df_fore$vintage)
 
 df_preds <- data.frame()
-flt_variable <- "Hochbau"
-flt_group <- "production"
+flt_variable <- "gross domestic product"
+flt_group <- "national accounts"
 flt_vintage <- max(vintages)
 
 tmp_historic <- fsubset(
