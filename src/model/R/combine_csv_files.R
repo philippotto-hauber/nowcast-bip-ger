@@ -16,7 +16,12 @@ for (p in patterns){
         rbind,
         lapply(files, read.csv)
     )
-
+    
+    dat_out$vintage <- readr::parse_date(dat_out$vintage, format = "%d-%b-%Y", locale = readr::locale("en"))
+    if (p == "forecasts"){
+      dat_out$period <- readr::parse_date(dat_out$period, format = "%d-%b-%Y", locale = readr::locale("en"))
+    }
+    
     write.csv(dat_out, paste0(dir_nowcast, "/", p, ".csv"), row.names = FALSE)
     file.remove(files)
 }
