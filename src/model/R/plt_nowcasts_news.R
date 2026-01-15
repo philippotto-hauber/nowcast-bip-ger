@@ -1,33 +1,71 @@
-plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool = FALSE){
+plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool = FALSE, include_bottomup = FALSE){
   # nowcasts 
-  df_ew_pool <- df_fore |> 
-    fgroup_by(vintage) |> 
-    fsummarise(ew_pool = round(mean(value), 2))
-  
-  plt_fore <- df_fore |> 
-    fsubset(vintage %in% vintages) |> 
-    ggplot()+
-    geom_point(aes(x = vintage, y = value), size = 0.9, alpha = 0.5)+
-    geom_line(
-      mapping = aes(x = vintage, y = ew_pool), 
-      data = df_ew_pool |> fsubset(vintage %in% vintages),
-      linewidth = 1.1
-    )+
-    geom_label(
-      mapping = aes(x = vintage, y = ew_pool, label = round(ew_pool, 2)), 
-      data = df_ew_pool |> fsubset(vintage %in% vintages), 
-      size = 3
-    )+
-    scale_x_date(breaks = vintages, date_labels = "%b %d", limits = c(min(vintages) - lubridate::days(7), max(vintages) + lubridate::days(7)))+ 
-    scale_y_continuous(labels = function(x) format(x, nsmall = 2))+
-    labs(
-      title = str_title,
-      subtitle = "Nowcasts",
-      caption = if(ew_pool) "Dots represent forecasts of different model specifications, the line and labels indicate the equally-weighted pool." else NULL,
-      x = "", y = "%"
-    )+
-    theme_minimal()
-  
+  if (include_bottomup){
+    df_fore$variable[df_fore$variable == "gross domestic product"] <- "top-down"
+    df_fore$variable[df_fore$variable == "gross domestic product (bottom up)"] <- "bottom-up"
+    
+    df_ew_pool <- df_fore |> 
+      fgroup_by(vintage, variable) |> 
+      fsummarise(ew_pool = round(mean(value), 2))
+    
+    plt_fore <- df_fore |> 
+      fsubset(vintage %in% vintages) |> 
+      ggplot(aes(x = vintage, group = variable, color = variable))+
+      geom_point(aes(, y = value), size = 0.9, alpha = 0.5)+
+      geom_line(
+        mapping = aes(y = ew_pool), 
+        data = df_ew_pool |> fsubset(vintage %in% vintages),
+        linewidth = 1.1
+      )+
+      geom_label(
+        mapping = aes(y = ew_pool, label = round(ew_pool, 2)), 
+        data = df_ew_pool |> fsubset(vintage %in% vintages), 
+        size = 3
+      )+
+      scale_x_date(breaks = vintages, date_labels = "%b %d", limits = c(min(vintages) - lubridate::days(7), max(vintages) + lubridate::days(7)))+ 
+      scale_y_continuous(labels = function(x) format(x, nsmall = 2))+
+      scale_color_manual(values = c("#EFAC00", "#9C55E3"), name = NULL)+
+      labs(
+        title = str_title,
+        subtitle = "Nowcasts",
+        caption = if(ew_pool) "Dots represent forecasts of different model specifications, the line and labels indicate the equally-weighted pool." else NULL,
+        x = "", y = "%"
+      )+
+      theme_minimal()+
+      theme(
+        legend.position = "bottom",
+        legend.title = element_blank(),
+        legend.text=element_text(size=6)
+      )
+  } else {
+    df_ew_pool <- df_fore |> 
+      fgroup_by(vintage) |> 
+      fsummarise(ew_pool = round(mean(value), 2))
+    
+    plt_fore <- df_fore |> 
+      fsubset(vintage %in% vintages) |> 
+      ggplot()+
+      geom_point(aes(x = vintage, y = value), size = 0.9, alpha = 0.5)+
+      geom_line(
+        mapping = aes(x = vintage, y = ew_pool), 
+        data = df_ew_pool |> fsubset(vintage %in% vintages),
+        linewidth = 1.1
+      )+
+      geom_label(
+        mapping = aes(x = vintage, y = ew_pool, label = round(ew_pool, 2)), 
+        data = df_ew_pool |> fsubset(vintage %in% vintages), 
+        size = 3
+      )+
+      scale_x_date(breaks = vintages, date_labels = "%b %d", limits = c(min(vintages) - lubridate::days(7), max(vintages) + lubridate::days(7)))+ 
+      scale_y_continuous(labels = function(x) format(x, nsmall = 2))+
+      labs(
+        title = str_title,
+        subtitle = "Nowcasts",
+        caption = if(ew_pool) "Dots represent forecasts of different model specifications, the line and labels indicate the equally-weighted pool." else NULL,
+        x = "", y = "%"
+      )+
+      theme_minimal()
+  }
   # news
   npg_modified <- c(
     "production"      = "#8B0000", 
@@ -49,6 +87,9 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
     fsummarise(impact_ew_pool = mean(sum_model))
   
   # add impact of revisions (i.e. change in forecast not explained by variable impacts!)
+  if (include_bottomup){
+    df_ew_pool <- fsubset(df_ew_pool, variable == "top-down") # no news decomp for bottom-up forecasts! 
+  }
   df_rev <- df_plt_news |> fgroup_by(vintage) |> fsummarise(sum_impact = sum(impact_ew_pool))
   df_rev$delta <- diff(df_ew_pool$ew_pool)
   df_rev$revision <- df_rev$delta - df_rev$sum_impact
@@ -73,6 +114,6 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
     scale_fill_manual(values = npg_modified)
   
   # combined plots
-  plt <- ggpubr::ggarrange(plt_fore, plt_news, ncol = 1, nrow = 2, heights = c(1, 2))
+  plt <- ggpubr::ggarrange(plt_fore, plt_news, ncol = 1, nrow = 2, heights = c(1, 1))
   return(plt)
 }

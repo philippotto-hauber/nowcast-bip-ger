@@ -55,8 +55,8 @@ if (!dir.exists(paste0(dir_graphs, "/models"))) dir.create(paste0(dir_graphs, "/
 
 # load data ----
 df_fore <- read.csv(paste0(dir_root, "/Nowcasts/", nowcast_year, "Q", nowcast_quarter, "/output_csv/forecasts.csv"))
-df_fore$vintage <- readr::parse_date(df_fore$vintage, format = "%d-%b-%Y", locale = readr::locale("en"))
-df_fore$period <- readr::parse_date(df_fore$period, format = "%d-%b-%Y", locale = readr::locale("en"))
+df_fore$vintage <- readr::parse_date(df_fore$vintage, locale = readr::locale("en"))
+df_fore$period <- readr::parse_date(df_fore$period, locale = readr::locale("en"))
 
 df_news <- read.csv(paste0(dir_root, "/Nowcasts/", nowcast_year, "Q", nowcast_quarter, "/output_csv/news.csv"))
 df_news$vintage <- readr::parse_date(df_news$vintage, format = "%d-%b-%Y", locale = readr::locale("en"))
@@ -67,18 +67,23 @@ vintages <- unique(df_news$vintage)
 models <- unique(df_news$model)
 
 # generate plots ----
-
 for (i in seq(1, nrow(vars))){
   flt_variable <- vars$name[i]
-  
+  if (flt_variable == "gross domestic product"){
+    flt_variable <- c(flt_variable, "gross domestic product (bottom up)")
+    include_bottomup <- TRUE 
+  } else {
+    include_bottomup <- FALSE
+  }
   for (j in seq(1, length(periods))){
     flt_period <- periods[j]
     plt_nowcast_and_news(
-      fsubset(df_fore, period == flt_period  & variable == flt_variable),
+      fsubset(df_fore, period == flt_period  & variable %in% flt_variable),
       fsubset(df_news, period == paste0(lubridate::year(flt_period), "Q", ceiling(lubridate::month(flt_period) / 3))  & target == flt_variable),
       vintages,
       paste0(flt_variable, " (", convert_date_to_str(flt_period), "): equal-weight pool"),
-      ew_pool = TRUE
+      ew_pool = TRUE,
+      include_bottomup = include_bottomup
     )
     ggsave(
       paste0(dir_graphs, vars$mnemonic[i], "_", convert_date_to_str(flt_period), "_equalweightpool.pdf"), 
@@ -89,12 +94,12 @@ for (i in seq(1, nrow(vars))){
 
     for (flt_model in models){
       plt_nowcast_and_news(
-        fsubset(df_fore, period == flt_period  & variable == flt_variable & model == flt_model),
+        fsubset(df_fore, period == flt_period  & variable %in% flt_variable & model == flt_model),
         fsubset(df_news, period == convert_date_to_str(flt_period) & target == flt_variable & model == flt_model),
         vintages,
-        paste0(flt_variable, " (", convert_date_to_str(flt_period), "): ", clean_up_model_name(flt_model))
+        paste0(flt_variable, " (", convert_date_to_str(flt_period), "): ", clean_up_model_name(flt_model)),
+        include_bottomup = include_bottomup
       )
-      
       ggsave(
         paste0(dir_graphs, "models/", vars$mnemonic[i], "_", convert_date_to_str(flt_period), "_", flt_model, ".pdf"), 
         width = 20, 
@@ -103,7 +108,7 @@ for (i in seq(1, nrow(vars))){
       )
     }
     
-    plt_fancharts(
+    plt_forecastrange(
       fsubset(df_fore, variable == flt_variable & period == flt_period), 
       vintages,
       paste0(flt_variable, " (", convert_date_to_str(flt_period), ")")
