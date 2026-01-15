@@ -1,4 +1,4 @@
-plt_fancharts <- function(df_fore, vintages, str_title){
+plt_forecastrange <- function(df_fore, vintages, str_title){
   df_plt <- df_fore |> 
     fsubset(variable == flt_variable & period == flt_period) |>
     fgroup_by(vintage) |> 
