@@ -130,4 +130,4 @@ write.csv(
   row.names = FALSE
 )
 
-print(paste0("Done converting mat vintages to csv and writing to", paste0(dir_main, "/vintages.csv")))
+print(paste0("Done converting mat vintages to csv and writing to ", paste0(dir_main, "/vintages.csv")))
