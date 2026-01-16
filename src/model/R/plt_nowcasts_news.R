@@ -13,19 +13,20 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
       ggplot(aes(x = vintage, group = variable, color = variable))+
       geom_point(aes(, y = value), size = 0.9, alpha = 0.5)+
       geom_line(
-        mapping = aes(y = ew_pool), 
+        mapping = aes(y = ew_pool, linetype = variable), 
         data = df_ew_pool |> fsubset(vintage %in% vintages),
         linewidth = 1.1
       )+
       geom_label(
         mapping = aes(y = ew_pool, label = round(ew_pool, 2), vjust = variable), 
         data = df_ew_pool |> fsubset(vintage %in% vintages), 
-        size = 3,
-        show.legend = FALSE
+        size = 3
       )+
+      guides(label = FALSE, linetype = FALSE)
       scale_x_date(breaks = vintages, date_labels = "%b %d", limits = c(min(vintages) - lubridate::days(7), max(vintages) + lubridate::days(7)))+ 
       scale_y_continuous(labels = function(x) format(x, nsmall = 2))+
-      scale_color_manual(values = c("#EFAC00", "#9C55E3"), name = NULL)+
+      scale_color_manual(values = c("#1B1B1B", "#4A5568"), name = NULL)+
+      scale_linetype_manual(values = c("top-down" = "solid", "bottom-up" = "dashed"))+
       geomtextpath::scale_vjust_manual(values = c("top-down" = 0, "bottom-up" = 1))+
       labs(
         title = str_title,
@@ -37,7 +38,8 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
       theme(
         legend.position = "bottom",
         legend.title = element_blank(),
-        legend.text=element_text(size=6)
+        legend.text=element_text(size=6),
+        caption.text=element_text(size = 4)
       )
   } else {
     df_ew_pool <- df_fore |> 
@@ -66,7 +68,10 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
         caption = if(ew_pool) "Dots represent forecasts of different model specifications, the line and labels indicate the equally-weighted pool." else NULL,
         x = "forecast date", y = "%"
       )+
-      theme_minimal()
+      theme_minimal()+
+      theme(
+        caption.text=element_text(size = 4)
+      )
   }
   # news
   npg_modified <- c(
@@ -97,6 +102,14 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
   df_rev$revision <- df_rev$delta - df_rev$sum_impact
   df_plt_news <- rbind(df_plt_news, data.frame(vintage = df_rev$vintage, group = "revisions", impact_ew_pool = df_rev$revision))
   
+  if(ew_pool & include_bottomup) {
+    str_caption = "Average impacts across different model specifications. News decomposition refers to the top-down forecast."
+  }  else if (ew_pool){
+    str_caption = "Average impacts across different model specifications."
+  } else {
+    str_caption = NULL
+  }
+
   plt_news <- df_plt_news |> 
     ggplot(aes(x = vintage, y = impact_ew_pool, group = group, fill = group))+
     geom_bar(position = "stack", stat="identity", width = 6)+
@@ -104,14 +117,15 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
     scale_y_continuous(labels = function(x) format(x, nsmall = 2))+
     labs(
       subtitle = "News decomposition", 
-      caption = if(ew_pool) "Average impacts across different model specifications." else NULL,
+      caption = str_caption,
       x = "forecast date", y = "ppts"
     )+
     theme_minimal()+
     theme(
       legend.position = "bottom",
       legend.title = element_blank(),
-      legend.text=element_text(size=6)
+      legend.text=element_text(size=6),
+      caption.text=element_text(size = 4)
     )+
     scale_fill_manual(values = npg_modified)
   
