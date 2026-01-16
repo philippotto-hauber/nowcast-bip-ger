@@ -6,7 +6,7 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
     
     df_ew_pool <- df_fore |> 
       fgroup_by(vintage, variable) |> 
-      fsummarise(ew_pool = round(mean(value), 2))
+      fsummarise(ew_pool = round(mean(value), 4))
     
     plt_fore <- df_fore |> 
       fsubset(vintage %in% vintages) |> 
@@ -18,18 +18,20 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
         linewidth = 1.1
       )+
       geom_label(
-        mapping = aes(y = ew_pool, label = round(ew_pool, 2)), 
+        mapping = aes(y = ew_pool, label = round(ew_pool, 2), vjust = variable), 
         data = df_ew_pool |> fsubset(vintage %in% vintages), 
-        size = 3
+        size = 3,
+        show.legend = FALSE
       )+
       scale_x_date(breaks = vintages, date_labels = "%b %d", limits = c(min(vintages) - lubridate::days(7), max(vintages) + lubridate::days(7)))+ 
       scale_y_continuous(labels = function(x) format(x, nsmall = 2))+
       scale_color_manual(values = c("#EFAC00", "#9C55E3"), name = NULL)+
+      geomtextpath::scale_vjust_manual(values = c("top-down" = 0, "bottom-up" = 1))+
       labs(
         title = str_title,
         subtitle = "Nowcasts",
         caption = if(ew_pool) "Dots represent forecasts of different model specifications, the line and labels indicate the equally-weighted pool." else NULL,
-        x = "", y = "%"
+        x = "forecast date", y = "%"
       )+
       theme_minimal()+
       theme(
@@ -62,7 +64,7 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
         title = str_title,
         subtitle = "Nowcasts",
         caption = if(ew_pool) "Dots represent forecasts of different model specifications, the line and labels indicate the equally-weighted pool." else NULL,
-        x = "", y = "%"
+        x = "forecast date", y = "%"
       )+
       theme_minimal()
   }
@@ -103,7 +105,7 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
     labs(
       subtitle = "News decomposition", 
       caption = if(ew_pool) "Average impacts across different model specifications." else NULL,
-      x = "", y = "ppts"
+      x = "forecast date", y = "ppts"
     )+
     theme_minimal()+
     theme(
