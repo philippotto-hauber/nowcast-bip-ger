@@ -109,9 +109,10 @@ for (i in seq(1, nrow(vars))){
     }
     
     plt_forecastrange(
-      fsubset(df_fore, variable == flt_variable & period == flt_period), 
+      fsubset(df_fore, variable %in% flt_variable & period == flt_period), 
       vintages,
-      paste0(flt_variable, " (", convert_date_to_str(flt_period), ")")
+      paste0(flt_variable, " (", convert_date_to_str(flt_period), ")"),
+      include_bottomup = include_bottomup
     )
     
     ggsave(
