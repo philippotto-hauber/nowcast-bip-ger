@@ -59,7 +59,7 @@ df_fore$vintage <- readr::parse_date(df_fore$vintage, locale = readr::locale("en
 df_fore$period <- readr::parse_date(df_fore$period, locale = readr::locale("en"))
 
 df_news <- read.csv(paste0(dir_root, "/Nowcasts/", nowcast_year, "Q", nowcast_quarter, "/output_csv/news.csv"))
-df_news$vintage <- readr::parse_date(df_news$vintage, format = "%d-%b-%Y", locale = readr::locale("en"))
+df_news$vintage <- readr::parse_date(df_news$vintage, locale = readr::locale("en"))
 
 df_news$group[df_news$group == "ifo" | df_news$group == "ESI"] <- "surveys"
 
