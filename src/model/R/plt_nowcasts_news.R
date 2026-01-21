@@ -6,7 +6,7 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
     
     df_ew_pool <- df_fore |> 
       fgroup_by(vintage, variable) |> 
-      fsummarise(ew_pool = round(mean(value), 4))
+      fsummarise(ew_pool = mean(value))
     
     plt_fore <- df_fore |> 
       fsubset(vintage %in% vintages) |> 
@@ -18,16 +18,17 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
         linewidth = 1.1
       )+
       geom_label(
-        mapping = aes(y = ew_pool, label = round(ew_pool, 2), vjust = variable), 
+        mapping = aes(y = ew_pool, label = sprintf("%.2f", ew_pool), vjust = variable), 
         data = df_ew_pool |> fsubset(vintage %in% vintages), 
-        size = 3
+        size = 3,
+        show.legend = FALSE
       )+
-      guides(label = FALSE, linetype = FALSE)
+      guides(point = FALSE, label = FALSE, linetype = FALSE)+
       scale_x_date(breaks = vintages, date_labels = "%b %d", limits = c(min(vintages) - lubridate::days(7), max(vintages) + lubridate::days(7)))+ 
       scale_y_continuous(labels = function(x) format(x, nsmall = 2))+
-      scale_color_manual(values = c("#1B1B1B", "#4A5568"), name = NULL)+
+      scale_color_manual(values = c("top-down" = "#1B1B1B", "bottom-up" = "#007A7C"), name = NULL)+
       scale_linetype_manual(values = c("top-down" = "solid", "bottom-up" = "dashed"))+
-      geomtextpath::scale_vjust_manual(values = c("top-down" = 0, "bottom-up" = 1))+
+      geomtextpath::scale_vjust_manual(values = c("top-down" = -0.5, "bottom-up" = 1.5))+
       labs(
         title = str_title,
         subtitle = "Nowcasts",
@@ -39,8 +40,9 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
         legend.position = "bottom",
         legend.title = element_blank(),
         legend.text=element_text(size=6),
-        caption.text=element_text(size = 4)
-      )
+        plot.caption=element_text(size = 6)
+      )+
+      coord_cartesian(clip = "off")
   } else {
     df_ew_pool <- df_fore |> 
       fgroup_by(vintage) |> 
@@ -70,7 +72,7 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
       )+
       theme_minimal()+
       theme(
-        caption.text=element_text(size = 4)
+        plot.caption=element_text(size = 6)
       )
   }
   # news
@@ -125,7 +127,8 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
       legend.position = "bottom",
       legend.title = element_blank(),
       legend.text=element_text(size=6),
-      caption.text=element_text(size = 4)
+      plot.caption=element_text(size = 6),
+      legend.key.size = unit(0.3, "cm")
     )+
     scale_fill_manual(values = npg_modified)
   
