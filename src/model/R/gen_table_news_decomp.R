@@ -1,11 +1,11 @@
-# args <- commandArgs(trailingOnly = TRUE)
-# dir_root <- args[1]
-# nowcast_year <- args[2]
-# nowcast_quarter <- args[3]
+args <- commandArgs(trailingOnly = TRUE)
+dir_root <- args[1]
+nowcast_year <- args[2]
+nowcast_quarter <- args[3]
 # for debugging
-dir_root <- "C:/Users/Hauber-P/Documents/dev"
-nowcast_year <- 2025
-nowcast_quarter <- 4
+# dir_root <- "C:/Users/Hauber-P/Documents/dev"
+# nowcast_year <- 2025
+# nowcast_quarter <- 4
 
 # setup ----
 library(collapse)
@@ -20,17 +20,17 @@ vars <- data.frame(
 dir_tables <- paste0(dir_root, "/Nowcasts/", nowcast_year, "Q", nowcast_quarter, "/tables/")
 if (!dir.exists(paste0(dir_tables, "/models"))) dir.create(paste0(dir_tables, "/models"), recursive = TRUE)
 
-gen_table_news_decomp <- function(dat, threshold, str_target, str_period, str_model){
+gen_table_news_decomp <- function(dat, threshold, str_target, str_period, str_model, flag_ew = FALSE){
   vintages_all <- sort(unique(dat$vintage))
   dat <- dat |> 
   collapse::fmutate(abs_val = abs(impact)) |> 
   collapse::fsubset(abs_val >= threshold) |>  
   collapse::roworder(-abs_val) |> 
-  collapse::fselect(vintage, group, variable, forecast, actual, weight, impact)
+  collapse::fselect(icon, vintage, group, variable, forecast, actual, weight, impact)
   
   vintages <- sort(unique(dat$vintage))
 
-  str_footnote <- paste0("Variable releases with an absolute impact smaller than ", threshold, " have been dropped. There were no releases with an absolute impact larger than for the following vintages: ", as.Date(setdiff(vintages_all, vintages)))
+  str_footnote <- paste0("Variable releases with an absolute impact smaller than ", threshold, " have been dropped.", ifelse(length(setdiff(vintages_all, vintages)) == 0, "", paste0(" There were no releases with an absolute impact larger than for the following vintages: ", as.Date(setdiff(vintages_all, vintages)))))
 
   t <- dat |> 
   gt::gt(groupname_col = "vintage") |>
@@ -45,12 +45,17 @@ gen_table_news_decomp <- function(dat, threshold, str_target, str_period, str_mo
   ) |> 
   gt::fmt_number(
     columns = c("weight", "impact"),
-    decimals = 4
+    decimals = 3
+  ) |> 
+  gt::cols_label(
+    icon = ""
   ) |> 
   gt::tab_spanner(
     label = "impact = (forecast - actual) x weight",
     columns = c(forecast, actual, weight, impact)
   ) |> 
+  gt::fmt_icon(columns = "icon", height = "1em") |>
+  gt::cols_align(align = "center", columns = "icon") |>   
   gt::tab_style(
     style = list(
       cell_fill(color = "#C6EFCE"),
@@ -96,6 +101,25 @@ df_ew <- df_news |>
 df_news <- rbind(df_news, df_ew)
 
 # loop to generate and save tables ----
+
+# add column with icons
+icon_map <- c(
+  "production"   = "industry",
+  "orders"       = "clipboard-list",
+  "turnover"     = "money-bill-transfer",
+  "prices"       = "euro-sign",
+  "labor market" = "people-group",
+  "financial"    = "landmark",
+  "ifo"      = "pen-to-square",
+  "ESI"      = "pen-to-square",
+  "national accounts" = "magnifying-glass-chart"
+)
+
+df_news <- df_news |> 
+  collapse::fmutate(
+    icon = icon_map[group]
+  )
+
 models <- unique(df_news$model) 
 targets <- unique(df_news$target)
 periods <- unique(df_news$period)
