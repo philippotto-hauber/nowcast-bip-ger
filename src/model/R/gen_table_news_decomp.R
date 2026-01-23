@@ -1,11 +1,11 @@
-args <- commandArgs(trailingOnly = TRUE)
-dir_root <- args[1]
-nowcast_year <- args[2]
-nowcast_quarter <- args[3]
+# args <- commandArgs(trailingOnly = TRUE)
+# dir_root <- args[1]
+# nowcast_year <- args[2]
+# nowcast_quarter <- args[3]
 # for debugging
-# dir_root <- "C:/Users/Hauber-P/Documents/dev"
-# nowcast_year <- 2025
-# nowcast_quarter <- 4
+dir_root <- "C:/Users/Hauber-P/Documents/dev"
+nowcast_year <- 2025
+nowcast_quarter <- 4
 
 # setup ----
 library(collapse)
@@ -68,6 +68,13 @@ gen_table_news_decomp <- function(dat, threshold, str_target, str_period, str_mo
   ) |> 
   gt::tab_style(
     style = list(
+      cell_fill(color = "gray95"),
+      cell_text(size = "larger", align = "center", weight = "bold")
+    ),
+    locations = cells_row_groups(groups = everything())
+  ) |> 
+  gt::tab_style(
+    style = list(
       cell_fill(color = "#FFC7CE"),
       cell_text(color = "#9C0006", weight = "bold")
     ),
@@ -100,9 +107,7 @@ df_ew <- df_news |>
 
 df_news <- rbind(df_news, df_ew)
 
-# loop to generate and save tables ----
-
-# add column with icons
+# add column with icons ----
 icon_map <- c(
   "production"   = "industry",
   "orders"       = "clipboard-list",
@@ -120,9 +125,23 @@ df_news <- df_news |>
     icon = icon_map[group]
   )
 
+# loop to generate and save tables ----
 models <- unique(df_news$model) 
 targets <- unique(df_news$target)
 periods <- unique(df_news$period)
+
+m <- "equal-weight pool"
+t <- targets[1]
+p <- periods[1]
+
+gen_table_news_decomp(
+        df_news |> 
+          fsubset(target == t & period == p & model == m),
+        threshold = 0.01,
+        str_target = t, 
+        str_period = p, 
+        str_model = m
+      )
 
 for (t in targets){
   for (p in periods){
