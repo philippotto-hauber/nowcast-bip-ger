@@ -50,10 +50,6 @@ gen_table_news_decomp <- function(dat, threshold, str_target, str_period, str_mo
   gt::cols_label(
     icon = ""
   ) |> 
-  gt::tab_spanner(
-    label = "impact = (forecast - actual) x weight",
-    columns = c(forecast, actual, weight, impact)
-  ) |> 
   gt::fmt_icon(columns = "icon", height = "1em") |>
   gt::cols_align(align = "center", columns = "icon") |>   
   gt::tab_style(
@@ -83,9 +79,13 @@ gen_table_news_decomp <- function(dat, threshold, str_target, str_period, str_mo
       rows = impact < 0
     )
   ) |> 
-  tab_footnote(
+  gt::tab_footnote(
     footnote = str_footnote,
     location = cells_title(groups = "title")
+  ) |> 
+  gt::tab_footnote(
+    footnote = "impact = (forecast - actual) x weight",
+    location = cells_column_labels(columns = "impact")
   ) 
   return(t)
 }
