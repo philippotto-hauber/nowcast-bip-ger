@@ -20,18 +20,7 @@ vars <- data.frame(
 dir_tables <- paste0(dir_root, "/Nowcasts/", nowcast_year, "Q", nowcast_quarter, "/tables/")
 if (!dir.exists(paste0(dir_tables, "/models"))) dir.create(paste0(dir_tables, "/models"), recursive = TRUE)
 
-gen_table_news_decomp <- function(dat, threshold, str_target, str_period, str_model, flag_ew = FALSE){
-  vintages_all <- sort(unique(dat$vintage))
-  dat <- dat |> 
-  collapse::fmutate(abs_val = abs(impact)) |> 
-  collapse::fsubset(abs_val >= threshold) |>  
-  collapse::roworder(-abs_val) |> 
-  collapse::fselect(icon, vintage, group, variable, ref_period, trafo, forecast, actual, weight, impact)
-  
-  vintages <- sort(unique(dat$vintage))
-
-  str_footnote <- paste0("Variable releases with an absolute impact smaller than ", threshold, " have been dropped.", ifelse(length(setdiff(vintages_all, vintages)) == 0, "", paste0(" There were no releases with an absolute impact larger than for the following vintages: ", as.Date(setdiff(vintages_all, vintages)))))
-
+gen_table_news_decomp <- function(dat, str_target, str_period, str_model, str_footnote, str_footnote_model){
   t <- dat |> 
   gt::gt(groupname_col = "vintage") |>
   row_group_order(groups = rev(as.character(vintages))) |> 
@@ -90,12 +79,17 @@ gen_table_news_decomp <- function(dat, threshold, str_target, str_period, str_mo
   ) |> 
   gt::tab_footnote(
     footnote = str_footnote,
-    location = cells_title(groups = "title")
+    locations = cells_title(groups = "title")
   ) |> 
   gt::tab_footnote(
     footnote = "impact = (forecast - actual) x weight",
-    location = cells_column_labels(columns = "impact")
-  ) 
+    locations = cells_column_labels(columns = "impact")
+  ) |>
+  gt::tab_footnote(
+    footnote = str_footnote_model,
+    locations = cells_title(groups = "subtitle")
+  )
+
   return(t)
 }
 
@@ -172,32 +166,65 @@ df_news$trafo[df_news$trafo == "3"] <- "$\\Delta \\text{log()}$"
 
 # loop to generate and save tables ----
 models <- unique(df_news$model) 
+n_spec <- length(setdiff(models, "equal-weight pool"))
 targets <- unique(df_news$target)
 periods <- unique(df_news$period)
+threshold <- 0.01
 
-m <- "equal-weight pool"
-t <- targets[1]
-p <- periods[1]
+# m <- "equal-weight pool"
+# t <- targets[1]
+# p <- periods[1]
 
-gen_table_news_decomp(
-        df_news |> 
-          fsubset(target == t & period == p & model == m),
-        threshold = 0.01,
-        str_target = t, 
-        str_period = p, 
-        str_model = m
-      )
+# gen_table_news_decomp(
+#         df_tmp,
+#         str_target = t, 
+#         str_period = p, 
+#         str_model = m, 
+#         str_footnote,
+#         str_footnote_model
+#       )
 
 for (t in targets){
   for (p in periods){
     for (m in models){
+      df_tmp <- df_news |> 
+        fsubset(target == t & period == p & model == m)
+
+      vintages_all <- sort(unique(df_tmp$vintage))
+      df_tmp <- df_tmp |> 
+        collapse::fmutate(abs_val = abs(impact)) |> 
+        collapse::fsubset(abs_val >= threshold) |>  
+        collapse::roworder(-abs_val) |> 
+        collapse::fselect(icon, vintage, group, variable, ref_period, trafo, forecast, actual, weight, impact)
+
+      vintages <- sort(unique(df_tmp$vintage))
+      str_footnote <- paste0("Variable releases with an absolute impact smaller than ", threshold, " have been dropped.", ifelse(length(setdiff(vintages_all, vintages)) == 0, "", paste0(" There were no releases with an absolute impact larger than for the following vintages: ", as.Date(setdiff(vintages_all, vintages)))))
+
+      if (m == "equal-weight pool"){
+        str_footnote_model <- paste0("Average impact across ", n_spec, " model specifications")
+      } else {
+          parts <- base::strsplit(m, "_")[[1]]  
+          nr_val <- parts[2]
+          np_val <- parts[4]
+          nj_val <- parts[6]
+          str_footnote_model <- paste0(
+            "Model with ", nr_val, " factors, ", 
+            np_val, " lags in the factor VAR and ", 
+            ifelse(
+              nj_val == 0, 
+              "no auto-correlation in the idiosyncratic components",
+            paste0(" AR(", nj_val, ") idiosyncratic components")
+            )
+          )
+      }
+
       gen_table_news_decomp(
-        df_news |> 
-          fsubset(target == t & period == p & model == m),
-        threshold = 0.01,
+        df_tmp,
         str_target = t, 
         str_period = p, 
-        str_model = m
+        str_model = m,
+        str_footnote = str_footnote,
+        str_footnote_model = str_footnote_model
       ) |> 
       gtsave(
         ifelse(
