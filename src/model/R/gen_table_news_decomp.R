@@ -26,7 +26,7 @@ gen_table_news_decomp <- function(dat, threshold, str_target, str_period, str_mo
   collapse::fmutate(abs_val = abs(impact)) |> 
   collapse::fsubset(abs_val >= threshold) |>  
   collapse::roworder(-abs_val) |> 
-  collapse::fselect(icon, vintage, group, variable, forecast, actual, weight, impact)
+  collapse::fselect(icon, vintage, group, variable, ref_period, trafo, forecast, actual, weight, impact)
   
   vintages <- sort(unique(dat$vintage))
 
@@ -48,10 +48,26 @@ gen_table_news_decomp <- function(dat, threshold, str_target, str_period, str_mo
     decimals = 3
   ) |> 
   gt::cols_label(
-    icon = ""
+    icon = "",
+    trafo = gt::html(fontawesome::fa("screwdriver-wrench")),
+    ref_period = gt::html(fontawesome::fa("calendar-days"))
   ) |> 
   gt::fmt_icon(columns = "icon", height = "1em") |>
   gt::cols_align(align = "center", columns = "icon") |>   
+  gt::cols_align(align = "center", columns = "trafo") |> 
+  gt::cols_align(align = "center", columns = "ref_period") |>    
+  gt::fmt_markdown(columns = trafo) |> 
+  gt::tab_style(
+    style = list(
+      cell_fill(color = "gray95"),
+      cell_text(align = "center", weight = "bold")
+    ),
+    locations = cells_row_groups(groups = everything())
+  ) |> 
+  gt::tab_style(
+    style = cell_text(size = "smaller"),
+    locations = cells_body(columns = c("ref_period", "trafo"))
+  ) |> 
   gt::tab_style(
     style = list(
       cell_fill(color = "#C6EFCE"),
@@ -61,13 +77,6 @@ gen_table_news_decomp <- function(dat, threshold, str_target, str_period, str_mo
       columns = impact,
       rows = impact > 0
     )
-  ) |> 
-  gt::tab_style(
-    style = list(
-      cell_fill(color = "gray95"),
-      cell_text(size = "larger", align = "center", weight = "bold")
-    ),
-    locations = cells_row_groups(groups = everything())
   ) |> 
   gt::tab_style(
     style = list(
@@ -124,6 +133,42 @@ df_news <- df_news |>
   collapse::fmutate(
     icon = icon_map[group]
   )
+
+# calculate reference period ----
+df_historic <- read.csv(paste0(dir_root, "/Echtzeitdatensatz/vintages/vintages.csv"))
+df_historic$vintage <- readr::parse_date(df_historic$vintage)
+df_historic$period <- readr::parse_date(df_historic$period)
+
+df_historic <- df_historic |>
+  fmutate(bothNA = is.na(raw) & is.na(value)) |>
+  fsubset(!bothNA) |> 
+  fselect(-bothNA)
+
+df_news <- collapse::join(
+  df_news,
+  df_historic |> 
+  fgroup_by(vintage, variable, group) |> 
+  fmutate(is_max_period = period == max(period)) |> 
+  fungroup() |> 
+  fsubset(is_max_period) |> 
+  fmutate(ref_period = paste0(lubridate::year(period), "M", lubridate::month(period))) |> 
+  fselect(vintage, group, variable, ref_period),
+  on = c("vintage", "variable", "group"),
+  how = "left"
+)
+
+# and add trafo column ----
+df_news <- collapse::join(
+  df_news, 
+  df_historic |> 
+    fselect(variable, group, trafo),
+  on = c("variable", "group"),
+  how = "left"
+)
+# recode
+df_news$trafo[df_news$trafo == "1"] <- "-"
+df_news$trafo[df_news$trafo == "2"] <- "$\\Delta$"
+df_news$trafo[df_news$trafo == "3"] <- "$\\Delta \\text{log()}$"
 
 # loop to generate and save tables ----
 models <- unique(df_news$model) 
