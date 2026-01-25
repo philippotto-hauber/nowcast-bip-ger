@@ -20,7 +20,7 @@ vars <- data.frame(
 dir_tables <- paste0(dir_root, "/Nowcasts/", nowcast_year, "Q", nowcast_quarter, "/tables/")
 if (!dir.exists(paste0(dir_tables, "/models"))) dir.create(paste0(dir_tables, "/models"), recursive = TRUE)
 
-gen_table_news_decomp <- function(dat, str_target, str_period, str_model, str_footnote, str_footnote_model){
+gen_table_news_decomp <- function(dat, str_target, str_period, str_model, str_footnote_vintage, str_footnote_model){
   t <- dat |> 
   gt::gt(groupname_col = "vintage") |>
   row_group_order(groups = rev(as.character(vintages))) |> 
@@ -78,7 +78,7 @@ gen_table_news_decomp <- function(dat, str_target, str_period, str_model, str_fo
     )
   ) |> 
   gt::tab_footnote(
-    footnote = str_footnote,
+    footnote = str_footnote_vintage,
     locations = cells_title(groups = "title")
   ) |> 
   gt::tab_footnote(
@@ -151,7 +151,7 @@ df_news <- collapse::join(
   how = "left"
 )
 
-# and add trafo column ----
+# add trafo column ----
 df_news <- collapse::join(
   df_news, 
   df_historic |> 
@@ -169,27 +169,15 @@ models <- unique(df_news$model)
 n_spec <- length(setdiff(models, "equal-weight pool"))
 targets <- unique(df_news$target)
 periods <- unique(df_news$period)
-threshold <- 0.01
-
-# m <- "equal-weight pool"
-# t <- targets[1]
-# p <- periods[1]
-
-# gen_table_news_decomp(
-#         df_tmp,
-#         str_target = t, 
-#         str_period = p, 
-#         str_model = m, 
-#         str_footnote,
-#         str_footnote_model
-#       )
+threshold_impact <- 0.01
 
 for (t in targets){
   for (p in periods){
-    for (m in models){
+    for (m in models){      
       df_tmp <- df_news |> 
         fsubset(target == t & period == p & model == m)
 
+      # generate vintage footnote
       vintages_all <- sort(unique(df_tmp$vintage))
       df_tmp <- df_tmp |> 
         collapse::fmutate(abs_val = abs(impact)) |> 
@@ -198,8 +186,9 @@ for (t in targets){
         collapse::fselect(icon, vintage, group, variable, ref_period, trafo, forecast, actual, weight, impact)
 
       vintages <- sort(unique(df_tmp$vintage))
-      str_footnote <- paste0("Variable releases with an absolute impact smaller than ", threshold, " have been dropped.", ifelse(length(setdiff(vintages_all, vintages)) == 0, "", paste0(" There were no releases with an absolute impact larger than for the following vintages: ", as.Date(setdiff(vintages_all, vintages)))))
+      str_footnote_vintage <- paste0("Variable releases with an absolute impact smaller than ", threshold_impact, " have been dropped.", ifelse(length(setdiff(vintages_all, vintages)) == 0, "", paste0(" There were no releases with an absolute impact larger than ", threshold_impact, " for the following vintages: ", as.Date(setdiff(vintages_all, vintages)))))
 
+      # generate model footnote
       if (m == "equal-weight pool"){
         str_footnote_model <- paste0("Average impact across ", n_spec, " model specifications")
       } else {
@@ -218,12 +207,13 @@ for (t in targets){
           )
       }
 
+      # now we are good to go! 
       gen_table_news_decomp(
         df_tmp,
         str_target = t, 
         str_period = p, 
         str_model = m,
-        str_footnote = str_footnote,
+        str_footnote_vintage = str_footnote_vintage,
         str_footnote_model = str_footnote_model
       ) |> 
       gtsave(
