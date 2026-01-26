@@ -4,7 +4,7 @@ function data_ifo = f_load_ifo(vintage, dir_rawdata, dir_repo)
 dirname = [dir_rawdata '/ifo/'] ;
 
 %% ifo options
-data_ifo.names = {'ifo_lage', 'ifo_erwartung'};
+data_ifo.names = {'ifo: Gewerblich Wirtschaft, Lage', 'ifo: Gewerblich Wirtschaft, Erwartung'};
 data_ifo.groups = {'ifo', 'ifo'};
 data_ifo.trafo = [2, 2];
 data_ifo.type = {'m', 'm'} ; 
