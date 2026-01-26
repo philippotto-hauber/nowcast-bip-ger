@@ -190,7 +190,7 @@ for (t in targets){
 
       # generate model footnote
       if (m == "equal-weight pool"){
-        str_footnote_model <- paste0("Average impact across ", n_spec, " model specifications")
+        str_footnote_model <- paste0("Average forecast, weight and impact across ", n_spec, " model specifications")
       } else {
           parts <- base::strsplit(m, "_")[[1]]  
           nr_val <- parts[2]
