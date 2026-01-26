@@ -181,7 +181,7 @@ for (t in targets){
       vintages_all <- sort(unique(df_tmp$vintage))
       df_tmp <- df_tmp |> 
         collapse::fmutate(abs_val = abs(impact)) |> 
-        collapse::fsubset(abs_val >= threshold) |>  
+        collapse::fsubset(abs_val >= threshold_impact) |>  
         collapse::roworder(-abs_val) |> 
         collapse::fselect(icon, vintage, group, variable, ref_period, trafo, forecast, actual, weight, impact)
 
