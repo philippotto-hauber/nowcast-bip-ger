@@ -197,8 +197,8 @@ for (t in targets){
           np_val <- parts[4]
           nj_val <- parts[6]
           str_footnote_model <- paste0(
-            "Model with ", nr_val, " factors, ", 
-            np_val, " lags in the factor VAR and ", 
+            "Model with ", nr_val, " factor(s), ", 
+            np_val, " lag(s) in the factor VAR and ", 
             ifelse(
               nj_val == 0, 
               "no auto-correlation in the idiosyncratic components",
