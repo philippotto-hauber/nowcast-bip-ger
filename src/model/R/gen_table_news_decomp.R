@@ -1,11 +1,11 @@
-# args <- commandArgs(trailingOnly = TRUE)
-# dir_root <- args[1]
-# nowcast_year <- args[2]
-# nowcast_quarter <- args[3]
+args <- commandArgs(trailingOnly = TRUE)
+dir_root <- args[1]
+nowcast_year <- args[2]
+nowcast_quarter <- args[3]
 # for debugging
-dir_root <- "C:/Users/Hauber-P/Documents/dev"
-nowcast_year <- 2025
-nowcast_quarter <- 4
+# dir_root <- "C:/Users/Hauber-P/Documents/dev"
+# nowcast_year <- 2025
+# nowcast_quarter <- 4
 
 # setup ----
 library(collapse)
