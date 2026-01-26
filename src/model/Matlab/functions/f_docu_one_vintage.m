@@ -1,4 +1,4 @@
-function  f_docuII(nowcast_new,vintages,details,options,savenamemaster,flag_ewpool,dirname)
+function  f_docuII(nowcast_new,vintages,details,Nr,Np,Nj,savenamemaster, varname, flag_ewpool,dirname)
 
 
 for v = 2 : size(nowcast_new,2) 
@@ -13,9 +13,9 @@ for v = 2 : size(nowcast_new,2)
         temp = '####### equal-weight pool #######################################' ;
         fprintf(fid,'%s \r\n',temp);
     else
-        fprintf(fid,'####### Nr = %d ##################################################\r\n',options.Nr);
-        fprintf(fid,'####### Np = %d ##################################################\r\n',options.Np);
-        fprintf(fid,'####### Nj = %d ##################################################\r\n',options.Nj);
+        fprintf(fid,'####### Nr = %d ##################################################\r\n',Nr);
+        fprintf(fid,'####### Np = %d ##################################################\r\n',Np);
+        fprintf(fid,'####### Nj = %d ##################################################\r\n',Nj);
     end
     temp = '#################################################################';
     fprintf(fid,'%s \r\n',temp);
@@ -25,7 +25,7 @@ for v = 2 : size(nowcast_new,2)
     fprintf(fid,'%s \r\n',temp);
     temp = '#-';
     fprintf(fid,'%s \r\n',temp);
-    fprintf(fid, ['#- On ' vintages{v} ', the nowcast for ' savenamemaster(10:15) ' was %4.2f percent... \r\n'], round(nowcast_new(1,v),2));
+    fprintf(fid, ['#- On ' vintages{v} ', the nowcast for ' varname ' was %4.2f percent... \r\n'], round(nowcast_new(1,v),2));
     temp = '#-';
     fprintf(fid,'%s \r\n',temp);
     fprintf(fid, '#- ... a revision of %4.2f percentage points... \r\n',round(nowcast_new(1,v),2)-round(nowcast_new(1,v-1),2));

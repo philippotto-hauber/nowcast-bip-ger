@@ -24,24 +24,16 @@ data_BuBaRTD.rawdata = [] ;
 flag_novintage = zeros( 1 , length(data_BuBaRTD.names) ) ; 
 for n = 1 : length(data_BuBaRTD.names) 
     
-    % load data and dates
-    
-    if isfile( [  dir_rawdata '\BuBa RTD\' data_BuBaRTD.groups{n} '\' data_BuBaRTD.seriesnames{n} '_cur.csv'] )
-         temp = importdata([   dir_rawdata '\BuBa RTD\' data_BuBaRTD.groups{n} '\' data_BuBaRTD.seriesnames{n} '_cur.csv'],',',5) ; 
-    else
-         temp = importdata([ dir_rawdata '\BuBa RTD\' data_BuBaRTD.groups{n} '\' data_BuBaRTD.seriesnames{n} '.csv'],',',1) ; 
-    end
-    
-    num = temp.data ; 
-    firstdate = year(temp.textdata(2,1)) + month(temp.textdata(2,1)) / 12 ;     
-    tempvintages = temp.textdata(1,2:end) ;
-    for v = 1 : length( tempvintages )
-        tempstr =  tempvintages{v} ;
-        tempvintages{ v } = tempstr( 2 : end - 1 ) ; 
-    end
+    % load data, dates and vintages
+    dir_tmp = [ dir_rawdata '\BuBa RTD\' data_BuBaRTD.groups{n} '\' data_BuBaRTD.seriesnames{n}];
+    num = readmatrix([ dir_tmp '_num.csv']);
+    dates_tmp = readmatrix([ dir_tmp '_dates.csv'], 'OutputType','string');
+    firstdate = year(dates_tmp(1)) + month(dates_tmp(1)) / 12 ;  
+    tempvintages =  readmatrix([ dir_tmp '_vintages.csv'], 'OutputType','string');
     datavintages_num = datenum(tempvintages) ; 
-    clearvars temp  tempstr tempvintages
-       
+
+    clearvars dates_tmp tempvintages
+ 
     % get column index corresponding to latest available vintage
     index_col = sum(datavintages_num <= datenum(vintage)) ; 
      

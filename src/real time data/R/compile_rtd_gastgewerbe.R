@@ -8,7 +8,7 @@ dir_repo <- args[2]
 
 vintages <- list.files(path = paste0(dir_repo, "/aux_real_time_data/releases/umsatz_gastgewerbe/"), pattern = "umsatz-gastgewerbe-", full.names = TRUE)
 
-source("extract_date_from_filename.R")
+source(here::here("src", "real time data", "R", "extract_date_from_filename.R"))
 
 dat <- data.frame()
 for (v in vintages)

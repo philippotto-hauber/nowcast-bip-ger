@@ -1,6 +1,6 @@
 args <- commandArgs(trailingOnly = TRUE)
 dir_main <- args[length(args)]
-#dir_main = "C:/Users/Philipp/Desktop/Echtzeitdatensatz/raw data"
+# dir_main = "C:/Users/Hauber-P/Documents/dev/Echtzeitdatensatz/raw data"
 
 # create store_dir if it does not already exist
 dir_dest <- paste0(dir_main, "/ifo")
