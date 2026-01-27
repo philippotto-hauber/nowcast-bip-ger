@@ -23,7 +23,7 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
         size = 3,
         show.legend = FALSE
       )+
-      guides(point = FALSE, label = FALSE, linetype = FALSE)+
+      guides(point = "none", label = "none", linetype = "none")+
       scale_x_date(breaks = vintages, date_labels = "%b %d", limits = c(min(vintages) - lubridate::days(7), max(vintages) + lubridate::days(7)))+ 
       scale_y_continuous(labels = function(x) format(x, nsmall = 2))+
       scale_color_manual(values = c("top-down" = "#1B1B1B", "bottom-up" = "#007A7C"), name = NULL)+
