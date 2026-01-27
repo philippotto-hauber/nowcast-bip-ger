@@ -102,7 +102,14 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
   df_rev <- df_plt_news |> fgroup_by(vintage) |> fsummarise(sum_impact = sum(impact_ew_pool))
   df_rev$delta <- diff(df_ew_pool$ew_pool)
   df_rev$revision <- df_rev$delta - df_rev$sum_impact
-  df_plt_news <- rbind(df_plt_news, data.frame(vintage = df_rev$vintage, group = "revisions", impact_ew_pool = df_rev$revision))
+  df_plt_news <- rbind(
+    df_plt_news, 
+    data.frame(
+      vintage = df_rev$vintage, 
+      group = "revisions", 
+      impact_ew_pool = df_rev$revision
+    )
+  )
   
   if(ew_pool & include_bottomup) {
     str_caption = "Average impacts across different model specifications. News decomposition refers to the top-down forecast."
