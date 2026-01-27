@@ -40,7 +40,8 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
         legend.position = "bottom",
         legend.title = element_blank(),
         legend.text=element_text(size=6),
-        plot.caption=element_text(size = 6)
+        plot.caption=element_text(size = 6),
+        axis.text.x = element_text(angle = 60, vjust = 0.5)
       )+
       coord_cartesian(clip = "off")
   } else {
@@ -99,6 +100,7 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
   if (include_bottomup){
     df_ew_pool <- fsubset(df_ew_pool, variable == "top-down") # no news decomp for bottom-up forecasts! 
   }
+
   df_rev <- df_plt_news |> fgroup_by(vintage) |> fsummarise(sum_impact = sum(impact_ew_pool))
   df_rev$delta <- diff(df_ew_pool$ew_pool)
   df_rev$revision <- df_rev$delta - df_rev$sum_impact
@@ -135,7 +137,8 @@ plt_nowcast_and_news <- function(df_fore, df_news, vintages, str_title, ew_pool 
       legend.title = element_blank(),
       legend.text=element_text(size=6),
       plot.caption=element_text(size = 6),
-      legend.key.size = unit(0.3, "cm")
+      legend.key.size = unit(0.3, "cm"),
+      axis.text.x = element_text(angle = 60, vjust = 0.5)
     )+
     scale_fill_manual(values = npg_modified)
   
