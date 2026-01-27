@@ -28,4 +28,5 @@ calc_revisions <- function(data, v1, v2) {
 }
 # calculate revisions 
 test <- calc_revisions(data = vintages, v1 = "2025-12-30", v2 = "2026-01-15")
- head(test, 10)
+
+head(test, 10)
