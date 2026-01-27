@@ -4,7 +4,7 @@ function data_ifo = f_load_ifo(vintage, dir_rawdata, dir_repo)
 dirname = [dir_rawdata '/ifo/'] ;
 
 %% ifo options
-data_ifo.names = {'ifo: Gewerblich Wirtschaft, Lage', 'ifo: Gewerblich Wirtschaft, Erwartung'};
+data_ifo.names = {'ifo: Lage', 'ifo:  Erwartungen'};
 data_ifo.groups = {'ifo', 'ifo'};
 data_ifo.trafo = [2, 2];
 data_ifo.type = {'m', 'm'} ; 
@@ -12,7 +12,7 @@ data_ifo.flag_usestartvals =[1, 1] ;
 data_ifo.flag_sa = [0, 0];
 
 %% read in data and select vars
-[num, txt, ~] = xlsread([ dirname 'ifo_current.xlsx'], 'Wirtschaftsbereiche');
+[num, txt, ~] = xlsread([ dirname 'ifo_current.xlsx'], 'ifo Geschäftsklima Deutschland');
 row_offset = size(txt, 1) - size(num, 1);
 col_offset = size(txt, 2) - size(num, 2);
 dates_str = txt(row_offset+1:end, 1);
