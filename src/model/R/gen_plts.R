@@ -3,7 +3,7 @@ dir_root <- args[1]
 nowcast_year <- args[2]
 nowcast_quarter <- args[3]
 # for debugging
-# dir_root <- "C:/Users/Hauber-P/Documents/dev"
+# dir_root <- "C:/Users/Hauber-P/Documents"
 # nowcast_year <- 2025
 # nowcast_quarter <- 4
 
@@ -70,16 +70,16 @@ models <- unique(df_news$model)
 for (i in seq(1, nrow(vars))){
   flt_variable <- vars$name[i]
   if (flt_variable == "gross domestic product"){
-    flt_variable <- c(flt_variable, "gross domestic product (bottom up)")
     include_bottomup <- TRUE 
+    flt_variable <- c(flt_variable, paste0(flt_variable, " (bottom up)"))
   } else {
     include_bottomup <- FALSE
   }
   for (j in seq(1, length(periods))){
     flt_period <- periods[j]
     plt_nowcast_and_news(
-      fsubset(df_fore, period == flt_period  & variable %in% flt_variable),
-      fsubset(df_news, period == paste0(lubridate::year(flt_period), "Q", ceiling(lubridate::month(flt_period) / 3))  & target == flt_variable),
+      fsubset(df_fore, period == flt_period & variable %in% flt_variable),
+      fsubset(df_news, period == paste0(lubridate::year(flt_period), "Q", ceiling(lubridate::month(flt_period) / 3))  & target %in% flt_variable),
       vintages,
       paste0(flt_variable, " (", convert_date_to_str(flt_period), "): equal-weight pool"),
       ew_pool = TRUE,
@@ -94,8 +94,8 @@ for (i in seq(1, nrow(vars))){
 
     for (flt_model in models){
       plt_nowcast_and_news(
-        fsubset(df_fore, period == flt_period  & variable %in% flt_variable & model == flt_model),
-        fsubset(df_news, period == convert_date_to_str(flt_period) & target == flt_variable & model == flt_model),
+        fsubset(df_fore, period == flt_period & model == flt_model & variable %in% flt_variable),
+        fsubset(df_news, period == convert_date_to_str(flt_period) & target %in% flt_variable & model == flt_model),
         vintages,
         paste0(flt_variable, " (", convert_date_to_str(flt_period), "): ", clean_up_model_name(flt_model)),
         include_bottomup = include_bottomup
