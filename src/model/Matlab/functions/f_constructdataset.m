@@ -10,13 +10,26 @@ load( [dir_data '\vintages\dataset_' num2str(year(vintage)) '_' num2str(month(vi
 
 vintagedate = vintage ; 
 
-% ---------------------- % 
-% - sample start ------- %
+% ------------------------------- % 
+% - sample start ---------------- %
+% --1 if series starts after!---- % 
 
 index_ifo = find(abs(dataset.data_ifo.dates - samplestart)<1e-05) ;
+if isempty(index_ifo)
+    index_ifo = 1; 
+end
 index_ESIBCI = find(abs(dataset.data_ESIBCI.dates - samplestart)<1e-05) ;
+if isempty(index_ESIBCI)
+    index_ESIBCI = 1; 
+end
 index_BuBaRTD = find(abs(dataset.data_BuBaRTD.dates - samplestart)<1e-05) ;
+if isempty(index_BuBaRTD)
+    index_BuBaRTD = 1; 
+end
 index_financial = find(abs(dataset.data_financial.dates - samplestart)<1e-05) ;
+if isempty(index_financial)
+    index_financial = 1; 
+end
 
 % --------------------------- % 
 % - maximum length of data -- %
@@ -64,16 +77,6 @@ dataM = [ [ dataset.data_BuBaRTD.data(index_BuBaRTD:end,strcmp(dataset.data_BuBa
           ]' ; 
       
 dataQ =   [ dataset.data_BuBaRTD.data(index_BuBaRTD:end,~strcmp(dataset.data_BuBaRTD.type,'m')); NaN(maxobs - size(dataset.data_BuBaRTD.data(index_BuBaRTD:end,~strcmp(dataset.data_BuBaRTD.type,'m')),1),size(dataset.data_BuBaRTD.data(index_BuBaRTD:end,~strcmp(dataset.data_BuBaRTD.type,'m')),2))]' ;
- 
-
-% % select only a handful of indicators
-% ind = [1, 4, 25, 29, 46, 50, 43, 54, 64, 77, 78, 90, 91, 97, 98, 104, 107, 108, 109 117, 118, 146, 179, 178 ];
-% dataM = dataM(ind, :); 
-% dataQ = dataQ(1, :); 
-% names = names([ind, length(namesM)+1]);
-% groups = groups([ind, length(namesM)+1]);
-% flag_usestartvalsM = flag_usestartvalsM(ind);
-% flag_usestartvalsQ = flag_usestartvalsQ(1); 
 
 % -------------------------- % 
 % - dates ------------------ % 
