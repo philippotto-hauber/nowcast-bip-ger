@@ -13,7 +13,12 @@ vintagedate = vintage ;
 % ---------------------- % 
 % - sample start ------- %
 
-index_ifo = find(abs(dataset.data_ifo.dates - samplestart)<1e-05) ;
+if min(dataset.data_ifo.dates > samplestart)
+    index_ifo = 1;
+    dataset.data_ifo.data = [NaN((dataset.data_ifo.dates(1) - samplestart) * 12, size(dataset.data_ifo.data, 2)); dataset.data_ifo.data];
+else
+    index_ifo = find(abs(dataset.data_ifo.dates - samplestart)<1e-05) ;
+end
 index_ESIBCI = find(abs(dataset.data_ESIBCI.dates - samplestart)<1e-05) ;
 index_BuBaRTD = find(abs(dataset.data_BuBaRTD.dates - samplestart)<1e-05) ;
 index_financial = find(abs(dataset.data_financial.dates - samplestart)<1e-05) ;
@@ -65,16 +70,6 @@ dataM = [ [ dataset.data_BuBaRTD.data(index_BuBaRTD:end,strcmp(dataset.data_BuBa
       
 dataQ =   [ dataset.data_BuBaRTD.data(index_BuBaRTD:end,~strcmp(dataset.data_BuBaRTD.type,'m')); NaN(maxobs - size(dataset.data_BuBaRTD.data(index_BuBaRTD:end,~strcmp(dataset.data_BuBaRTD.type,'m')),1),size(dataset.data_BuBaRTD.data(index_BuBaRTD:end,~strcmp(dataset.data_BuBaRTD.type,'m')),2))]' ;
  
-
-% % select only a handful of indicators
-% ind = [1, 4, 25, 29, 46, 50, 43, 54, 64, 77, 78, 90, 91, 97, 98, 104, 107, 108, 109 117, 118, 146, 179, 178 ];
-% dataM = dataM(ind, :); 
-% dataQ = dataQ(1, :); 
-% names = names([ind, length(namesM)+1]);
-% groups = groups([ind, length(namesM)+1]);
-% flag_usestartvalsM = flag_usestartvalsM(ind);
-% flag_usestartvalsQ = flag_usestartvalsQ(1); 
-
 % -------------------------- % 
 % - dates ------------------ % 
 

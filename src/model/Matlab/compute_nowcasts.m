@@ -4,7 +4,8 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     % - This code computes the news decomposition for nowcasts of GDP 
     % - growth 
     % ----------------------------------------------------------------------- %
-    % dir_root = 'G:/Geteilte Ablagen/02_Konjunktur/04_Prognose/9_Prognosemodelle/03_DFM';
+    
+    % dir_root = 'C:/Users/Hauber-P/Documents';
     % year_nowcast = '2025';
     % quarter_nowcast = '2';
     % switch_estimatemodels = '1';
@@ -18,10 +19,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     foldername = [dir_nowcast '\output_csv'] ;if exist(foldername, 'dir') ~= 7;mkdir(foldername);end  
     foldername = [dir_nowcast '\graphs'] ;if exist(foldername, 'dir') ~= 7;mkdir(foldername);end  
     foldername = [dir_nowcast '\params'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
-    foldername = [dir_nowcast '\docu'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
     foldername = [dir_nowcast '\tables'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
-    foldername = [dir_nowcast '\monthlyGDP'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
-    foldername = [dir_nowcast '\non gdp forecasts'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
 
     str_nowcast = [year_nowcast 'Q' quarter_nowcast]; 
     if strcmp(quarter_nowcast, '4')
