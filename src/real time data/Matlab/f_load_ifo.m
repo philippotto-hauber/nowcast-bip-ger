@@ -1,5 +1,9 @@
 function data_ifo = f_load_ifo(vintage, dir_rawdata, dir_repo)
 
+% vintage = '2025-09-30';
+% dir_rawdata = 'C:/Users/Hauber-P/Documents/Echtzeitdatensatz/raw data';
+% dir_repo = 'C:/Users/Hauber-P/Documents/GitHub/nowcast-bip-ger';
+
 % add path data files
 dirname = [dir_rawdata '/ifo/'] ;
 
