@@ -19,10 +19,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     foldername = [dir_nowcast '\output_csv'] ;if exist(foldername, 'dir') ~= 7;mkdir(foldername);end  
     foldername = [dir_nowcast '\graphs'] ;if exist(foldername, 'dir') ~= 7;mkdir(foldername);end  
     foldername = [dir_nowcast '\params'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
-    foldername = [dir_nowcast '\docu'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
     foldername = [dir_nowcast '\tables'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
-    foldername = [dir_nowcast '\monthlyGDP'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
-    foldername = [dir_nowcast '\non gdp forecasts'] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
 
     str_nowcast = [year_nowcast 'Q' quarter_nowcast]; 
     if strcmp(quarter_nowcast, '4')
