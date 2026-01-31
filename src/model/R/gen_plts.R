@@ -30,7 +30,7 @@ get_now_and_forecast_periods <- function(year_nowcast, quarter_nowcast) {
     next_quarter <- 1
     fore <- convert_str_to_date(next_year, next_quarter)
   } else {
-    fore <- convert_str_to_date(year_nowcast, quarter_nowcast + 1)
+    fore <- convert_str_to_date(year_nowcast, as.character(as.numeric(quarter_nowcast) + 1))
   }  
   return(c(now, fore))
 }

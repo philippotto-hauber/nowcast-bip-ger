@@ -6,10 +6,10 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     % ----------------------------------------------------------------------- %
     
     % dir_root = 'C:/Users/Hauber-P/Documents';
-    % year_nowcast = '2025';
-    % quarter_nowcast = '2';
-    % switch_estimatemodels = '1';
-    % addpath('./functions')
+    % year_nowcast = '2026';
+    % quarter_nowcast = '1';
+    % switch_estimatemodels = '0';
+    % addpath('functions')
 
     dir_data = [dir_root '\Echtzeitdatensatz'];
     dir_nowcast = [dir_root '\Nowcasts\' year_nowcast 'Q' quarter_nowcast] ;
@@ -25,7 +25,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
     if strcmp(quarter_nowcast, '4')
         str_forecast = [ num2str(str2double(year_nowcast) + 1) 'Q1'] ; 
     else 
-        str_forecast = [ year_nowcast 'Q' quarter_nowcast] ; 
+        str_forecast = [ year_nowcast 'Q' num2str(str2double(quarter_nowcast) + 1)] ; 
     end
 
     % ----------------------------------------------------------------------- %
@@ -207,6 +207,7 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                     [i, m, std] = get_index_mean_std(options, names_news_decomp{n}) ;
                     results.nowcast.(mnemonic_news_decomp{n}).varname_long = names_news_decomp{n};
                     results.nowcast.(mnemonic_news_decomp{n}).new(1,1,modcounter) = std * ( Z(i,:) * ks_output_old.stT(:,options.index_nowcast) ) + m ; 
+                    results.forecast.(mnemonic_news_decomp{n}).varname_long = names_news_decomp{n};
                     results.forecast.(mnemonic_news_decomp{n}).new(1,1,modcounter) = std * ( Z(i,:) * ks_output_old.stT(:,options.index_forecast) ) + m ;
                 end
 
@@ -256,7 +257,6 @@ function out = compute_nowcasts(dir_root, year_nowcast, quarter_nowcast, switch_
                     % export with dates as mat file to folder
                     mean_gdp = options.meangdp;
                     std_gdp = options.stdgdp; 
-                    foldername = [dir_nowcast '\monthlyGDP\' vintages{v}] ; if exist(foldername, 'dir') ~= 7;mkdir(foldername);end
                     dates_converted = f_convertdates(options.dates); 
                     gdp_realizations = options.stdgdp * data_new(options.index_gdp, :) + options.meangdp; 
                     results.monthly_gdp.gdp_mm{:, v, modcounter} = gdp_mm;
