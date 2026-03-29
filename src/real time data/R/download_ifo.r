@@ -21,7 +21,7 @@ while (looking_for_file)
     url_data <- paste0(url_start, yy, mm, url_end)
   }
   
-  if (httr::HEAD(url_data)$status_code == 403){
+  if (httr::GET(url_data)$status_code == 403){
     # update yy and mm
     if (mm == 1)
     {
