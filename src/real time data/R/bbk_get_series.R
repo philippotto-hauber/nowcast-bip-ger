@@ -34,6 +34,10 @@ library(httr)
 #' @return A data.frame. In "long" format: series_key, period, period_date,
 #'         vintage, value. In "wide" format: period plus one column per
 #'         vintage date.
+#'
+#' Vintages with no exact publication day on record (early manually-recorded
+#' vintages, where the Bundesbank encodes "day unknown" as day 40, e.g.
+#' "40.02.1997") are always dropped.
 bbk_get_series <- function(key,
                             start_period = NULL,
                             end_period   = NULL,
@@ -83,9 +87,9 @@ bbk_get_series <- function(key,
   vintage_raw  <- as.character(unlist(tbl[1, -1]))
   vintage_date <- as.Date(vintage_raw, format = "%d.%m.%Y")
   if (anyNA(vintage_date)) {
-    warning("Some vintage dates could not be parsed (left as NA): ",
-             paste(vintage_raw[is.na(vintage_date)], collapse = ", "),
-             call. = FALSE)
+    message("Dropping ", sum(is.na(vintage_date)), " vintage(s) with no exact ",
+            "publication day on record: ",
+            paste(vintage_raw[is.na(vintage_date)], collapse = ", "))
   }
 
   # Data rows are the ones whose first column is an observation period
@@ -99,6 +103,12 @@ bbk_get_series <- function(key,
   period  <- trimws(tbl[[1]][is_data_row])
   val_mat <- as.matrix(tbl[is_data_row, -1, drop = FALSE])
   storage.mode(val_mat) <- "double"  # empty strings become NA
+
+  if (anyNA(vintage_date)) {
+    keep <- !is.na(vintage_date)
+    vintage_date <- vintage_date[keep]
+    val_mat <- val_mat[, keep, drop = FALSE]
+  }
 
   if (format == "wide") {
     wide <- as.data.frame(val_mat, stringsAsFactors = FALSE)
