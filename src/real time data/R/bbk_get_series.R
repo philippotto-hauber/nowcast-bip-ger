@@ -100,7 +100,7 @@ bbk_get_series <- function(key,
     stop("No data rows found in the response for key '", key, "'.", call. = FALSE)
   }
 
-  period  <- trimws(tbl[[1]][is_data_row])
+  period  <- .bbk_quarter_to_month(trimws(tbl[[1]][is_data_row]))
   val_mat <- as.matrix(tbl[is_data_row, -1, drop = FALSE])
   storage.mode(val_mat) <- "double"  # empty strings become NA
 
@@ -135,6 +135,18 @@ bbk_get_series <- function(key,
   out <- out[order(out$period_date, out$vintage), ]
   rownames(out) <- NULL
   out
+}
+
+# Reformat quarterly period labels ("1991-Q1") to "yyyy-mm" using the
+# quarter's first month ("1991-01"). Other frequencies pass through unchanged.
+.bbk_quarter_to_month <- function(period) {
+  is_q <- grepl("^[0-9]{4}-Q[1-4]$", period)
+  if (any(is_q)) {
+    yr <- substr(period[is_q], 1, 4)
+    q  <- as.integer(substr(period[is_q], 7, 7))
+    period[is_q] <- sprintf("%s-%02d", yr, (q - 1) * 3 + 1)
+  }
+  period
 }
 
 # Convert a Bundesbank observation-period label ("1991-Q1", "2020-05",
