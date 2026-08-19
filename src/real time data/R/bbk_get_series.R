@@ -1,21 +1,3 @@
-# bundesbank_vintages.R
-#
-# Download time series (including real-time "vintages"/revisions) from the
-# Deutsche Bundesbank SDMX Web Service.
-#
-# API docs: https://www.bundesbank.de/en/statistics/time-series-databases/help-for-sdmx-web-service
-#
-# A Bundesbank series code such as
-#   BBKRT.Q.DE.Y.A.AG1.CA010.V.A
-# is "<flowRef>.<dot-separated dimension key>". For real-time-database
-# flows (flowRef "BBKRT"), the CSV endpoint returns a matrix with one column
-# per publication ("vintage") date and one row per observation period, i.e.
-# exactly the revision history of the series. For ordinary (non-real-time)
-# flows the same endpoint returns a single-column series, and the function
-# below handles both cases.
-
-library(httr)
-
 #' Download a Bundesbank series (optionally with all real-time vintages)
 #'
 #' @param key          Full series code, e.g. "BBKRT.Q.DE.Y.A.AG1.CA010.V.A".
