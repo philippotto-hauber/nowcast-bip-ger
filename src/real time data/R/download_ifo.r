@@ -1,12 +1,16 @@
 args <- commandArgs(trailingOnly = TRUE)
 dir_main <- args[length(args)]
-# dir_main = "C:/Users/Hauber-P/Documents/dev/Echtzeitdatensatz/raw data"
+# dir_main = "C:/Users/Hauber-P/Documents/Echtzeitdatensatz/raw data"
 
 # create store_dir if it does not already exist
 dir_dest <- paste0(dir_main, "/ifo")
 if (!dir.exists(dir_dest)) dir.create(dir_dest, recursive = TRUE)
 
 file_dest <- paste0(dir_dest, "/ifo_current.xlsx")
+if (file.exists(file_dest)) {
+  file.remove(file_dest)
+}
+
 yy <- as.numeric(format(Sys.Date(),"%Y"))
 mm <- as.numeric(format(Sys.Date(),"%m"))
 url_start <- "https://www.ifo.de/sites/default/files/secure/timeseries/gsk-d-"
