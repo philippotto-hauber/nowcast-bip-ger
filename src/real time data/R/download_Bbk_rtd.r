@@ -1,7 +1,7 @@
-# args <- commandArgs(trailingOnly = TRUE)
-# dir_main <- args[length(args)]
+args <- commandArgs(trailingOnly = TRUE)
+dir_main <- args[length(args)]
 # for debugging
-dir_main <- "C:/Users/Hauber-P/Documents/Echtzeitdatensatz/raw data"
+# dir_main <- "C:/Users/Hauber-P/Documents/Echtzeitdatensatz/raw data"
 # create store_dir if it does not already exist
 storedir <- paste0(dir_main, "/BuBa RTD/")
 if (!dir.exists(storedir)) dir.create(storedir, recursive = TRUE)
